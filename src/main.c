@@ -7,6 +7,27 @@ int main()
 
 	while (1) {
 		menu = main_menu();
+	
+		if(menu == 1){
+
+		}
+
+		if(menu == 2){
+
+		}
+
+		if(menu == 3){
+		
+		}
+
+		if(menu == 4){
+
+		}
+
+		if(menu == 5){
+
+		}
+
 	}
 
 	return 0;
