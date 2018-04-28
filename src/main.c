@@ -6,8 +6,7 @@
 
 int main()
 {
-	int menu = 0;
-	int i = 1;
+	int i = 1, menu = 0, settings = 0, level = 0, vibor = 1, bot = 1;
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
 
 	while (i == 1) {
@@ -19,7 +18,7 @@ int main()
 		}
 
 		if(menu == 2){
-
+			game_settings(&menu, &settings, &level, &vibor, &bot);
 		}
 
 		if(menu == 3){
@@ -33,7 +32,7 @@ int main()
 		if(menu == 5){
 
 		}
-		i = 0;
+		/*i = 0;*/
 
 	}
 
