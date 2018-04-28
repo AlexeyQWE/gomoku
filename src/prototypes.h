@@ -8,4 +8,6 @@
 
 	void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y]);
 
+	void entering_coord(int vibor, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y]);
+
 	void game_settings(int *menu, int *settings, int *level, int *vibor, int *bot);
