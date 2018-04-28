@@ -105,9 +105,9 @@ void entering_coord(int vibor, int winExit, int *height, int *widht, char tableG
 	}
 
 	if(vibor == 1){
-		tableGame[hight][weight] = 'X';
+		tableGame[*height][*widht] = 'X';
 	}else{
-		tableGame[hight][weight] = 'O';
+		tableGame[*height][*widht] = 'O';
 	}
 }
 
