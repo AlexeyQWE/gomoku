@@ -84,3 +84,77 @@ void print_gameboard(int size_board, char gameboard_mass[size_board][size_board]
 				}
 }
 
+void game_settings(int *menu, int *settings, int *level, int *vibor, int *bot)
+{
+	int i = 0;
+
+	while(*menu == 2){
+		system("clear");
+		printf("\t\t\t\t      _____   _\n");
+		printf("\t\t\t\t     /   //  /\\\\\n");
+		printf("\t\t\t\t    /   //  /  \\\\\n");				
+		printf("\t\t\t\t    \\   \\\\_/   ||\n");
+		printf("\t\t\t\t     \\        //\n");
+		printf("\t\t\t\t      |    __//\n");
+		printf("\t\t\t\t      /   //\n");
+		printf("\t\t\t\t     /   //\n");
+		printf("\t\t\t\t    /   //\n");
+		printf("\n\n\t\t\t\t   НАСТРОЙКИ");
+		printf("\n\n\t\t\t\t   1.Бот - ");
+
+		if(*bot == 1){
+			printf("включён");
+		}else{
+			printf("выключен");
+		}
+		if(*settings == 1){
+			printf("\n\t\t\t\t\t|-------- 1.Включить\n\t\t\t\t\t|-------- 0.Выключить");
+		}
+		printf("\n\t\t\t\t   2.Уровень бота - ");
+		if(*level == 1){
+			printf("новичок");
+		}else if(*level == 0){
+			printf("защитник");
+		}
+		if(*settings == 2){
+			printf("\n\t\t\t\t\t|-------- 1.Новичок\n\t\t\t\t\t|-------- 0.Защитник");
+		}
+		printf("\n\t\t\t\t   3.Автоматически Вы играете за - ");
+		if(*vibor == 1){
+			printf("X");
+		}else{
+			printf("O");
+		}
+		if(*settings == 3){
+			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 0.Играть первым за О");
+		}
+		printf("\n\t\t\t\t   4.Выход в меню\n\t\t\t\t   ");
+		if(*settings == 0){	
+			for(int i = 0; i < 1; i++){
+				scanf("%d", settings);
+				if((*settings < 1) || (*settings > 4)){
+					printf("Эй, не шали, такого варианта нет!\n");
+					--i;
+				}
+			}
+			i = 0;
+		}
+		if(*settings == 1 && i == 1){
+			input_nubmers_test(bot);
+			i = 0;
+			*settings = 0;
+		}else if(*settings == 2 && i == 1){
+			input_nubmers_test(level);
+			i = 0;
+			*settings = 0;
+		}else if(*settings == 3 && i == 1){
+			input_nubmers_test(vibor);
+			i = 0;
+			*settings = 0;
+		}else if(*settings == 4){
+			*menu = *settings;
+		}
+		i = 1;
+	}
+	i = 0;
+}
