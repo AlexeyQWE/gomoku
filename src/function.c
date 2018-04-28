@@ -43,45 +43,62 @@ int main_menu()
 void fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 {
 	system("clear");// ОЧИЩАЕМ ОБЛАСТЬ ВЫШЕ, В ДАЛЬНЕЙШЕМ, БУДЕТ ВЫГЯДИТЬ ТАК, ЧТО ДОСКА СТАТИЧНА
-			for(int i = 0; i < TABLE_Y; i++){// ЗАПОЛНЯЕМ МАССИВ (ИГРОВУЮ ДОСКУ), ТО ЕСТЬ ПРИВОДИМ К СМОТРИБЕЛЬНОМУ ВИДУ
-				for(int j = 0; j < TABLE_Y; j++){
-					gameboard_mass[i][j] = '_';
-				}
-			}
+	for(int i = 0; i < TABLE_Y; i++){// ЗАПОЛНЯЕМ МАССИВ (ИГРОВУЮ ДОСКУ), ТО ЕСТЬ ПРИВОДИМ К СМОТРИБЕЛЬНОМУ ВИДУ
+		for(int j = 0; j < TABLE_Y; j++){
+			gameboard_mass[i][j] = '_';
+		}
+	}
 }
 
 void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 {
 	system("clear"); 
-	printf("\n\t\t ____   __      _    _      __    _   __ __   __\n");
-	printf("\t\t(  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /\n");
-	printf("\t\t) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /\n");
-	printf("\t\t(_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/\n");	
-
-		for(int i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
-			printf("\n\t\t");
-			for(int j = 0; j < TABLE_Y; j++){
-				if(i == 0){
-					if(j == 0){// ВЫВОДЯТСЯ ОРИЕНТИРОВОЧНЫЕ КООРДИНАТЫ ПО БОКАМ ИГРОВОГО ПОЛЯ ПО ГОРИЗОНТАЛИ
-						printf("   ");
-					}else if(j < 10){
-						printf(" %d ", j);
-					}else if(j == 9){
-						printf("%d ", j);
-					}else{
-						printf(" %d", j);
-					}
-				}else if(j == 0){// ТЕ ЖЕ САМЫЕ КООРДИНАТЫ, ТОЛЬКО ПО ВЕРТИКАЛИ
-					if(i < 10){
-						printf(" %d ", i);
-					}else{
-							printf("%d ", i);
-						}
-					}else{
-						printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
-						}
-					}
+	printf("\n\t\t   ____   __      _    _      __    _   __ __   __\n");
+	printf("\t\t  (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /\n");
+	printf("\t\t  ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /\n");
+	printf("\t\t  (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/\n");
+	for(int i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
+		printf("\n\t\t");
+		for(int j = 0; j < TABLE_Y; j++){
+			if(i == 0){
+				if(j == 0){// ВЫВОДЯТСЯ ОРИЕНТИРОВОЧНЫЕ КООРДИНАТЫ ПО БОКАМ ИГРОВОГО ПОЛЯ ПО ГОРИЗОНТАЛИ
+					printf("   ");
+				}else if(j < 10){
+					printf(" %d ", j);
+				}else if(j == 9){
+					printf("%d ", j);
+				}else{
+					printf(" %d", j);
 				}
+			}else if(j == 0){// ТЕ ЖЕ САМЫЕ КООРДИНАТЫ, ТОЛЬКО ПО ВЕРТИКАЛИ
+				if(i < 10){
+					printf(" %d ", i);
+				}else{
+						printf("%d ", i);
+					}
+			}else{
+				printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+			}
+		}
+	}
+}
+
+void entering_coord(int vibor, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y])
+{
+	if((vibor == 1 || vibor == 0) && winExit != 1){
+		if(vibor == 1){
+			printf("\nХод делает X [Высота] [Ширина]\n");
+		}else{
+			printf("\nХод делает O [Высота] [Ширина]\n");
+		}
+		for(int i = 0; i < 1; i++){// ПРОВЕРКА НА ВВОДИМЫЕ СИМВОЛЫ
+			scanf("%d %d", &*height, &*widht);
+			if(((*height <= 0) || (*height > 15)) || ((*widht <= 0) || (*widht > 15))){
+				printf("Наверно руки дрожат? Попробуй еще раз\n");
+				--i;
+			}
+		}
+	}
 }
 
 void game_settings(int *menu, int *settings, int *level, int *vibor, int *bot)
