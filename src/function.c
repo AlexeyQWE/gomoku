@@ -2,6 +2,17 @@
 #include <stdlib.h> 
 #include "prototypes.h"
 
+void input_nubmers_test(int *numbers)// ПРОВЕРКА НА ВВОДИМЫЕ ЦИФРЫ 
+{
+	for(int i = 0; i < 1; i++){
+		scanf("%d", numbers);
+		if((*numbers < 0) || (*numbers > 1)){
+			printf("Эй, не шали, такого варианта нет!\n");
+			--i;
+		}
+	}
+}
+
 int main_menu()
 {
 	int menu;
@@ -72,3 +83,4 @@ void print_gameboard(int size_board, char gameboard_mass[size_board][size_board]
 					}
 				}
 }
+
