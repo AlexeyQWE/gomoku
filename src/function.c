@@ -103,6 +103,12 @@ void entering_coord(int vibor, int winExit, int *height, int *widht, char tableG
 			}
 		}
 	}
+
+	if(vibor == 1){
+		tableGame[hight][weight] = 'X';
+	}else{
+		tableGame[hight][weight] = 'O';
+	}
 }
 
 void game_settings(int *menu, int *settings, int *level, int *vibor, int *bot)
