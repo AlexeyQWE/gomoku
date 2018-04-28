@@ -2,19 +2,23 @@
 #include <stdlib.h>
 #include "prototypes.h"
 
-#define TABLE_Y 17	// РАЗМЕР ДОСКИ
+#define TABLE_Y 16	// РАЗМЕР ДОСКИ
 
 int main()
 {
-	int i = 1, menu = 0, settings = 0, level = 0, vibor = 1, bot = 1;
+	int i = 1, menu = 0, level = 0, vibor = 1, bot = 1;
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
 
 	while (i == 1) {
+		int settings = 0, winExit = 0;
 		menu = main_menu();
 	
 		if(menu == 1){
-			fill_gameboard(TABLE_Y,tableGame);
-			print_gameboard(TABLE_Y,tableGame);
+			fill_gameboard(tableGame);
+			do{
+				print_gameboard(tableGame);
+				scanf("%d", &settings);
+			}while(winExit != 1);
 		}
 
 		if(menu == 2){
@@ -30,7 +34,7 @@ int main()
 		}
 
 		if(menu == 5){
-
+			break;
 		}
 		/*i = 0;*/
 
