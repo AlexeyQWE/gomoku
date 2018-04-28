@@ -30,7 +30,7 @@ int main()
 		}
 
 		if(menu == 5){
-
+			break;
 		}
 		/*i = 0;*/
 
