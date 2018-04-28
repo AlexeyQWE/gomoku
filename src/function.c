@@ -97,6 +97,10 @@ void entering_coord(int vibor, int winExit, int *height, int *widht, char tableG
 				printf("Наверно руки дрожат? Попробуй еще раз\n");
 				--i;
 			}
+			if(tableGame[*height][*widht] == 'X' || tableGame[*height][*widht] == 'O'){// ПРОВЕРКА НА ЗАНЯТОСТЬ КЛЕТКИ
+				printf("Эта клетка уже занята\n");
+				--i;
+			}
 		}
 	}
 }
