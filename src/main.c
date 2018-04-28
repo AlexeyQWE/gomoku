@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include "prototypes.h"
 
-#define TABLE_Y 16	// РАЗМЕР ДОСКИ
-
 int main()
 {
 	int i = 1, menu = 0, level = 0, vibor = 1, bot = 1;
+	int height = 0, widht = 0;
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
 
 	while (i == 1) {
@@ -17,7 +16,7 @@ int main()
 			fill_gameboard(tableGame);
 			do{
 				print_gameboard(tableGame);
-				scanf("%d", &settings);
+				entering_coord(vibor, winExit, &height, &widht, tableGame);
 			}while(winExit != 1);
 		}
 
