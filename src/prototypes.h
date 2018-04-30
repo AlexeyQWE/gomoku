@@ -8,7 +8,7 @@
 
 	void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y]);
 
-	void entering_coord(int vibor, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y]);
+	void entering_coord(int choice, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y]);
 
 	void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO);
 
@@ -16,4 +16,4 @@
 
 	int checkWin(int score, int choice, int *winX, int *winO);
 
-	void game_settings(int *menu, int *settings, int *level, int *vibor, int *bot);
+	void game_settings(int *menu, int *settings, int *level, int *choice, int *bot);
