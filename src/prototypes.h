@@ -10,4 +10,10 @@
 
 	void entering_coord(int vibor, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y]);
 
+	void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO);
+
+	void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo);
+
+	int checkWin(int score, int choice, int *winX, int *winO);
+
 	void game_settings(int *menu, int *settings, int *level, int *vibor, int *bot);
