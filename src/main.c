@@ -23,8 +23,10 @@ int main()
 					printf("\n\n\t\t\tO - ПОБЕДИЛ");
 					winExit = 1;
 				}
-				entering_coord(choice, winExit, &height, &widht, tableGame);
-				check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO);
+				entering_coord(choice, &height, &widht, tableGame);
+				if((choice == 1 || choice == 0) && winExit != 1){
+					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO);
+				}
 				if(choice == 1){// ЗДЕСЬ ОПРЕДЕЛЯЕТСЯ ОЧЕРЕДНОСТЬ ХОДОВ
 					choice = 0;
 				}else if(choice == 0){
