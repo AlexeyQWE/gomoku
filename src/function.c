@@ -113,7 +113,6 @@ void entering_coord(int choice, int winExit, int *height, int *widht, char table
 
 void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO)
 {
-	if((choice == 1 || choice == 0) && winExit != 1){
 		int score = 0, j = 0;
 		int left = widht - 4;
 		int right = widht + 4; 
@@ -214,7 +213,6 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		score = 0;
 		j = 0;
 		spaceFinder = 0;
-	}
 }
 
 void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo)
