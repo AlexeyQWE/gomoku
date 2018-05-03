@@ -13,6 +13,37 @@ void input_nubmers_test(int *numbers)// ПРОВЕРКА НА ВВОДИМЫЕ �
 	}
 }
 
+static int LEN = 2;
+
+int correct_entering()
+{
+	char strChoose[LEN];
+	int c;
+	char *ptr;
+	do{
+		for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
+			*ptr = c;
+		*ptr = '\0';
+
+		while(getchar() != '\n'){
+			printf("Некорректный ввод\n");
+			continue;
+		}
+	}while(strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5');
+	if(strChoose[0] == '1')
+		return 1;
+	else if(strChoose[0] == '2')
+		return 2;
+	else if(strChoose[0] == '3')
+		return 3;
+	else if(strChoose[0] == '4')
+		return 4;
+	else if(strChoose[0] == '5')
+		return 5;
+	else
+		return 0;
+}
+
 int main_menu()
 {
 	int menu;
@@ -30,13 +61,8 @@ int main_menu()
 	printf("\n\n\t\t\t\t   GOMOKU\n\n\t\t\t\t   1.Играть\n\t\t\t\t   2.Настройки\n\t\t\t\t   3.Правила игры\n\t\t\t\t   4.Таблица лидеров\n\t\t\t\t   5.Выход\n\t\t\t\t   ");
 	printf("\n");
 	printf("Выберите нужный вам пункт ");
-	for(int i = 0; i < 1; i++){
-		scanf("%d", &menu);
-		if((menu < 1) || (menu > 5)){// ПРОВЕРКА НА КОРРЕКТНОСТЬ ВВОДА, БУКВЫ НЕ МОЖЕТ ПРОВЕРИТЬ
-			printf("Эй, не шали, такого варианта нет!\n");
-			--i;
-		}	
-	}
+	menu = correct_entering();
+
 	return menu;
 }
 
@@ -262,11 +288,11 @@ int checkWin(int score, int choice, int *winX, int *winO)// ПРОВЕРКА Н�
 	return 0;
 }
 
-void game_settings(int *menu, int *settings, int *level, int *choice, int *bot)
+void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 {
 	int i = 0;
 
-	while(*menu == 2){
+	while(menu == 2){
 		system("clear");
 		printf("\t\t\t\t      _____   _\n");
 		printf("\t\t\t\t     /   //  /\\\\\n");
@@ -330,7 +356,7 @@ void game_settings(int *menu, int *settings, int *level, int *choice, int *bot)
 			i = 0;
 			*settings = 0;
 		}else if(*settings == 4){
-			*menu = *settings;
+			menu = *settings;
 		}
 		i = 1;
 	}
