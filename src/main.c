@@ -34,6 +34,10 @@ int main()
 					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO);
 				}
 
+				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){
+					move_bot(level);
+				}
+
 				if(choice == 1){// ЗДЕСЬ ОПРЕДЕЛЯЕТСЯ ОЧЕРЕДНОСТЬ ХОДОВ
 					choice = 0;
 				}else if(choice == 0){
