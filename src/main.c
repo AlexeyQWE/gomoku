@@ -4,12 +4,13 @@
 
 int main()
 {
-	int i = 1, menu = 0, level = 0, choice = 1, bot = 1;
+	int i = 1, level = 0, choice = 1, bot = 1;
 	int height = 0, widht = 0; // КООРДИНАТЫ
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
 
 	while (i == 1) {
 		int settings = 0;
+		int menu = 0;
 		menu = main_menu();
 	
 		if(menu == 1){// ИГРА
@@ -27,7 +28,7 @@ int main()
 					winExit = 1;
 				}
 
-				entering_coord(choice, &height, &widht, tableGame);
+				entering_coord(choice, winExit, &height, &widht, tableGame);
 
 				if((choice == 1 || choice == 0) && winExit != 1){
 					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO);
@@ -43,7 +44,7 @@ int main()
 		}
 
 		if(menu == 2){// НАСТРОЙКИ
-			game_settings(&menu, &settings, &level, &choice, &bot);
+			game_settings(menu, &settings, &level, &choice, &bot);
 		}
 
 		if(menu == 3){// ПРАВИЛА ИГРЫ
