@@ -241,6 +241,16 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		spaceFinder = 0;
 }
 
+void move_bot(int level){
+	if(level == 1){
+		level = 0;
+		/* Пока в раздумьях */
+	}else if(level == 0){
+		level = 1;
+		/* задача Алексея Карасева */
+	}
+}
+
 void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo)
 {
 	if(i > 0 && checkTwo <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
