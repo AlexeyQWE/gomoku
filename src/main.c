@@ -4,7 +4,7 @@
 
 int main()
 {
-	int i = 1, level = 0, choice = 1, bot = 1;
+	int i = 1, level = 1, choice = 1, bot = 1;
 	int height = 0, widht = 0; // КООРДИНАТЫ
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
 
@@ -37,12 +37,6 @@ int main()
 				}
 
 				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){
-					gorizontScore = 6;
-					printf("%d\n", gorizontScore);
-					printf("%d\n", vertikalScore);
-					printf("%d\n", leftDiagonalScore);
-					printf("%d\n", rightDiagonalScore);
-					scanf("%d", &winO);
 					move_bot(tableGame, level, gorizontScore, vertikalScore, leftDiagonalScore, rightDiagonalScore, gorizontScoreLeft, vertikalScoreLeft, leftDiagonalScoreLeft, rightDiagonalScoreLeft, hodBot, &left, &right, choice, height, widht);
 				}
 
