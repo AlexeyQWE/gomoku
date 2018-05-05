@@ -13,7 +13,7 @@ void input_nubmers_test(int *numbers)// ПРОВЕРКА НА ВВОДИМЫЕ �
 	}
 }
 
-static int LEN = 2;
+static int LEN = 3;
 
 int correct_entering()
 {
@@ -23,13 +23,15 @@ int correct_entering()
 	do{
 		for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
 			*ptr = c;
-		*ptr = '\0';
 
-		while(getchar() != '\n'){
-			printf("Некорректный ввод\n");
+		if(c == '\n')
+			*ptr = '\0';
+
+		while(c != '\n'){
+			c = getchar();
 			continue;
 		}
-	}while(strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5');
+	}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5') || strChoose[1] != '\0');
 	if(strChoose[0] == '1')
 		return 1;
 	else if(strChoose[0] == '2')
@@ -137,30 +139,30 @@ void entering_coord(int choice, int winExit, int *height, int *widht, char table
 	}
 }
 
-void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *gorizontScore, int *vertikalScore, int *leftDiagonalScore, int *rightDiagonalScore, int *gorizontScoreLeft, int *vertikalScoreLeft, int *leftDiagonalScoreLeft, int *rightDiagonalScoreLeft)
+void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *gorizontScore, int *vertikalScore, int *leftDiagonalScore, int *rightDiagonalScore, int *gorizontScoreLeft, int *vertikalScoreLeft, int *leftDiagonalScoreLeft, int *rightDiagonalScoreLeft, int *left, int *right, int *up, int *down)
 {
 		int score = 0, j = 0;
-		int left = widht - 4;
-		int right = widht + 4; 
-		int up = height - 4;
-		int down = height + 4;
+		*left = widht - 4;
+		*right = widht + 4; 
+		*up = height - 4;
+		*down = height + 4;
 		// ГОРИЗОНТАЛЬНАЯ ПРОВЕРКА, СОСТОИТ В ТОМ
 		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
 		// В ЛЕВО НА 4 КЛЕТКИ И В ПРАВО НА 4 КЛЕТКИ
 		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
 		// ПОШАГОВО ОПИШУ НА СЛЕДУЩЕЙ ПРОВЕРКЕ ПО ГОРИЗОНТАЛИ
-		int exit = left - 1;
+		int exit = *left - 1;
 		int check = 0;
 		int spaceFinder = 0;
-		for(int i = widht - 1; i >= left; i--){// НАЧИНАЕТСЯ ОТСЧЕТ С ЛЕВОЙ КЛЕТКИ, КОТОРАЯ НАХОДИТСЯ РАДОМ С ТОЙ КЛЕКТОЙ, КОТОРУЮ УКАЗАЛ ЮЗЕР
+		for(int i = widht - 1; i >= *left; i--){// НАЧИНАЕТСЯ ОТСЧЕТ С ЛЕВОЙ КЛЕТКИ, КОТОРАЯ НАХОДИТСЯ РАДОМ С ТОЙ КЛЕКТОЙ, КОТОРУЮ УКАЗАЛ ЮЗЕР
 			control(exit, i, choice, tableGame, height, &score, &spaceFinder, height, height, widht - 1, widht + 1, &check, i);
 			if(check != 0)
 				i = check;
 		}
 		*gorizontScoreLeft = score;
 		check = 0;
-		exit = right + 1;
-		for(int i = widht + 1; i <= right; i++){
+		exit = *right + 1;
+		for(int i = widht + 1; i <= *right; i++){
 			control(exit, i, choice, tableGame, height, &score, &spaceFinder, height, height, widht - 1, widht + 1, &check, i);
 			if(check != 0)
 				i = check;
@@ -174,16 +176,16 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
 		// В ВЕРХ НА 4 КЛЕТКИ И ВНИЗ НА 4 КЛЕТКИ
 		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
-		exit = up - 1;
-		for(int i = height - 1; i >= up; i--){
+		exit = *up - 1;
+		for(int i = height - 1; i >= *up; i--){
 			control(exit, widht, choice, tableGame, i, &score, &spaceFinder, height - 1, height + 1, widht, widht, &check, i);
 			if(check != 0)
 				i = check;
 		}
 		*vertikalScoreLeft = score;
 		check = 0;
-		exit = down + 1;
-		for(int i = height + 1; i <= down; i++){
+		exit = *down + 1;
+		for(int i = height + 1; i <= *down; i++){
 			control(exit, widht, choice, tableGame, i, &score, &spaceFinder, height - 1, height + 1, widht, widht, &check, i);
 			if(check != 0)
 				i = check;
@@ -197,9 +199,9 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
 		// В ВЕРХ И ВЛЕВО НА 4 КЛЕТКИ И ВНИЗ ВПРАВО НА 4 КЛЕТКИ
 		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
-		exit = up - 1;
+		exit = *up - 1;
 		j = 0;
-		for(int i = height - 1; i >= up; i--){//4 1
+		for(int i = height - 1; i >= *up; i--){//4 1
 			++j;
 			control(exit, widht - j, choice, tableGame, i, &score, &spaceFinder, height - 1, height + 1, widht - j - 1, widht - j + 1, &check, i);
 			if(check != 0)
@@ -207,9 +209,9 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		}
 		*leftDiagonalScoreLeft = score;
 		check = 0;
-		exit = down + 1;
+		exit = *down + 1;
 		j = 0;
-		for(int i = height + 1; i <= down; i++){
+		for(int i = height + 1; i <= *down; i++){
 			++j;
 			control(exit, widht + j, choice, tableGame, i, &score, &spaceFinder, height - 1, height + 1, widht + j - 1, widht + j + 1, &check, i);
 			if(check != 0)
@@ -224,9 +226,9 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
 		// В ВЕРХ И !!!ВПРАВО!!! НА 4 КЛЕТКИ И ВНИЗ !!!ВЛЕВО!!! НА 4 КЛЕТКИ
 		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
-		exit = up - 1;
+		exit = *up - 1;
 		j = 0;
-		for(int i = height - 1; i >= up; i--){
+		for(int i = height - 1; i >= *up; i--){
 			++j;
 			control(exit, widht + j, choice, tableGame, i, &score, &spaceFinder, height - 1, height + 1, widht + j - 1, widht + j + 1, &check, i);
 			if(check != 0)
@@ -234,9 +236,9 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		}
 		*rightDiagonalScoreLeft = score;
 		check = 0;
-		exit = down + 1;
+		exit = *down + 1;
 		j = 0;
-		for(int i = height + 1; i <= down; i++){// 6 > 9
+		for(int i = height + 1; i <= *down; i++){// 6 > 9
 			++j;
 			if(check != 0)
 				i = check;
@@ -249,12 +251,28 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		spaceFinder = 0;
 }
 
-void move_bot(int level, int gorizontScore, int vertikalScore, int leftDiagonalScore, int rightDiagonalScore, int gorizontScoreLeft, int vertikalSchetLeft, int leftDiagonalSchetLeft, int rightDiagonalSchetLeft, int hodBot){
+void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, int vertikalScore, int leftDiagonalScore, int rightDiagonalScore, int gorizontScoreLeft, int vertikalSchetLeft, int leftDiagonalSchetLeft, int rightDiagonalSchetLeft, int hodBot, int *left, int *right, int choice, int height, int widht){
+	int exit;
 	if(level == 1){
 		// ПРОВЕРКА СЧЕТЧИКОВ, КОТОРЫЕ СЧИТАЛИСЬ ПРИ ПРОВЕРКЕ ХОДА ИГРОКА, ТО ЕСТЬ, ЕСЛИ ГДЕ-ТО СЧЕТЧИК БОЛЬШЕ, ТО ЗНАЧИТ БОТ БУДЕТ ХОДИТЬ ИМЕННО В ТОЙ ПЛОСКОСТИ
 		// НАПРИМЕР gorizontScore = 5  А ОСТАЛЬНЫЕ РАВНЫ ПО 1 (СЧЕТЧИКИ), ЗНАЧИТ ОН ПОЙДЕТ ИМЕННО ПО ПЛОСКОСТИ ГОРИЗОНТАЛИ (ВПРАВО ИЛИ ВЛЕВО БУДЕТ РЕШАТЬСЯ ДАЛЬШЕ)
 		if(gorizontScore >= vertikalScore && gorizontScore >= leftDiagonalScore && gorizontScore >= rightDiagonalScore){
-			hodBot = 1;
+			exit = *left - 1;// СЧЕТЧИК ДЛЯ ВЫХОДА И ПОСЛЕДУЮЩЕГО ЦИКЛА for
+				if((gorizontScore - gorizontScoreLeft) <= gorizontScoreLeft || gorizontScore == gorizontScoreLeft){
+					for(int i = widht - 1; i >= *left; i--){
+						if(i > 0 && i <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
+							move_bot_gotizont(choice, tableGame, &i, height, &hodBot, exit, &widht);// САМ ПРОЦЕСС ХОДА БОТА
+						}	
+					}
+				}
+				if(hodBot == 0){
+					exit = *right + 1;
+					for(int i = widht + 1; i <= *right; i++){
+						if(i > 0 && i <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
+							move_bot_gotizont(choice, tableGame, &i, height, &hodBot, exit, &widht);
+						}	
+					}
+				}
 		}
 		if(vertikalScore >= gorizontScore && vertikalScore >= leftDiagonalScore && vertikalScore >= rightDiagonalScore){
 			hodBot = 1;
@@ -271,6 +289,29 @@ void move_bot(int level, int gorizontScore, int vertikalScore, int leftDiagonalS
 		level = 1;
 		/* задача Алексея Карасева */
 	}
+}
+
+char move_bot_gotizont(int choice, char tableGame[TABLE_Y][TABLE_Y], int *i, int height, int *hodBot, int exit, int *widht){
+	if(choice == 1){
+		if(tableGame[height][*i] == 'O'){// ЕСЛИ В ХОДЕ ЦИКЛА-ПРОВЕРКИ ВСТРЕЧАЕТСЯ СОЮЗНЫЙ ЗНАК (ТО ЕСТЬ ТОТ, ЗА КОТОРЫЙ ИГРАЕТ БОТ), ТО ВЫБОР ХОДА СБРАСЫВАЕТСЯ И ВЫХОДИТ ИЗ ЦИКЛА, ПЕРЕКЛЮЧАЯСЬ НА СЛЕД ЦИКЛ-ВЫБОР ДЛЯ СВОЕГО ХОДА
+			*i = exit;
+		}else if(tableGame[height][*i] == '_' && tableGame[height][*i] != 'O'){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+			tableGame[height][*i] = 'O';
+			*widht = *i;// ТРЕБУЕТСЯ ДЛЯ ДАЛЬНЕЙШЕЙ ПРОВЕРКИ НА ПОБЕДУ БОТА
+			*i = exit;// ТРЕБЙЕТСЯ ДЛЯ ДАЛЬНЕЙШЕЙ ПРОВЕРКИ БОТА НА ПОБЕДУ
+			*hodBot = 1;// СЧЕТЧИК ОБОЗНАЧАЕТ, ЧТО БОТ СХОДИЛ И ПРАВО ХОДА ПЕРЕДАЕТСЯ ЧЕЛОВЕКУ
+		}
+	}else{// ЭТО В СЛУЧАЕ ТОГО, ЕСЛИ БОТ ИГРАЕТ ЗА КРЕСТИКИ
+		if(tableGame[height][*i] == 'X'){
+			*i = exit;
+		}else if(tableGame[height][*i] == '_' && tableGame[height][*i] != 'X'){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+			tableGame[height][*i] = 'X';
+			*widht = *i;
+			*i = exit;
+			*hodBot = 1;
+		}
+	}
+	return 0;
 }
 
 void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo)
