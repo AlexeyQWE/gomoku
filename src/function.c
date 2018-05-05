@@ -137,7 +137,7 @@ void entering_coord(int choice, int winExit, int *height, int *widht, char table
 	}
 }
 
-void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO)
+void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *gorizontSchet, int *vertikalSchet, int *leftDiagonalSchet, int *rightDiagonalSchet, int *gorizontSchetLeft, int *vertikalSchetLeft, int *leftDiagonalSchetLeft, int *rightDiagonalSchetLeft)
 {
 		int score = 0, j = 0;
 		int left = widht - 4;
@@ -157,6 +157,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
+		*gorizontSchetLeft = score;
 		check = 0;
 		exit = right + 1;
 		for(int i = widht + 1; i <= right; i++){
@@ -164,6 +165,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
+		*gorizontSchet = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
@@ -178,6 +180,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
+		*vertikalSchetLeft = score;
 		check = 0;
 		exit = down + 1;
 		for(int i = height + 1; i <= down; i++){
@@ -185,6 +188,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
+		*vertikalSchet = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
@@ -201,6 +205,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
+		*leftDiagonalSchetLeft = score;
 		check = 0;
 		exit = down + 1;
 		j = 0;
@@ -210,6 +215,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
+		*leftDiagonalSchet = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
@@ -226,6 +232,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
+		*rightDiagonalSchetLeft = score;
 		check = 0;
 		exit = down + 1;
 		j = 0;
@@ -234,6 +241,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
+		*rightDiagonalSchet = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
@@ -241,10 +249,24 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		spaceFinder = 0;
 }
 
-void move_bot(int level){
+void move_bot(int level, int gorizontSchet, int vertikalSchet, int leftDiagonalSchet, int rightDiagonalSchet, int gorizontSchetLeft, int vertikalSchetLeft, int leftDiagonalSchetLeft, int rightDiagonalSchetLeft, int hodBot){
 	if(level == 1){
-		level = 0;
-		/* Пока в раздумьях */
+		// ПРОВЕРКА СЧЕТЧИКОВ, КОТОРЫЕ СЧИТАЛИСЬ ПРИ ПРОВЕРКЕ ХОДА ИГРОКА, ТО ЕСТЬ, ЕСЛИ ГДЕ-ТО СЧЕТЧИК БОЛЬШЕ, ТО ЗНАЧИТ БОТ БУДЕТ ХОДИТЬ ИМЕННО В ТОЙ ПЛОСКОСТИ
+		// НАПРИМЕР gorizontScore = 5  А ОСТАЛЬНЫЕ РАВНЫ ПО 1 (СЧЕТЧИКИ), ЗНАЧИТ ОН ПОЙДЕТ ИМЕННО ПО ПЛОСКОСТИ ГОРИЗОНТАЛИ (ВПРАВО ИЛИ ВЛЕВО БУДЕТ РЕШАТЬСЯ ДАЛЬШЕ)
+		if(gorizontSchet >= vertikalSchet && gorizontSchet >= leftDiagonalSchet && gorizontSchet >= rightDiagonalSchet){
+			hodBot = 1;
+		}
+		if(vertikalSchet >= gorizontSchet && vertikalSchet >= leftDiagonalSchet && vertikalSchet >= rightDiagonalSchet){
+			hodBot = 1;
+		}
+		/* ЛЕВАЯ ДИАГОНАЛЬ, ТО ЕСТЬ ТАКАЯ \ */
+		if(leftDiagonalSchet >= gorizontSchet && leftDiagonalSchet >= vertikalSchet && leftDiagonalSchet >= rightDiagonalSchet){
+			hodBot = 1;
+		}
+		// ПРАВАЯ ДИАГОНАЛЬ, ТО ЕСТЬ ТАКАЯ / 
+		if(rightDiagonalSchet >= gorizontSchet && rightDiagonalSchet >= vertikalSchet && rightDiagonalSchet >= leftDiagonalSchet){
+			hodBot = 1;
+		}
 	}else if(level == 0){
 		level = 1;
 		/* задача Алексея Карасева */
