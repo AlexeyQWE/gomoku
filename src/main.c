@@ -9,6 +9,7 @@ int main()
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
 
 	while (i == 1) {
+		int gorizontSchet, vertikalSchet, leftDiagonalSchet, rightDiagonalSchet, gorizontSchetLeft, vertikalSchetLeft, leftDiagonalSchetLeft, rightDiagonalSchetLeft, hodBot = 0; // перменные для бота
 		int settings = 0;
 		int menu = 0;
 		menu = main_menu();
