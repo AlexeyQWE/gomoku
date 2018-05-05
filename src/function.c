@@ -137,7 +137,7 @@ void entering_coord(int choice, int winExit, int *height, int *widht, char table
 	}
 }
 
-void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *gorizontSchet, int *vertikalSchet, int *leftDiagonalSchet, int *rightDiagonalSchet, int *gorizontSchetLeft, int *vertikalSchetLeft, int *leftDiagonalSchetLeft, int *rightDiagonalSchetLeft)
+void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *gorizontScore, int *vertikalScore, int *leftDiagonalScore, int *rightDiagonalScore, int *gorizontScoreLeft, int *vertikalScoreLeft, int *leftDiagonalScoreLeft, int *rightDiagonalScoreLeft)
 {
 		int score = 0, j = 0;
 		int left = widht - 4;
@@ -157,7 +157,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
-		*gorizontSchetLeft = score;
+		*gorizontScoreLeft = score;
 		check = 0;
 		exit = right + 1;
 		for(int i = widht + 1; i <= right; i++){
@@ -165,7 +165,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
-		*gorizontSchet = score;
+		*gorizontScore = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
@@ -180,7 +180,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
-		*vertikalSchetLeft = score;
+		*vertikalScoreLeft = score;
 		check = 0;
 		exit = down + 1;
 		for(int i = height + 1; i <= down; i++){
@@ -188,7 +188,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
-		*vertikalSchet = score;
+		*vertikalScore = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
@@ -205,7 +205,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
-		*leftDiagonalSchetLeft = score;
+		*leftDiagonalScoreLeft = score;
 		check = 0;
 		exit = down + 1;
 		j = 0;
@@ -215,7 +215,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
-		*leftDiagonalSchet = score;
+		*leftDiagonalScore = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
@@ -232,7 +232,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
-		*rightDiagonalSchetLeft = score;
+		*rightDiagonalScoreLeft = score;
 		check = 0;
 		exit = down + 1;
 		j = 0;
@@ -241,7 +241,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 			if(check != 0)
 				i = check;
 		}
-		*rightDiagonalSchet = score;
+		*rightDiagonalScore = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
@@ -249,22 +249,22 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		spaceFinder = 0;
 }
 
-void move_bot(int level, int gorizontSchet, int vertikalSchet, int leftDiagonalSchet, int rightDiagonalSchet, int gorizontSchetLeft, int vertikalSchetLeft, int leftDiagonalSchetLeft, int rightDiagonalSchetLeft, int hodBot){
+void move_bot(int level, int gorizontScore, int vertikalScore, int leftDiagonalScore, int rightDiagonalScore, int gorizontScoreLeft, int vertikalSchetLeft, int leftDiagonalSchetLeft, int rightDiagonalSchetLeft, int hodBot){
 	if(level == 1){
 		// ПРОВЕРКА СЧЕТЧИКОВ, КОТОРЫЕ СЧИТАЛИСЬ ПРИ ПРОВЕРКЕ ХОДА ИГРОКА, ТО ЕСТЬ, ЕСЛИ ГДЕ-ТО СЧЕТЧИК БОЛЬШЕ, ТО ЗНАЧИТ БОТ БУДЕТ ХОДИТЬ ИМЕННО В ТОЙ ПЛОСКОСТИ
 		// НАПРИМЕР gorizontScore = 5  А ОСТАЛЬНЫЕ РАВНЫ ПО 1 (СЧЕТЧИКИ), ЗНАЧИТ ОН ПОЙДЕТ ИМЕННО ПО ПЛОСКОСТИ ГОРИЗОНТАЛИ (ВПРАВО ИЛИ ВЛЕВО БУДЕТ РЕШАТЬСЯ ДАЛЬШЕ)
-		if(gorizontSchet >= vertikalSchet && gorizontSchet >= leftDiagonalSchet && gorizontSchet >= rightDiagonalSchet){
+		if(gorizontScore >= vertikalScore && gorizontScore >= leftDiagonalScore && gorizontScore >= rightDiagonalScore){
 			hodBot = 1;
 		}
-		if(vertikalSchet >= gorizontSchet && vertikalSchet >= leftDiagonalSchet && vertikalSchet >= rightDiagonalSchet){
+		if(vertikalScore >= gorizontScore && vertikalScore >= leftDiagonalScore && vertikalScore >= rightDiagonalScore){
 			hodBot = 1;
 		}
 		/* ЛЕВАЯ ДИАГОНАЛЬ, ТО ЕСТЬ ТАКАЯ \ */
-		if(leftDiagonalSchet >= gorizontSchet && leftDiagonalSchet >= vertikalSchet && leftDiagonalSchet >= rightDiagonalSchet){
+		if(leftDiagonalScore >= gorizontScore && leftDiagonalScore >= vertikalScore && leftDiagonalScore >= rightDiagonalScore){
 			hodBot = 1;
 		}
 		// ПРАВАЯ ДИАГОНАЛЬ, ТО ЕСТЬ ТАКАЯ / 
-		if(rightDiagonalSchet >= gorizontSchet && rightDiagonalSchet >= vertikalSchet && rightDiagonalSchet >= leftDiagonalSchet){
+		if(rightDiagonalScore >= gorizontScore && rightDiagonalScore >= vertikalScore && rightDiagonalScore >= leftDiagonalScore){
 			hodBot = 1;
 		}
 	}else if(level == 0){
