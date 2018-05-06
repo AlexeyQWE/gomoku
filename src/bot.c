@@ -47,7 +47,7 @@ void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, in
 		if(leftDiagonalScore >= gorizontScore && leftDiagonalScore >= vertikalScore && leftDiagonalScore >= rightDiagonalScore && hodBot != 1){
 			exit = up - 1;
 			int j = 0;
-			// leftDiagonalSchet - leftDiagonalSchetLeft --- ЭТО СЧЕТЧИК КАК БЫ ВЕРХНЕЙ ПОЛОВИНЫ ЛЕВОЙ ДИАГОНАЛИ, leftDiagonalSchetLeft ---- ЭТО СЧЕТЧИК НИЖНЕЙ ЛЕВОЙ ДИАГОНАЛИ
+			// leftDiagonalScore - leftDiagonalScoreLeft --- ЭТО СЧЕТЧИК КАК БЫ ВЕРХНЕЙ ПОЛОВИНЫ ЛЕВОЙ ДИАГОНАЛИ, leftDiagonalScoreLeft ---- ЭТО СЧЕТЧИК НИЖНЕЙ ЛЕВОЙ ДИАГОНАЛИ
 			if(((leftDiagonalScore - leftDiagonalScoreLeft) > leftDiagonalScoreLeft || leftDiagonalScore == leftDiagonalScoreLeft) && (widht - leftDiagonalScore) > 0) {
 				for(int i = height - 1; i >= up; i--){//4 1
 					if(i > 0 && i <= 15){
@@ -68,10 +68,31 @@ void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, in
 			}
 		}
 		// ПРАВАЯ ДИАГОНАЛЬ, ТО ЕСТЬ ТАКАЯ / 
-		if(rightDiagonalScore >= gorizontScore && rightDiagonalScore >= vertikalScore && rightDiagonalScore >= leftDiagonalScore){
-			hodBot = 1;
+		if(rightDiagonalScore >= gorizontScore && rightDiagonalScore >= vertikalScore && rightDiagonalScore >= leftDiagonalScore && hodBot != 1){
+			exit = up - 1;
+			int j = 0;
+			// rightDiagonalScore - rightDiagonalScoreLeft --- ЭТО СЧЕТЧИК КАК БЫ НИЖНЕЙ ПОЛОВИНЫ ПРАВОЙ ДИАГОНАЛИ, rightDiagonalScoreLeft ---- ЭТО СЧЕТЧИК ВЕРХНЕЙ ПРАВОЙ ДИАГОНАЛИ
+			if(((rightDiagonalScore - rightDiagonalScoreLeft) > rightDiagonalScoreLeft || rightDiagonalScore == rightDiagonalScoreLeft) && (widht + 1) != 11){
+				for(int i = height - 1; i >= up; i--){
+					if(i > 0 && i <= 15){
+						++j;
+						move_bot_diagonal_plus(j, choice, tableGame, &i, &widht, &hodBot, exit, &height);
+					}
+				}
+			}
+			if(hodBot == 0){
+				exit = down + 1;
+				j = 0;
+				for(int i = height + 1; i <= down; i++){// 6 > 9
+					if(i > 0 && i <= 15){
+						++j;
+						move_bot_diagonal_minus(j, choice, tableGame, &i, &widht, &hodBot, exit, &height);
+					}
+				}
+			}
 		}
-	}else if(level == 0){
+	}
+	if(level == 0 || hodBot == 0){// ЕСЛИ БОТ НЕ СДЕЛАЛ ХОД, ТО ОН ПЕРЕХОДИТ К ЛЕГКОМУ БОТУ
 		level = 1;
 		/* задача Алексея Карасева */
 	}
