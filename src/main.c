@@ -48,6 +48,10 @@ int main()
 				gorizontScore = 1, vertikalScore = 1, leftDiagonalScore = 1, rightDiagonalScore = 1, gorizontScoreLeft = 5, vertikalScoreLeft = 1, leftDiagonalScoreLeft = 1, rightDiagonalScoreLeft = 1;
 
 			}while(winExit != 1);
+			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[0] - Выйти из игры\n");
+			input_nubmers_test(&menu);// ФУНКЦИЯ ПРОВЕРКИ ВВОДИМЫХ ЗНАЧЕНИЙ
+			if(menu == 0)
+				break;
 		}
 
 		if(menu == 2){// НАСТРОЙКИ
