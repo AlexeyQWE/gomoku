@@ -2,6 +2,11 @@
 #include <stdlib.h> 
 #include "prototypes.h"
 
+struct winner{// ИСПОЛЬЗУЕТСЯ ДЛЯ ВЫВОДА ТАБЛИЦЫ ЛИДЕРОВ НА СТРАНИЦЕ ТАБЛИЦА ЛИДЕРОВ
+    char name[20];// ХРАНИТ ИМЕНА ПОБЕДИТЕЛЕЙ ИЗ ФАЙЛА
+    unsigned num_moves;// ХРАНИТ КОЛИЧЕСТВО ХОДОВ ЗА КОТОРОЕ ПОБЕДИЛ ПОБЕДИТЕЛЬ
+};
+
 int main_menu()
 {
 	int menu;
