@@ -251,6 +251,24 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		spaceFinder = 0;
 }
 
+int checkWin(int score, int choice, int *winX, int *winO)// ПРОВЕРКА НА ПОБЕДУ
+{
+	if(score == 4){
+		if(choice == 1){// ЕСЛИ СЧЕТЧИК БУДЕТ РАВЕН 4, ТО ИГРОК ПОБЕДИЛ
+			*winX = 1;
+		}else{
+			*winO = 1;
+		}
+	}else if(score > 4){
+		if(choice == 1){
+			*winO = 1;
+		}else{
+			*winX = 1;
+		}
+	}
+	return 0;
+}
+
 void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo)
 {
 	if(i > 0 && checkTwo <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
