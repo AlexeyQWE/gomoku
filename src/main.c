@@ -37,7 +37,35 @@ int main()
 		}
 
 		if(menu == 4){
+		    while(menu == 4){
+			    system("clear");
+			    printf("\t\t\t\t       __\n");
+			    printf("\t\t\t\t      / /\\\n");
+			    printf("\t\t\t\t ____/_/  \\___\n");
+			    printf("\t\t\t\t | |   ___   |\n");
+			    printf("\t\t\t\t  \\ \\  \\_/  /\n");
+			    printf("\t\t\t\t   \\_\\_   _/\n");
+			    printf("\t\t\t\t     \\ \\ /\n");
+			    printf("\t\t\t\t      || |\n");
+			    printf("\t\t\t\t     ||___|\n");
+			    FILE *winTabl;
+			    i = 1;
+			    winTabl = fopen("LeadTabl.txt", "r");
+			    printf("\n\t\t\t\t№    Имя\tКоличество ходов");
 
+			    for(int i = 1; i <= 10; i++){
+				if(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+				    if(i < 10){
+					    printf("\n\t\t\t\t%d  - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves);
+				    }else{
+					    printf("\n\t\t\t\t%d - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves); 
+				    }
+				}
+			    }
+			    fclose(winTabl);
+			    printf("\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+			    input_nubmers_test(&menu);
+		    }
 		}
 
 		if(menu == 5){
