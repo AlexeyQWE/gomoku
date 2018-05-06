@@ -2,7 +2,7 @@
 #include <stdlib.h> 
 #include "prototypes.h"
 
-void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, int vertikalScore, int leftDiagonalScore, int rightDiagonalScore, int gorizontScoreLeft, int vertikalScoreLeft, int leftDiagonalSchetLeft, int rightDiagonalSchetLeft, int hodBot, int left, int right, int down, int up, int choice, int height, int widht){
+void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, int vertikalScore, int leftDiagonalScore, int rightDiagonalScore, int gorizontScoreLeft, int vertikalScoreLeft, int leftDiagonalScoreLeft, int rightDiagonalScoreLeft, int hodBot, int left, int right, int down, int up, int choice, int height, int widht){
 	int exit;
 	if(level == 1){
 		// ПРОВЕРКА СЧЕТЧИКОВ, КОТОРЫЕ СЧИТАЛИСЬ ПРИ ПРОВЕРКЕ ХОДА ИГРОКА, ТО ЕСТЬ, ЕСЛИ ГДЕ-ТО СЧЕТЧИК БОЛЬШЕ, ТО ЗНАЧИТ БОТ БУДЕТ ХОДИТЬ ИМЕННО В ТОЙ ПЛОСКОСТИ
@@ -44,8 +44,28 @@ void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, in
 			}
 		}
 		/* ЛЕВАЯ ДИАГОНАЛЬ, ТО ЕСТЬ ТАКАЯ \ */
-		if(leftDiagonalScore >= gorizontScore && leftDiagonalScore >= vertikalScore && leftDiagonalScore >= rightDiagonalScore){
-			hodBot = 1;
+		if(leftDiagonalScore >= gorizontScore && leftDiagonalScore >= vertikalScore && leftDiagonalScore >= rightDiagonalScore && hodBot != 1){
+			exit = up - 1;
+			int j = 0;
+			// leftDiagonalSchet - leftDiagonalSchetLeft --- ЭТО СЧЕТЧИК КАК БЫ ВЕРХНЕЙ ПОЛОВИНЫ ЛЕВОЙ ДИАГОНАЛИ, leftDiagonalSchetLeft ---- ЭТО СЧЕТЧИК НИЖНЕЙ ЛЕВОЙ ДИАГОНАЛИ
+			if(((leftDiagonalScore - leftDiagonalScoreLeft) > leftDiagonalScoreLeft || leftDiagonalScore == leftDiagonalScoreLeft) && (widht - leftDiagonalScore) > 0) {
+				for(int i = height - 1; i >= up; i--){//4 1
+					if(i > 0 && i <= 15){
+						++j;
+						move_bot_diagonal_minus(j, choice, tableGame, &i, &widht, &hodBot, exit, &height);
+					}
+				}
+			}
+			if(hodBot == 0 && (height + leftDiagonalScore - leftDiagonalScoreLeft) <= 15){
+				exit = down + 1;
+				int j = 0;
+				for(int i = height + 1; i <= down; i++){
+					if(i > 0 && i <= 15){
+						++j;
+						move_bot_diagonal_plus(j, choice, tableGame, &i, &widht, &hodBot, exit, &height);
+					}
+				}
+			}
 		}
 		// ПРАВАЯ ДИАГОНАЛЬ, ТО ЕСТЬ ТАКАЯ / 
 		if(rightDiagonalScore >= gorizontScore && rightDiagonalScore >= vertikalScore && rightDiagonalScore >= leftDiagonalScore){
@@ -103,20 +123,60 @@ char move_bot_vertical(int choice, char tableGame[TABLE_Y][TABLE_Y], int *i, int
 	return 0;
 }
 
-int checkWin(int score, int choice, int *winX, int *winO)// ПРОВЕРКА НА ПОБЕДУ
-{
-	if(score == 4){
-		if(choice == 1){// ЕСЛИ СЧЕТЧИК БУДЕТ РАВЕН 4, ТО ИГРОК ПОБЕДИЛ
-			*winX = 1;
+char move_bot_diagonal_minus(int j, int choice, char tableGame[TABLE_Y][TABLE_Y], int *i, int *widht, int *hodBot, int exit, int *height){
+	if(choice == 1){
+		if(tableGame[*i][*widht - j] == 'O'){
+			*i = exit;
+		}else if(tableGame[*i][*widht - j] == '_' && tableGame[*i][*widht - j] != 'O' && *widht - j > 0){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+			tableGame[*i][*widht - j] = 'O';
+			*height = *i;
+			*widht = *widht - j;
+			*i = exit;
+			*hodBot = 1;
 		}else{
-			*winO = 1;
+			*hodBot = 0;
 		}
-	}else if(score > 4){
-		if(choice == 1){
-			*winO = 1;
+	}else{
+		if(tableGame[*i][*widht - j] == 'X'){
+			*i = exit;
+		}else if(tableGame[*i][*widht - j] == '_' && tableGame[*i][*widht - j] != 'X' && *widht - j > 0){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+			tableGame[*i][*widht - j] = 'X';
+			*height = *i;
+			*widht = *widht - j;
+			*i = exit;	
+			*hodBot = 1;
 		}else{
-			*winX = 1;
+			*hodBot = 0;
+		}		
+	}
+	return 0;
+}
+
+char move_bot_diagonal_plus(int j, int choice, char tableGame[TABLE_Y][TABLE_Y], int *i, int *widht, int *hodBot, int exit, int *height){
+	if(choice == 1){
+		if(tableGame[*i][*widht + j] == 'O'){
+			*i = exit;
+		}else if(tableGame[*i][*widht + j] == '_' && tableGame[*i][*widht + j] != 'O' && *widht + j <= 10){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+			tableGame[*i][*widht + j] = 'O';
+			*height = *i;
+			*widht = *widht + j;
+			*i = exit;
+			*hodBot = 1;
+		}else{
+			*hodBot = 0;
 		}
+	}else{
+		if(tableGame[*i][*widht + j] == 'X'){
+			*i = exit;
+		}else if(tableGame[*i][*widht + j] == '_' && tableGame[*i][*widht + j] != 'X' && *widht + j <= 10){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+			tableGame[*i][*widht + j] = 'X';
+			*height = *i;
+			*widht = *widht + j;
+			*i = exit;	
+			*hodBot = 1;
+		}else{
+			*hodBot = 0;
+		}		
 	}
 	return 0;
 }
