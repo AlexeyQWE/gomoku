@@ -29,3 +29,19 @@ CTEST(testing_suite, fill_and_print_gameboard)
 	printf("\n");
 	ASSERT_EQUAL(expected2, result2);
 }
+
+CTEST(testing_suite, game_settings) 
+{
+	//GIVEN
+	int level = 1, choice = 1, bot = 1, settings = 0;
+
+	//WHEN
+	game_settings(2, &settings, &level, &choice, &bot);
+
+	//THEN
+	const int expected = 4;
+	ASSERT_EQUAL(expected, settings); //Проверка на то, что параметр settings, по завершению работы функции, будет равен 4
+	ASSERT_INTERVAL(0, 1, level);   //Проверка на то, что параметр level, по завершению работы функциии, будет в диапозоне от 0 до 1
+	ASSERT_INTERVAL(0, 1, choice);   //Проверка на то, что параметр choice, по завершению работы функциии, будет в диапозоне от 0 до 1
+	ASSERT_INTERVAL(0, 1, bot);		//Проверка на то, что параметр bot, по завершению работы функциии, будет в диапозоне от 0 до 1
+}
