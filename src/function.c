@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h> 
+#include <ctype.h>
 #include "prototypes.h"
 
 void input_nubmers_test(int *numbers)// ПРОВЕРКА НА ВВОДИМЫЕ ЦИФРЫ 
@@ -50,7 +51,7 @@ int main_menu()
 {
 	int menu;
 
-	system("clear");// УДАЛЯЕТ В ТЕРМИНАЛЕ ВСЕ НАПИСАННОЕ ВЫШЕ
+	/*system("clear")*/;// УДАЛЯЕТ В ТЕРМИНАЛЕ ВСЕ НАПИСАННОЕ ВЫШЕ
 	printf("\t\t __   __   ______   __        __         ______    \n");
 	printf("\t\t/_/| /_/| /_____/| /_/|      /_/|       /______\\   \n");
 	printf("\t\t|-|| |-|| |- ___|/ |-||      |-||      /- ___ -\\\\  \n");
@@ -68,26 +69,32 @@ int main_menu()
 	return menu;
 }
 
-void fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
+int fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 {
-	system("clear");// ОЧИЩАЕМ ОБЛАСТЬ ВЫШЕ, В ДАЛЬНЕЙШЕМ, БУДЕТ ВЫГЯДИТЬ ТАК, ЧТО ДОСКА СТАТИЧНА
-	for(int i = 0; i < TABLE_Y; i++){// ЗАПОЛНЯЕМ МАССИВ (ИГРОВУЮ ДОСКУ), ТО ЕСТЬ ПРИВОДИМ К СМОТРИБЕЛЬНОМУ ВИДУ
-		for(int j = 0; j < TABLE_Y; j++){
+	int i = 0, j = 0;
+	/*system("clear");*/// ОЧИЩАЕМ ОБЛАСТЬ ВЫШЕ, В ДАЛЬНЕЙШЕМ, БУДЕТ ВЫГЯДИТЬ ТАК, ЧТО ДОСКА СТАТИЧНА
+	for( i = 0; i < TABLE_Y; i++){// ЗАПОЛНЯЕМ МАССИВ (ИГРОВУЮ ДОСКУ), ТО ЕСТЬ ПРИВОДИМ К СМОТРИБЕЛЬНОМУ ВИДУ
+		for( j = 0; j < TABLE_Y; j++){
 			gameboard_mass[i][j] = '_';
 		}
 	}
+	if ( i >= TABLE_Y ||  j >= TABLE_Y)
+		return NULL;
+  	else 
+  		return 0;
 }
 
-void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
+int print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 {
-	system("clear"); 
+	int i = 0, j = 0;
+	/*system("clear");*/
 	printf("\n\t\t   ____   __      _    _      __    _   __ __   __\n");
 	printf("\t\t  (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /\n");
 	printf("\t\t  ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /\n");
 	printf("\t\t  (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/\n");
-	for(int i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
+	for( i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
 		printf("\n\t\t");
-		for(int j = 0; j < TABLE_Y; j++){
+		for(j = 0; j < TABLE_Y; j++){
 			if(i == 0){
 				if(j == 0){// ВЫВОДЯТСЯ ОРИЕНТИРОВОЧНЫЕ КООРДИНАТЫ ПО БОКАМ ИГРОВОГО ПОЛЯ ПО ГОРИЗОНТАЛИ
 					printf("   ");
@@ -109,6 +116,10 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 			}
 		}
 	}
+	if ( i >= TABLE_Y ||  j >= TABLE_Y)
+		return NULL;
+  	else
+  		return 0;
 }
 
 void entering_coord(int choice, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y])
@@ -303,7 +314,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 	int i = 0;
 
 	while(menu == 2){
-		system("clear");
+		/*system("clear");*/
 		printf("\t\t\t\t      _____   _\n");
 		printf("\t\t\t\t     /   //  /\\\\\n");
 		printf("\t\t\t\t    /   //  /  \\\\\n");				
