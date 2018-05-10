@@ -45,3 +45,15 @@ CTEST(testing_suite, game_settings)
 	ASSERT_INTERVAL(0, 1, choice);   //Проверка на то, что параметр choice, по завершению работы функциии, будет в диапозоне от 0 до 1
 	ASSERT_INTERVAL(0, 1, bot);		//Проверка на то, что параметр bot, по завершению работы функциии, будет в диапозоне от 0 до 1
 }
+
+CTEST(testing_suite, input_nubmers_test)
+{
+	//GIVEN
+	int number = 1;
+
+	//WHEN
+	input_nubmers_test(&number);
+
+	//THEN
+	ASSERT_INTERVAL(0, 1, number); //Проверка на то, что параметр number, по завершению работы функциии, будет в диапозоне от 0 до 1
+}
