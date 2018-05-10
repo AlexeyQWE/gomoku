@@ -2,13 +2,13 @@
 
 	void input_nubmers_test(int *numbers);
 
-	int correct_entering();
+	int correct_entering(void);
 
 	int main_menu(void);
 
-	void fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y]);	
+	int fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y]);	
 
-	void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y]);
+	int print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y]);
 
 	void entering_coord(int choice, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y]);
 
