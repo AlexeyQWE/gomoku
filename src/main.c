@@ -37,7 +37,21 @@ int main()
 				}
 
 				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){
-					move_bot(tableGame, level, gorizontScore, vertikalScore, leftDiagonalScore, rightDiagonalScore, gorizontScoreLeft, vertikalScoreLeft, leftDiagonalScoreLeft, rightDiagonalScoreLeft, hodBot, left, right, down, up, choice, height, widht);
+					move_bot(tableGame, level, gorizontScore, vertikalScore, leftDiagonalScore, rightDiagonalScore, gorizontScoreLeft, vertikalScoreLeft, leftDiagonalScoreLeft, rightDiagonalScoreLeft, hodBot, left, right, down, up, choice, &height, &widht);
+				}
+
+				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){
+					if(choice == 1){
+						choice = 0;
+					}else if(choice == 0){
+						choice = 1;
+					}
+					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO, &gorizontScore, &vertikalScore, &leftDiagonalScore, &rightDiagonalScore, &gorizontScoreLeft, &vertikalScoreLeft, &leftDiagonalScoreLeft, &rightDiagonalScoreLeft, &left, &right, &up, &down);
+					if(choice == 1){
+						choice = 0;
+					}else if(choice == 0){
+						choice = 1;
+					}
 				}
 
 				if(choice == 1 && bot != 1){// ЗДЕСЬ ОПРЕДЕЛЯЕТСЯ ОЧЕРЕДНОСТЬ ХОДОВ
@@ -45,7 +59,6 @@ int main()
 				}else if(choice == 0 && bot != 1){
 					choice = 1;
 				}
-				gorizontScore = 1, vertikalScore = 1, leftDiagonalScore = 1, rightDiagonalScore = 1, gorizontScoreLeft = 5, vertikalScoreLeft = 1, leftDiagonalScoreLeft = 1, rightDiagonalScoreLeft = 1;
 
 			}while(winExit != 1);
 			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[0] - Выйти из игры\n");
