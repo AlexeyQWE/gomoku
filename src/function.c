@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h> 
 #include "prototypes.h"
 
 static int LEN = 3, GLEN = 4;
@@ -124,6 +122,29 @@ int correct_entering(int menu, int settings)
 		else if(strChoose[0] == '4')
 			return 4;
 		else
+			return 0;	
+	}else if(menu == 10){
+		char strChoose[LEN];
+		do{
+			if(error == 1){
+				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				error = 0;
+			}
+			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
+				*ptr = c;
+
+			if(c == '\n')
+				*ptr = '\0';
+
+			while(c != '\n'){
+				c = getchar();
+				continue;
+			}
+			error++;
+		}while((strChoose[0] != '1' && strChoose[0] != '2') || strChoose[1] != '\0');
+		if(strChoose[0] == '1')
+			return 1;
+		else if(strChoose[0] == '2')
 			return 0;	
 	}
 	return 0;
