@@ -15,40 +15,108 @@ void input_nubmers_test(int *numbers)// ПРОВЕРКА НА ВВОДИМЫЕ �
 
 static int LEN = 3;
 
-int correct_entering()
+int correct_entering(int menu, int settings)
 {
 	char strChoose[LEN];
-	int c;
+	int c, error = 0;
 	char *ptr;
-	do{
-		for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
-			*ptr = c;
+	if(menu == 0){
+		do{
+			if(error == 1){
+				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				error = 0;
+			}
+			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
+				*ptr = c;
 
-		if(c == '\n')
-			*ptr = '\0';
+			if(c == '\n')
+				*ptr = '\0';
 
-		while(c != '\n'){
-			c = getchar();
-			continue;
-		}
-	}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5') || strChoose[1] != '\0');
-	if(strChoose[0] == '1')
-		return 1;
-	else if(strChoose[0] == '2')
-		return 2;
-	else if(strChoose[0] == '3')
-		return 3;
-	else if(strChoose[0] == '4')
-		return 4;
-	else if(strChoose[0] == '5')
-		return 5;
-	else
-		return 0;
+			while(c != '\n'){
+				c = getchar();
+				continue;
+			}
+			error++;
+		}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5') || strChoose[1] != '\0');
+		if(strChoose[0] == '1')
+			return 1;
+		else if(strChoose[0] == '2')
+			return 2;
+		else if(strChoose[0] == '3')
+			return 3;
+		else if(strChoose[0] == '4')
+			return 4;
+		else if(strChoose[0] == '5')
+			return 5;
+		else
+			return 0;
+	}else if(menu == 1){
+		do{
+			if(error == 1){
+				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				error = 0;
+			}
+			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
+				*ptr = c;
+
+			if(c == '\n')
+				*ptr = '\0';
+
+			while(c != '\n'){
+				c = getchar();
+				continue;
+			}
+			error++;
+		}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5') || strChoose[1] != '\0');
+		if(strChoose[0] == '1')
+			return 1;
+		else if(strChoose[0] == '2')
+			return 2;
+		else if(strChoose[0] == '3')
+			return 3;
+		else if(strChoose[0] == '4')
+			return 4;
+		else if(strChoose[0] == '5')
+			return 5;
+		else
+			return 0;
+	}else if(menu == 2){
+		do{
+			if(error == 1){
+				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				error = 0;
+			}
+			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
+				*ptr = c;
+
+			if(c == '\n')
+				*ptr = '\0';
+
+			while(c != '\n'){
+				c = getchar();
+				continue;
+			}
+			error++;
+		}while((strChoose[0] != '1' && strChoose[0] != '2' && (strChoose[0] != '3' || settings != 0) && (strChoose[0] != '4' || settings != 0)) || strChoose[1] != '\0');
+		if(strChoose[0] == '1')
+			return 1;
+		else if(strChoose[0] == '2' && settings == 0)
+			return 2;
+		else if(strChoose[0] == '2' && settings != 0)
+			return 0;
+		else if(strChoose[0] == '3')
+			return 3;
+		else if(strChoose[0] == '4')
+			return 4;
+		else
+			return 0;	
+	}
+	return 0;
 }
 
 int main_menu()
 {
-	int menu;
+	int menu = 0, settings = 0;
 
 	system("clear");// УДАЛЯЕТ В ТЕРМИНАЛЕ ВСЕ НАПИСАННОЕ ВЫШЕ
 	printf("\t\t __   __   ______   __        __         ______    \n");
@@ -63,7 +131,7 @@ int main_menu()
 	printf("\n\n\t\t\t\t   GOMOKU\n\n\t\t\t\t   1.Играть\n\t\t\t\t   2.Настройки\n\t\t\t\t   3.Правила игры\n\t\t\t\t   4.Таблица лидеров\n\t\t\t\t   5.Выход\n\t\t\t\t   ");
 	printf("\n");
 	printf("Выберите нужный вам пункт ");
-	menu = correct_entering();
+	menu = correct_entering(menu, settings);
 
 	return menu;
 }
@@ -105,7 +173,13 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 						printf("%d ", i);
 					}
 			}else{
-				printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+				if(gameboard_mass[i][j] == 'X'){
+					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+				}else if(gameboard_mass[i][j] == 'X'){
+					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+				}else{
+					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+				}
 			}
 		}
 	}
@@ -322,7 +396,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 			printf("выключен");
 		}
 		if(*settings == 1){
-			printf("\n\t\t\t\t\t|-------- 1.Включить\n\t\t\t\t\t|-------- 0.Выключить");
+			printf("\n\t\t\t\t\t|-------- 1.Включить\n\t\t\t\t\t|-------- 2.Выключить");
 		}
 		printf("\n\t\t\t\t   2.Уровень бота - ");
 		if(*level == 1){
@@ -331,7 +405,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 			printf("защитник");
 		}
 		if(*settings == 2){
-			printf("\n\t\t\t\t\t|-------- 1.Новичок\n\t\t\t\t\t|-------- 0.Защитник");
+			printf("\n\t\t\t\t\t|-------- 1.Новичок\n\t\t\t\t\t|-------- 2.Защитник");
 		}
 		printf("\n\t\t\t\t   3.Автоматически Вы играете за - ");
 		if(*choice == 1){
@@ -340,29 +414,23 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 			printf("O");
 		}
 		if(*settings == 3){
-			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 0.Играть первым за О");
+			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 2.Играть первым за О");
 		}
 		printf("\n\t\t\t\t   4.Выход в меню\n\t\t\t\t   ");
 		if(*settings == 0){	
-			for(int i = 0; i < 1; i++){
-				scanf("%d", settings);
-				if((*settings < 1) || (*settings > 4)){
-					printf("Эй, не шали, такого варианта нет!\n");
-					--i;
-				}
-			}
+			*settings = correct_entering(menu, *settings);
 			i = 0;
 		}
 		if(*settings == 1 && i == 1){
-			input_nubmers_test(bot);
+			*bot = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
 		}else if(*settings == 2 && i == 1){
-			input_nubmers_test(level);
+			*level = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
 		}else if(*settings == 3 && i == 1){
-			input_nubmers_test(choice);
+			*choice = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
 		}else if(*settings == 4){
