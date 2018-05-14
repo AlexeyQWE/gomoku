@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "prototypes.h"
 
 int main()
@@ -61,8 +59,9 @@ int main()
 				}
 
 			}while(winExit != 1);
-			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[0] - Выйти из игры\n");
-			input_nubmers_test(&menu);// ФУНКЦИЯ ПРОВЕРКИ ВВОДИМЫХ ЗНАЧЕНИЙ
+			menu = 10;
+			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[2] - Выйти из игры\n");
+			menu = correct_entering(menu, settings);// ФУНКЦИЯ ПРОВЕРКИ ВВОДИМЫХ ЗНАЧЕНИЙ
 			if(menu == 0)
 				break;
 		}
