@@ -37,10 +37,10 @@ int main()
 			do{
 				print_gameboard(tableGame);
 				
-				if(vibor == 1 && bot == 1){
+				if(choice == 1 && bot == 1){
 					limitMovesX = 50 - result[1].num_moves;
 					limitMovesO = 50 - result[3].num_moves;
-				}else if(vibor == 0 && bot == 1){
+				}else if(choice == 0 && bot == 1){
 					limitMovesX = 50 - result[3].num_moves;
 					limitMovesO = 50 - result[2].num_moves;
 				}else if(bot == 0){
