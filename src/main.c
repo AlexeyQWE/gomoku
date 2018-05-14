@@ -71,6 +71,15 @@ int main()
 					winExit = 1;
 				}
 
+				// ПОДСЧЕТ ХОДОВ ИГРОКА
+					result[1].num_moves++;
+					if(result[1].num_moves > 50)
+						winO = 1;
+				
+					result[2].num_moves++;
+					if(result[2].num_moves > 50)
+						winX = 1;
+
 				entering_coord(choice, winExit, &height, &widht, tableGame);
 				
 				if((choice == 1 || choice == 0) && winExit != 1){
