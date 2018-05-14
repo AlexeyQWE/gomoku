@@ -8,8 +8,6 @@
 
 	void neoWords(const char * str);
 
-	void input_nubmers_test(int *numbers);
-
 	int correct_entering(int menu, int settings);
 
 	int main_menu(void);
