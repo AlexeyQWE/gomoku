@@ -13,14 +13,14 @@ void input_nubmers_test(int *numbers)// ПРОВЕРКА НА ВВОДИМЫЕ �
 	}
 }
 
-static int LEN = 3;
+static int LEN = 3, GLEN = 4;
 
 int correct_entering(int menu, int settings)
 {
-	char strChoose[LEN];
 	int c, error = 0;
 	char *ptr;
 	if(menu == 0){
+		char strChoose[LEN];
 		do{
 			if(error == 1){
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
@@ -51,12 +51,13 @@ int correct_entering(int menu, int settings)
 		else
 			return 0;
 	}else if(menu == 1){
+		char strChoose[GLEN];
 		do{
 			if(error == 1){
-				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				printf("[Ошибка! Попробуйте снова]-----> ");
 				error = 0;
 			}
-			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
+			for(ptr = strChoose; ptr - strChoose < GLEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
 				*ptr = c;
 
 			if(c == '\n')
@@ -67,20 +68,45 @@ int correct_entering(int menu, int settings)
 				continue;
 			}
 			error++;
-		}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5') || strChoose[1] != '\0');
-		if(strChoose[0] == '1')
-			return 1;
-		else if(strChoose[0] == '2')
-			return 2;
-		else if(strChoose[0] == '3')
-			return 3;
-		else if(strChoose[0] == '4')
-			return 4;
-		else if(strChoose[0] == '5')
-			return 5;
-		else
-			return 0;
+		}while((((strChoose[0] != '1' || strChoose[1] != '0') && (strChoose[0] != '1' || strChoose[1] != '1') && (strChoose[0] != '1' || strChoose[1] != '2') && (strChoose[0] != '1' || strChoose[1] != '3') && (strChoose[0] != '1' || strChoose[1] != '4') && (strChoose[0] != '1' || strChoose[1] != '5')) || strChoose[2] != '\0') && (strChoose[0] != '1' || strChoose[1] != '\0') && (strChoose[0] != '2' || strChoose[1] != '\0') && (strChoose[0] != '3' || strChoose[1] != '\0') && strChoose[0] != '4' && (strChoose[0] != '5' || strChoose[1] != '\0') && (strChoose[0] != '6' || strChoose[1] != '\0') && (strChoose[0] != '7' || strChoose[1] != '\0') && (strChoose[0] != '8' || strChoose[1] != '\0') && (strChoose[0] != '9' || strChoose[1] != '\0'));
+		switch(strChoose[0]){
+			case '1':
+				if(strChoose[1] == '\0'){
+					return 1;
+				}
+				switch(strChoose[1]){
+					case '0':
+						return 10;
+					case '1':
+						return 11;
+					case '2':
+						return 12;
+					case '3':
+						return 13;
+					case '4':
+						return 14;
+					case '5':
+						return 15;
+				}
+			case '2':
+				return 2;
+			case '3':
+				return 3;
+			case '4':
+				return 4;
+			case '5':
+				return 5;
+			case '6':
+				return 6;
+			case '7':
+				return 7;
+			case '8':
+				return 8;
+			case '9':
+				return 9;
+		}
 	}else if(menu == 2){
+		char strChoose[LEN];
 		do{
 			if(error == 1){
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
@@ -187,20 +213,24 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 
 void entering_coord(int choice, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y])
 {
+	int menu = 1, settings = 0;
 	if((choice == 1 || choice == 0) && winExit != 1){
 		if(choice == 1){
-			printf("\nХод делает X [Высота] [Ширина]\n");
+			printf("\nХод делает X");
 		}else{
-			printf("\nХод делает O [Высота] [Ширина]\n");
+			printf("\nХод делает O");
 		}
 		for(int i = 0; i < 1; i++){// ПРОВЕРКА НА ВВОДИМЫЕ СИМВОЛЫ
-			scanf("%d %d", &*height, &*widht);
-			if(((*height <= 0) || (*height > 15)) || ((*widht <= 0) || (*widht > 15))){
-				printf("Наверно руки дрожат? Попробуй еще раз\n");
-				--i;
+			if(choice == 1){
+				printf("\n[Высота] - ");
+			}else{
+				printf("\n[Высота] - ");
 			}
+			*height = correct_entering(menu, settings);
+			printf("[Ширина] - ");
+			*widht = correct_entering(menu, settings);
 			if(tableGame[*height][*widht] == 'X' || tableGame[*height][*widht] == 'O'){// ПРОВЕРКА НА ЗАНЯТОСТЬ КЛЕТКИ
-				printf("Эта клетка уже занята\n");
+				printf("---!!!Эта клетка уже занята!!!---");
 				--i;
 			}
 		}
