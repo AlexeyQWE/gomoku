@@ -7,6 +7,8 @@ int main()
 	int i = 1, level = 1, choice = 1, bot = 1;
 	int height = 0, widht = 0; // КООРДИНАТЫ
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
+	int outPutReplics = 0;
+	int limitMovesX, limitMovesO;
 
 	while (i == 1) {
 		int gorizontScore, vertikalScore, leftDiagonalScore, rightDiagonalScore, gorizontScoreLeft, vertikalScoreLeft, leftDiagonalScoreLeft, rightDiagonalScoreLeft, hodBot = 0; // перменные для бота
@@ -14,8 +16,21 @@ int main()
 		int settings = 0;
 		int menu = 0;
 		menu = main_menu();
-	
+
 		if(menu == 1){// ИГРА
+
+			struct Replica repl[67];
+			result[1].num_moves = 0;
+			result[2].num_moves = 0;
+			result[3].num_moves = 0;
+			FILE *replic;
+			replic = fopen("data/replic/replic.txt", "r");
+			i = 1;
+			for(int i = 1; i <= 68; i++)
+				fgets (repl[i].replics, 65, replic);
+
+			fclose(replic);
+
 			fill_gameboard(tableGame);
 			int winExit = 0, winX = 0, winO = 0;
 
