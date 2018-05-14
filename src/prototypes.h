@@ -9,6 +9,8 @@ struct Replica{// ИСПОЛЬЗУЕТСЯ ВО ВРЕМЯ ИГРЫ
     char replics[100];// ХРАНИТ РЕПЛИКИ БОТА
 };
 
+struct afterVictory result[11];
+
 	void input_nubmers_test(int *numbers);
 
 	int correct_entering();
