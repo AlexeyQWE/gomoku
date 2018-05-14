@@ -24,7 +24,7 @@ int main()
 			result[2].num_moves = 0;
 			result[3].num_moves = 0;
 			FILE *replic;
-			replic = fopen("data/replic/replic.txt", "r");
+			replic = fopen("data/replic/replics.txt", "r");
 			i = 1;
 			for(int i = 1; i <= 68; i++)
 				fgets (repl[i].replics, 65, replic);
@@ -141,7 +141,7 @@ int main()
 			    printf("\t\t\t\t     ||___|\n");
 			    FILE *winTabl;
 			    i = 1;
-			    winTabl = fopen("LeadTabl.txt", "r");
+			    winTabl = fopen("data/Hall/LeadTable.txt", "r");
 			    printf("\n\t\t\t\t№    Имя\tКоличество ходов");
 
 			    for(int i = 1; i <= 10; i++){
