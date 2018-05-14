@@ -36,7 +36,33 @@ int main()
 
 			do{
 				print_gameboard(tableGame);
-
+				
+				if(vibor == 1 && bot == 1){
+					limitMovesX = 50 - result[1].num_moves;
+					limitMovesO = 50 - result[3].num_moves;
+				}else if(vibor == 0 && bot == 1){
+					limitMovesX = 50 - result[3].num_moves;
+					limitMovesO = 50 - result[2].num_moves;
+				}else if(bot == 0){
+					limitMovesX = 50 - result[1].num_moves;
+					limitMovesO = 50 - result[2].num_moves;
+				}
+				
+				if(bot == 1){
+					if((result[1].num_moves == 0 || result[2].num_moves == 0) && result[3].num_moves == 0){
+						printf("\n\tBot: %s", repl[1 + rand()%(5 - 1 + 1)].replics);
+					}else if(outPutReplics == 0){
+						printf("\n\tBot: %s", repl[6 + rand()%(17 - 6 + 1)].replics);
+					}else if(outPutReplics == 1){
+						printf("\n\tBot: %s", repl[18 + rand()%(28 - 18 + 1)].replics);
+					}else if(outPutReplics == 2){
+						printf("\n\tBot: %s", repl[29 + rand()%(39 - 29 + 1)].replics);
+					}else if(outPutReplics == 3){
+						printf("\n\tBot: %s", repl[40 + rand()%(50 - 40 + 1)].replics);
+					}
+				}
+				outPutReplics = 0;
+		
 				if(winX == 1){
 					printf("\n\n\t\t\tХ - ПОБЕДИЛ\a");
 					winExit = 1;
