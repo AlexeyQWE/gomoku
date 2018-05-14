@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h> 
 #include "prototypes.h"
 
 void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, int vertikalScore, int leftDiagonalScore, int rightDiagonalScore, int gorizontScoreLeft, int vertikalScoreLeft, int leftDiagonalScoreLeft, int rightDiagonalScoreLeft, int hodBot, int left, int right, int down, int up, int choice, int *height, int *widht){
