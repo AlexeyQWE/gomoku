@@ -82,8 +82,10 @@ int main()
 
 				entering_coord(choice, winExit, &height, &widht, tableGame);
 				
+				outPutReplics = score;
+
 				if((choice == 1 || choice == 0) && winExit != 1){
-					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO, &gorizontScore, &vertikalScore, &leftDiagonalScore, &rightDiagonalScore, &gorizontScoreLeft, &vertikalScoreLeft, &leftDiagonalScoreLeft, &rightDiagonalScoreLeft, &left, &right, &up, &down);
+					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO, &gorizontScore, &vertikalScore, &leftDiagonalScore, &rightDiagonalScore, &gorizontScoreLeft, &vertikalScoreLeft, &leftDiagonalScoreLeft, &rightDiagonalScoreLeft, &left, &right, &up, &down, &outPutReplics);
 				}
 
 				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){

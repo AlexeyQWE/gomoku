@@ -141,7 +141,7 @@ void entering_coord(int choice, int winExit, int *height, int *widht, char table
 	}
 }
 
-void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *gorizontScore, int *vertikalScore, int *leftDiagonalScore, int *rightDiagonalScore, int *gorizontScoreLeft, int *vertikalScoreLeft, int *leftDiagonalScoreLeft, int *rightDiagonalScoreLeft, int *left, int *right, int *up, int *down)
+void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *gorizontScore, int *vertikalScore, int *leftDiagonalScore, int *rightDiagonalScore, int *gorizontScoreLeft, int *vertikalScoreLeft, int *leftDiagonalScoreLeft, int *rightDiagonalScoreLeft, int *left, int *right, int *up, int *down, int *outPutReplics)
 {
 		int score = 0, j = 0;
 		*left = widht - 4;
@@ -155,6 +155,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		// ПОШАГОВО ОПИШУ НА СЛЕДУЩЕЙ ПРОВЕРКЕ ПО ГОРИЗОНТАЛИ
 		int exit = *left - 1;
 		int check = 0;
+		*outPutReplics = score;
 		int spaceFinder = 0;
 		for(int i = widht - 1; i >= *left; i--){// НАЧИНАЕТСЯ ОТСЧЕТ С ЛЕВОЙ КЛЕТКИ, КОТОРАЯ НАХОДИТСЯ РАДОМ С ТОЙ КЛЕКТОЙ, КОТОРУЮ УКАЗАЛ ЮЗЕР
 			control(exit, i, choice, tableGame, height, &score, &spaceFinder, height, height, widht - 1, widht + 1, &check, i);
@@ -172,6 +173,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		*gorizontScore = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
+		proverkaOutPutReplics(score, &*outPutReplics);
 		score = 0;
 		spaceFinder = 0;
 		// ВЕРТИКАЛЬНАЯ ПРОВЕРКА, СОСТОИТ В ТОМ
@@ -195,6 +197,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		*vertikalScore = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
+		proverkaOutPutReplics(score, &*outPutReplics);
 		score = 0;
 		spaceFinder = 0;
 		// ЛЕВАЯ ДИАГОНАЛЬНАЯ ПРОВЕРКА (ТО ЕСТЬ ТАКАЯ \ ), СОСТОИТ В ТОМ
@@ -222,6 +225,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		*leftDiagonalScore = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
+		proverkaOutPutReplics(score, &*outPutReplics);
 		score = 0;
 		spaceFinder = 0;
 		// ПРАВАЯ ДИАГОНАЛЬНАЯ ПРОВЕРКА (ТО ЕСТЬ ТАКАЯ / ), СОСТОИТ В ТОМ
@@ -248,6 +252,7 @@ void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int h
 		*rightDiagonalScore = score;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
+		proverkaOutPutReplics(score, &*outPutReplics);
 		score = 0;
 		j = 0;
 		spaceFinder = 0;
