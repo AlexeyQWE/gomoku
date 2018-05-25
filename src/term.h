@@ -6,7 +6,7 @@
 //Format text
 #define RESET 		0
 #define BRIGHT 		1
-#define DIM			2
+#define DIM		2
 #define UNDERSCORE	3
 #define BLINK		4
 #define REVERSE		5
