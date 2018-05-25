@@ -108,6 +108,11 @@ int correct_entering(int menu, int settings)
 				resetcolor();
 				error = 0;
 			}
+
+			set_display_atrib(BLINK);
+	    	set_display_atrib(F_YELLOW);
+			printf("\nВыберите нужный вам пункт ");
+			resetcolor();
 			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
 				*ptr = c;
 
@@ -521,7 +526,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		if(*settings == 3){
 			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 2.Играть первым за О");
 		}
-		printf("\n\t\t\t\t   4.Выход в меню\n\t\t\t\t   ");
+		printf("\n\t\t\t\t   4.Выход в меню\n");
 		resetcolor();
 
 		if(*settings == 0){	
