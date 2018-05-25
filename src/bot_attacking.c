@@ -2,7 +2,7 @@
 
 void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int playerScore, int choice,  int *botScoreGorizont, int *botScoreVertikal, int *botScoreLeftDiagonal, int *botScoreRightDiagonal, int  *botScoreGorizontLeft, int *botScoreVertikalLeft, int *botScoreLeftDiagonalLeft, int *botScoreRightDiagonalLeft, int *hightAtakBot, int *weightAtakBot, int height, int widht, int *hodBot){
 	int rak;
-	if((((botScore == playerScore && (playerScore < 3 && choice == 0))) || (botScore == playerScore && choice == 0) || (botScore >= playerScore && (playerScore < 2 && choice == 0))) || (botScore > playerScore) || (playerScore <= 2 && choice == 1)){//-----------УРОВЕНЬ БОТА - ИГРОК
+	if((((botScore == playerScore && (playerScore < 3 && choice == 0))) || (botScore == playerScore && choice == 0) || (botScore >= playerScore && (playerScore < 2 && choice == 0))) || (botScore > playerScore) || (playerScore < 2 && choice == 1)){//-----------УРОВЕНЬ БОТА - ИГРОК
 		int addmission = 0;
 		int exit, j;
 		if(botScoreGorizont[8] >= botScoreVertikal[8] && botScoreGorizont[8] >= botScoreLeftDiagonal[8] && botScoreGorizont[8] >= botScoreRightDiagonal[8] && *hodBot != 1){

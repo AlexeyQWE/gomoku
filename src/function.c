@@ -617,7 +617,7 @@ void check_to_win_bot(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, i
 	}
 }
 
-void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *playerScore,  int *hightStepPlayer, int *weightStepPlayer){
+void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *playerScore,  int *hightStepPlayer, int *weightStepPlayer, int dopusk){
 	int checking = 0;
 	int resultat[9] = {'\0'};
 	int key;
@@ -656,7 +656,7 @@ void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertika
 			playerScoreVertikalLeft[8] = playerScoreVertikalLeft[key];
 			playerScoreLeftDiagonalLeft[8] = playerScoreLeftDiagonalLeft[key];
 			playerScoreRightDiagonalLeft[8] = playerScoreRightDiagonalLeft[key];
-			if(level != 0){
+			if(level != 0 && dopusk != 0){
 				hightStepPlayer[8] = hightStepPlayer[key];
 				weightStepPlayer[8] = weightStepPlayer[key];
 			}

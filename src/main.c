@@ -46,6 +46,8 @@ int main()
 			fill_gameboard(tableGame);
 			int winExit = 0, winX = 0, winO = 0, scoreHandPlayer = 0, botScore = 0;
 
+			int dopusk = 0;
+
 			do{
 				if(choice == 0 && bot == 1 && settings == 0){// ЕСЛИ БОТ ХОДИТ ПЕРВЫМ, ТО ОН ХОДИТ В РАНДОМНУЮ ТОЧКУ ИГРОВОГО ПОЛЯ
 					tableGame[7][8] = 'X';
@@ -55,6 +57,7 @@ int main()
 						weightAtakBot[i] = 8;
 					}
 				}
+
 
 				print_gameboard(tableGame);
 
@@ -137,7 +140,7 @@ int main()
 				printf("he--------------------------- %d\n",hightStepPlayer[8]);
 				printf("weuty--------------------------- %d\n",weightStepPlayer[8]);
 
-				if((choice == 0 || choice == 1) && (level == 1 || level == 0) && settings != 300){
+				if((choice == 0 || choice == 1) && (level == 1 || level == 0 || level == 2) && settings != 300){
 					hightStepPlayer[8] = height;
 					weightStepPlayer[8] = widht;
 					settings = 300;
@@ -160,7 +163,7 @@ int main()
 				}
 
 				if(level == 2 || level == 0){
-					prioritization(level, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, &playerScore, hightStepPlayer, weightStepPlayer);
+					prioritization(level, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, &playerScore, hightStepPlayer, weightStepPlayer, dopusk);
 				}
 
 				printf("he--------------------------- %d\n",hightStepPlayer[8]);
@@ -211,8 +214,9 @@ int main()
 					}
 				}
 
+
 				if(level == 2 || level == 0){
-					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot);
+					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot, dopusk);
 				}
 				printf("he--------------------------- %d\n",hightStepPlayer[8]);
 				printf("weuty--------------------------- %d\n",weightStepPlayer[8]);
@@ -281,6 +285,23 @@ int main()
 						scanf("%d", &menu);
 						move_bot_easy(level, tableGame, choice, hightAtakBot, weightAtakBot, &hodBot, &winX, &winO, height, widht);
 					}
+
+					if(level == 2 && choice == 1 && dopusk == 0){
+						int triger = 0;
+						for(int p = 1; p < 9; p++){
+							if(hightAtakBot[p] == 0){
+								triger++;
+							}
+							if(triger != 0){
+								for(int l = 1; l < 9; l++){
+									hightAtakBot[l] = hightAtakBot[0];
+									weightAtakBot[l] = weightAtakBot[0];
+								}
+								p = 9;
+							}
+						}
+					}
+					dopusk++;
 				}
 
 				botScoreGorizont[8] = 0;
@@ -303,7 +324,7 @@ int main()
 				}
 
 				if(level == 2 || level == 1){
-					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot);
+					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot, dopusk);
 				}
 
 				hodBot = 0;
