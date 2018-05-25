@@ -168,7 +168,7 @@ int main_menu()
 	printf("\t\t|_|/ |_|/ |_____|/ |______|/ |______|/ \\_______/  \n");
 	resetcolor();
 	set_display_atrib(BRIGHT);
-	set_display_atrib(F_MAGENTA);
+	set_display_atrib(F_YELLOW);
 	printf("\n\n\t\t\t\t   GOMOKU\n\n\t\t\t\t   1.Играть\n\t\t\t\t   2.Настройки\n\t\t\t\t   3.Правила игры\n\t\t\t\t   4.Таблица лидеров\n\t\t\t\t   5.Выход\n\t\t\t\t   ");
 	printf("\n");
 	printf("Выберите нужный вам пункт ");
@@ -235,12 +235,12 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 			}else{
 				if(gameboard_mass[i][j] == 'X'){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
 					resetcolor();
-				}else if(gameboard_mass[i][j] == 'X'){
+				}else if(gameboard_mass[i][j] == 'O'){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
 					resetcolor();
 				}else{
@@ -463,8 +463,8 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		printf("\t\t\t\t     /   //\n");
 		printf("\t\t\t\t    /   //\n");
 		resetcolor();
-		set_display_atrib(BRIGHT);
-	    set_display_atrib(F_MAGENTA);
+		set_display_atrib(BLINK);
+	    set_display_atrib(F_YELLOW);
 		printf("\n\n\t\t\t\t   НАСТРОЙКИ");
 		printf("\n\n\t\t\t\t   1.Бот - ");
 
