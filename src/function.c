@@ -10,7 +10,10 @@ int correct_entering(int menu, int settings)
 		char strChoose[LEN];
 		do{
 			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				resetcolor();
 				error = 0;
 			}
 			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
@@ -41,7 +44,10 @@ int correct_entering(int menu, int settings)
 		char strChoose[GLEN];
 		do{
 			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
 				printf("[Ошибка! Попробуйте снова]-----> ");
+				resetcolor();
 				error = 0;
 			}
 			for(ptr = strChoose; ptr - strChoose < GLEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
@@ -96,7 +102,10 @@ int correct_entering(int menu, int settings)
 		char strChoose[LEN];
 		do{
 			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				resetcolor();
 				error = 0;
 			}
 			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
@@ -127,7 +136,10 @@ int correct_entering(int menu, int settings)
 		char strChoose[LEN];
 		do{
 			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				resetcolor();
 				error = 0;
 			}
 			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
