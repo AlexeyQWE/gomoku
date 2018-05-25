@@ -424,6 +424,8 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 
 	while(menu == 2){
 		system("clear");
+		set_display_atrib(BRIGHT);
+	    set_display_atrib(F_GREEN);
 		printf("\t\t\t\t      _____   _\n");
 		printf("\t\t\t\t     /   //  /\\\\\n");
 		printf("\t\t\t\t    /   //  /  \\\\\n");				
@@ -433,6 +435,9 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		printf("\t\t\t\t      /   //\n");
 		printf("\t\t\t\t     /   //\n");
 		printf("\t\t\t\t    /   //\n");
+		resetcolor();
+		set_display_atrib(BRIGHT);
+	    set_display_atrib(F_MAGENTA);
 		printf("\n\n\t\t\t\t   НАСТРОЙКИ");
 		printf("\n\n\t\t\t\t   1.Бот - ");
 
@@ -463,6 +468,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 2.Играть первым за О");
 		}
 		printf("\n\t\t\t\t   4.Выход в меню\n\t\t\t\t   ");
+		resetcolor();
 
 		if(*settings == 0){	
 			*settings = correct_entering(menu, *settings);
