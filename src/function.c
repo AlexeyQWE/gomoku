@@ -11,7 +11,7 @@ int correct_entering(int menu, int settings)
 		do{
 			if(error == 1){
 				set_display_atrib(BRIGHT);
-				set_display_atrib(F_YELLOW);
+				set_display_atrib(F_RED);
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
 				resetcolor();
 				error = 0;
@@ -45,7 +45,7 @@ int correct_entering(int menu, int settings)
 		do{
 			if(error == 1){
 				set_display_atrib(BRIGHT);
-				set_display_atrib(F_YELLOW);
+				set_display_atrib(F_RED);
 				printf("[Ошибка! Попробуйте снова]-----> ");
 				resetcolor();
 				error = 0;
@@ -103,7 +103,7 @@ int correct_entering(int menu, int settings)
 		do{
 			if(error == 1){
 				set_display_atrib(BRIGHT);
-				set_display_atrib(F_YELLOW);
+				set_display_atrib(F_RED);
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
 				resetcolor();
 				error = 0;
@@ -137,7 +137,7 @@ int correct_entering(int menu, int settings)
 		do{
 			if(error == 1){
 				set_display_atrib(BRIGHT);
-				set_display_atrib(F_YELLOW);
+				set_display_atrib(F_RED);
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
 				resetcolor();
 				error = 0;
