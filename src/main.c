@@ -1,7 +1,9 @@
 #include "prototypes.h"
+#include <stdio.h>
 
 int main()
 {
+	system("color F3");
 	int i = 1, level = 1, choice = 1, bot = 1;
 	int height = 0, widht = 0; // КООРДИНАТЫ
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
