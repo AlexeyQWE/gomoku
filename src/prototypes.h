@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
+//Copyright. Конслольный вывод цветов и библиотека "term.h" реализованы на основе данного проекта: https://github.com/dlinyj/terminal_controller
+
 #include "term.h"
 
 /*ANSI/VT100 Terminal using example */
