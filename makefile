@@ -1,6 +1,6 @@
-gom: build build/main.o build/function.o build/bot.o
+/bin/gom: build build/main.o build/function.o build/bot.o
 
-		gcc build/main.o build/function.o build/bot.o -o gom
+		gcc build/main.o build/function.o build/bot.o -o bin/gom
 
 build/main.o: src/main.c
 
