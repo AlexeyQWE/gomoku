@@ -18,10 +18,18 @@
 
 	void entering_coord(int choice, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y]);
 
-	void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *gorizontScore, int *vertikalScore, int *leftDiagonalScore, int *rightDiagonalScore, int *gorizontScoreLeft, int *vertikalScoreLeft, int *leftDiagonalScoreLeft, int *rightDiagonalScoreLeft, int *left, int *right, int *up, int *down);
+	void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *playerScore,  int *hightStepPlayer, int *weightStepPlayer);
 
-	void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, int vertikalScore, int leftDiagonalScore, int rightDiagonalScore, int gorizontScoreLeft, int vertikalScoreLeft, int leftDiagonalScoreLeft, int rightDiagonalScoreLeft, int hodBot, int left, int right, int down, int up, int choice, int *height, int *widht);
+	void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *hightStepPlayer, int *weightStepPlayer);
 
+	void check_to_win_bot(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *hightStepPlayer, int *weightStepPlayer);
+
+	void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int playerScore, int choice,  int *botScoreGorizont, int *botScoreVertikal, int *botScoreLeftDiagonal, int *botScoreRightDiagonal, int  *botScoreGorizontLeft, int *botScoreVertikalLeft, int *botScoreLeftDiagonalLeft, int *botScoreRightDiagonalLeft, int *hightAtakBot, int *weightAtakBot, int height, int widht, int *hodBot);
+
+	void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *hodBot, int choice, int height, int widht, int *hightAtakBot, int *weightAtakBot);
+
+	void move_bot_easy(int level, char tableGame[TABLE_Y][TABLE_Y], int choice, int *hightAtakBot, int *weightAtakBot, int *hodBot, int *winX, int *winO, int height, int widht);
+	
 	char move_bot_gotizont(int choice, char tableGame[TABLE_Y][TABLE_Y], int *i, int height, int *hodBot, int exit, int *widht);
 
 	char move_bot_vertical(int choice, char tableGame[TABLE_Y][TABLE_Y], int *i, int widht, int *hodBot, int exit, int *height);
@@ -30,7 +38,15 @@
 
 	char move_bot_diagonal_plus(int j, int choice, char tableGame[TABLE_Y][TABLE_Y], int *i, int *widht, int *hodBot, int exit, int *height);
 
-	void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo);
+	char step_attack_bot_gorizont(int vibor, char tableGame[TABLE_Y][TABLE_Y], int *i, int hight, int *hodBot, int exit, int *weight);
+
+	char step_attack_bot_vertical(int vibor, char tableGame[TABLE_Y][TABLE_Y], int *i, int weight, int *hodBot, int exit, int *hight);
+
+	char step_attack_bot_diagonal_plus(int j, int vibor, char tableGame[TABLE_Y][TABLE_Y], int *i, int *weight, int *hodBot, int exit, int *hight);
+	
+	char step_attack_bot_diagonal_minus(int j, int vibor, char tableGame[TABLE_Y][TABLE_Y], int *i, int *weight, int *hodBot, int exit, int *hight);
+	
+	void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo, int *zamok);
 
 	int checkWin(int score, int choice, int *winX, int *winO);
 
