@@ -13,7 +13,10 @@ int correct_entering(int menu, int settings)
 		char strChoose[LEN];
 		do{
 			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_RED);
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				resetcolor();
 				error = 0;
 			}
 			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
@@ -44,7 +47,10 @@ int correct_entering(int menu, int settings)
 		char strChoose[GLEN];
 		do{
 			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_RED);
 				printf("[Ошибка! Попробуйте снова]-----> ");
+				resetcolor();
 				error = 0;
 			}
 			for(ptr = strChoose; ptr - strChoose < GLEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
@@ -99,9 +105,17 @@ int correct_entering(int menu, int settings)
 		char strChoose[LEN];
 		do{
 			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_RED);
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				resetcolor();
 				error = 0;
 			}
+
+			set_display_atrib(BLINK);
+	    	set_display_atrib(F_YELLOW);
+			printf("\nВыберите нужный вам пункт ");
+			resetcolor();
 			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
 				*ptr = c;
 
@@ -130,7 +144,10 @@ int correct_entering(int menu, int settings)
 		char strChoose[LEN];
 		do{
 			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_RED);
 				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				resetcolor();
 				error = 0;
 			}
 			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
@@ -158,6 +175,8 @@ int main_menu()
 	int menu = 0, settings = 0;
 
 	system("clear");// УДАЛЯЕТ В ТЕРМИНАЛЕ ВСЕ НАПИСАННОЕ ВЫШЕ
+	set_display_atrib(BRIGHT);
+	set_display_atrib(F_RED);
 	printf("\t\t __   __   ______   __        __         ______    \n");
 	printf("\t\t/_/| /_/| /_____/| /_/|      /_/|       /______\\   \n");
 	printf("\t\t|-|| |-|| |- ___|/ |-||      |-||      /- ___ -\\\\  \n");
@@ -167,9 +186,13 @@ int main_menu()
 	printf("\t\t|-|| |-|| |-||___  |-||____  |-||____  |-||__|-||   \n");
 	printf("\t\t|-|| |-|| |-|___/| |-|____/| |-|____/| |-\\___/-|/ \n");
 	printf("\t\t|_|/ |_|/ |_____|/ |______|/ |______|/ \\_______/  \n");
+	resetcolor();
+	set_display_atrib(BRIGHT);
+	set_display_atrib(F_YELLOW);
 	printf("\n\n\t\t\t\t   GOMOKU\n\n\t\t\t\t   1.Играть\n\t\t\t\t   2.Настройки\n\t\t\t\t   3.Правила игры\n\t\t\t\t   4.Таблица лидеров\n\t\t\t\t   5.Выход\n\t\t\t\t   ");
 	printf("\n");
 	printf("Выберите нужный вам пункт ");
+	resetcolor();
 	menu = correct_entering(menu, settings);
 
 	return menu;
@@ -187,11 +210,14 @@ void fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 
 void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 {
-	//system("clear"); 
+	//system("clear");  
+	set_display_atrib(BRIGHT);
+    set_display_atrib(F_RED);
 	printf("\n\t\t   ____   __      _    _      __    _   __ __   __\n");
 	printf("\t\t  (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /\n");
 	printf("\t\t  ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /\n");
 	printf("\t\t  (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/\n");
+	resetcolor();
 	for(int i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
 		printf("\n\t\t");
 		for(int j = 0; j < TABLE_Y; j++){
@@ -199,25 +225,49 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 				if(j == 0){// ВЫВОДЯТСЯ ОРИЕНТИРОВОЧНЫЕ КООРДИНАТЫ ПО БОКАМ ИГРОВОГО ПОЛЯ ПО ГОРИЗОНТАЛИ
 					printf("   ");
 				}else if(j < 10){
-					printf(" %d ", j);
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf("  %d", j);
+					resetcolor();
 				}else if(j == 9){
-					printf("%d ", j);
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf("  %d", j);
+					resetcolor();
 				}else{
-					printf(" %d", j);
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf(" %2d", j);
+					resetcolor();
 				}
 			}else if(j == 0){// ТЕ ЖЕ САМЫЕ КООРДИНАТЫ, ТОЛЬКО ПО ВЕРТИКАЛИ
 				if(i < 10){
-					printf(" %d ", i);
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf(" %2d ", i);
+					resetcolor();
 				}else{
-						printf("%d ", i);
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf(" %d ", i);
+					resetcolor();
 					}
 			}else{
 				if(gameboard_mass[i][j] == 'X'){
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_WHITE);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+					resetcolor();
 				}else if(gameboard_mass[i][j] == 'O'){
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_WHITE);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+					resetcolor();
 				}else{
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+					resetcolor();
 				}
 			}
 		}
@@ -229,18 +279,33 @@ void entering_coord(int choice, int winExit, int *height, int *widht, char table
 	int menu = 1, settings = 0;
 	if((choice == 1 || choice == 0) && winExit != 1){
 		if(choice == 1){
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_GREEN);
 			printf("\nХод делает X");
+			resetcolor();
 		}else{
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_GREEN);
 			printf("\nХод делает O");
+			resetcolor();
 		}
 		for(int i = 0; i < 1; i++){// ПРОВЕРКА НА ВВОДИМЫЕ СИМВОЛЫ
 			if(choice == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
 				printf("\n[Высота] - ");
+				resetcolor();
 			}else{
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
 				printf("\n[Высота] - ");
+				resetcolor();
 			}
 			*height = correct_entering(menu, settings);
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_YELLOW);
 			printf("[Ширина] - ");
+			resetcolor();
 			*widht = correct_entering(menu, settings);
 			if(tableGame[*height][*widht] == 'X' || tableGame[*height][*widht] == 'O'){// ПРОВЕРКА НА ЗАНЯТОСТЬ КЛЕТКИ
 				printf("---!!!Эта клетка уже занята!!!---");
@@ -691,6 +756,8 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 
 	while(menu == 2){
 		system("clear");
+		set_display_atrib(BRIGHT);
+	    set_display_atrib(F_GREEN);
 		printf("\t\t\t\t      _____   _\n");
 		printf("\t\t\t\t     /   //  /\\\\\n");
 		printf("\t\t\t\t    /   //  /  \\\\\n");				
@@ -700,6 +767,9 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		printf("\t\t\t\t      /   //\n");
 		printf("\t\t\t\t     /   //\n");
 		printf("\t\t\t\t    /   //\n");
+		resetcolor();
+		set_display_atrib(BLINK);
+	    set_display_atrib(F_YELLOW);
 		printf("\n\n\t\t\t\t   НАСТРОЙКИ");
 		printf("\n\n\t\t\t\t   1.Бот - ");
 
@@ -729,7 +799,9 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		if(*settings == 3){
 			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 2.Играть первым за О");
 		}
-		printf("\n\t\t\t\t   4.Выход в меню\n\t\t\t\t   ");
+		printf("\n\t\t\t\t   4.Выход в меню\n");
+		resetcolor();
+
 		if(*settings == 0){	
 			*settings = correct_entering(menu, *settings);
 			i = 0;

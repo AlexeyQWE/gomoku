@@ -1,4 +1,5 @@
 #include "prototypes.h"
+#include <stdio.h>
 
 int main()
 {
