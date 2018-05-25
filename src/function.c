@@ -271,18 +271,33 @@ void entering_coord(int choice, int winExit, int *height, int *widht, char table
 	int menu = 1, settings = 0;
 	if((choice == 1 || choice == 0) && winExit != 1){
 		if(choice == 1){
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_GREEN);
 			printf("\nХод делает X");
+			resetcolor();
 		}else{
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_GREEN);
 			printf("\nХод делает O");
+			resetcolor();
 		}
 		for(int i = 0; i < 1; i++){// ПРОВЕРКА НА ВВОДИМЫЕ СИМВОЛЫ
 			if(choice == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
 				printf("\n[Высота] - ");
+				resetcolor();
 			}else{
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
 				printf("\n[Высота] - ");
+				resetcolor();
 			}
 			*height = correct_entering(menu, settings);
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_YELLOW);
 			printf("[Ширина] - ");
+			resetcolor();
 			*widht = correct_entering(menu, settings);
 			if(tableGame[*height][*widht] == 'X' || tableGame[*height][*widht] == 'O'){// ПРОВЕРКА НА ЗАНЯТОСТЬ КЛЕТКИ
 				printf("---!!!Эта клетка уже занята!!!---");
