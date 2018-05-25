@@ -191,10 +191,13 @@ void fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 {
 	system("clear"); 
+	set_display_atrib(BRIGHT);
+    set_display_atrib(F_RED);
 	printf("\n\t\t   ____   __      _    _      __    _   __ __   __\n");
 	printf("\t\t  (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /\n");
 	printf("\t\t  ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /\n");
 	printf("\t\t  (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/\n");
+	resetcolor();
 	for(int i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
 		printf("\n\t\t");
 		for(int j = 0; j < TABLE_Y; j++){
@@ -202,25 +205,49 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 				if(j == 0){// ВЫВОДЯТСЯ ОРИЕНТИРОВОЧНЫЕ КООРДИНАТЫ ПО БОКАМ ИГРОВОГО ПОЛЯ ПО ГОРИЗОНТАЛИ
 					printf("   ");
 				}else if(j < 10){
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
 					printf("  %d", j);
+					resetcolor();
 				}else if(j == 9){
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
 					printf("  %d", j);
+					resetcolor();
 				}else{
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
 					printf(" %2d", j);
+					resetcolor();
 				}
 			}else if(j == 0){// ТЕ ЖЕ САМЫЕ КООРДИНАТЫ, ТОЛЬКО ПО ВЕРТИКАЛИ
 				if(i < 10){
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
 					printf(" %2d ", i);
+					resetcolor();
 				}else{
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
 					printf(" %d ", i);
+					resetcolor();
 					}
 			}else{
 				if(gameboard_mass[i][j] == 'X'){
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+					resetcolor();
 				}else if(gameboard_mass[i][j] == 'X'){
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+					resetcolor();
 				}else{
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+					resetcolor();
 				}
 			}
 		}
