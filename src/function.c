@@ -155,6 +155,8 @@ int main_menu()
 	int menu = 0, settings = 0;
 
 	system("clear");// УДАЛЯЕТ В ТЕРМИНАЛЕ ВСЕ НАПИСАННОЕ ВЫШЕ
+	set_display_atrib(BRIGHT);
+	set_display_atrib(F_RED);
 	printf("\t\t __   __   ______   __        __         ______    \n");
 	printf("\t\t/_/| /_/| /_____/| /_/|      /_/|       /______\\   \n");
 	printf("\t\t|-|| |-|| |- ___|/ |-||      |-||      /- ___ -\\\\  \n");
@@ -164,9 +166,13 @@ int main_menu()
 	printf("\t\t|-|| |-|| |-||___  |-||____  |-||____  |-||__|-||   \n");
 	printf("\t\t|-|| |-|| |-|___/| |-|____/| |-|____/| |-\\___/-|/ \n");
 	printf("\t\t|_|/ |_|/ |_____|/ |______|/ |______|/ \\_______/  \n");
+	resetcolor();
+	set_display_atrib(BRIGHT);
+	set_display_atrib(F_MAGENTA);
 	printf("\n\n\t\t\t\t   GOMOKU\n\n\t\t\t\t   1.Играть\n\t\t\t\t   2.Настройки\n\t\t\t\t   3.Правила игры\n\t\t\t\t   4.Таблица лидеров\n\t\t\t\t   5.Выход\n\t\t\t\t   ");
 	printf("\n");
 	printf("Выберите нужный вам пункт ");
+	resetcolor();
 	menu = correct_entering(menu, settings);
 
 	return menu;
@@ -196,17 +202,17 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 				if(j == 0){// ВЫВОДЯТСЯ ОРИЕНТИРОВОЧНЫЕ КООРДИНАТЫ ПО БОКАМ ИГРОВОГО ПОЛЯ ПО ГОРИЗОНТАЛИ
 					printf("   ");
 				}else if(j < 10){
-					printf(" %d ", j);
+					printf("  %d", j);
 				}else if(j == 9){
-					printf("%d ", j);
+					printf("  %d", j);
 				}else{
-					printf(" %d", j);
+					printf(" %2d", j);
 				}
 			}else if(j == 0){// ТЕ ЖЕ САМЫЕ КООРДИНАТЫ, ТОЛЬКО ПО ВЕРТИКАЛИ
 				if(i < 10){
-					printf(" %d ", i);
+					printf(" %2d ", i);
 				}else{
-						printf("%d ", i);
+					printf(" %d ", i);
 					}
 			}else{
 				if(gameboard_mass[i][j] == 'X'){
@@ -457,6 +463,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 2.Играть первым за О");
 		}
 		printf("\n\t\t\t\t   4.Выход в меню\n\t\t\t\t   ");
+
 		if(*settings == 0){	
 			*settings = correct_entering(menu, *settings);
 			i = 0;
