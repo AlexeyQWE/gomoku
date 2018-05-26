@@ -351,6 +351,15 @@ int main()
 						scanf("%d", &menu);
 						move_bot_easy(level, tableGame, choice, hightAtakBot, weightAtakBot, &hodBot, &winX, &winO, height, widht);
 					}
+					
+					if(hodBot == 1){
+					    result[3].num_moves++;
+					    if(choice == 1 && result[3].num_moves > 50){
+						winX = 1;
+					    }else if(choice == 0 && result[3].num_moves > 50){
+						winO = 1;
+					    }
+					}
 
 					if(level == 2 && choice == 1 && dopusk == 0){
 						int triger = 0;
