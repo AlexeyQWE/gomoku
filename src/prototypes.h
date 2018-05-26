@@ -86,3 +86,4 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 	
 	void table_name(int menu, int settings, struct winner tablname[15]);
 
+	void easter_egg(int menu, int settings);

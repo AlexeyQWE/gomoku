@@ -507,6 +507,10 @@ int main()
 		if(menu == 5){// ВЫХОД
 			break;
 		}
+		
+		if(menu == 6){// ПАСХАЛКА
+			easter_egg(menu, settings);
+		}
 	
 	}
 	return 0;
