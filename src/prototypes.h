@@ -67,4 +67,4 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 
 	int checkWin(int score, int choice, int *winX, int *winO);
 
-	void game_settings(int menu, int *settings, int *level, int *choice, int *bot);
+	void game_settings(int menu, int *settings, int *level, int *choice, int *bot, int *otladka);
