@@ -173,10 +173,16 @@ int main()
 						*/
 
 				if(winX == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
 					printf("\n\n\t\t\tХ - ПОБЕДИЛ\a");
+					resetcolor();
 					winExit = 1;
 				}else if(winO == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
 					printf("\n\n\t\t\tO - ПОБЕДИЛ");
+					resetcolor();
 					winExit = 1;
 				}
 				if(winExit != 1){
@@ -412,12 +418,21 @@ int main()
 
 			}while(winExit != 1);
 			if(outPutReplics == 4 && bot == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
 					printf("\n\tBot: %s", repl[59 + rand()%(67 - 59 + 1)].replics);
+					resetcolor();
 			}
 			if(choice == 1 && bot == 1 && winO == 1){
+				    set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
 					printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
+					resetcolor();
 			}else if(choice == 0 && bot == 1 && winX == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
 					printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
+					resetcolor();
 			}
 			if(bot == 1 && ((choice == 1 && winX == 1) || (choice == 0 && winO == 1))){
 				FILE *winTabl;
@@ -433,13 +448,25 @@ int main()
 						tablname[k].num_moves = result[1].num_moves;
 						fclose(winTabl);
 						if(k == 1){
+							set_display_atrib(BRIGHT);
+							set_display_atrib(F_YELLOW);
 							printf("\n\t\t\tТы - Чемпион!\n\t\t\tТебе нет равных!");
+							resetcolor();
 						}else if(k == 2){
+							set_display_atrib(BRIGHT);
+							set_display_atrib(F_YELLOW);
 							printf("\n\t\t\tМолодец!\n\t\t\tТы занял 2 место, но надо еще потренироваться!");
+							resetcolor();
 						}else if(k == 3){
+							set_display_atrib(BRIGHT);
+							set_display_atrib(F_YELLOW);
 							printf("\n\t\t\tОго, ты вошел в тройку лучших из лучших!\n\t\t\tТы занимаешь почетное 3 место!");
+							resetcolor();
 						}
+						set_display_atrib(BRIGHT);
+						set_display_atrib(F_YELLOW);
 						printf("\n\t\t\tВведи свое имя, победитель, дабы история запомнила тебя!\n\t\t\t");
+						resetcolor();
 						scanf("%14s", tablname[k].name);
 						winTabl = fopen("data/hall/LeadTable.txt", "r+");
 						for(int j = 1; j <= 10; j++){
@@ -450,10 +477,16 @@ int main()
 					}
 				}
 			}else if(bot == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
 				printf("\n\t\t\tТы жалок, тебя выиграл бот");
+				resetcolor();
 			}
 			menu = 10;
+			set_display_atrib(BLINK);
+			set_display_atrib(F_YELLOW);
 			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[2] - Выйти из игры\n");
+			resetcolor();
 			menu = correct_entering(menu, settings);// ФУНКЦИЯ ПРОВЕРКИ ВВОДИМЫХ ЗНАЧЕНИЙ
 			if(menu == 0)
 				break;
