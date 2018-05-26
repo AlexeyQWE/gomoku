@@ -480,7 +480,7 @@ int main()
 			    resetcolor();
 			    set_display_atrib(BLINK);
 				set_display_atrib(F_YELLOW);
-			    printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 9Х9\n\t\t\t\tили 19 Х 19 за Х и О\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+			    printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 15Х15\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
 			   	resetcolor();
 			    menu = 0;
 			    menu = correct_entering(menu, settings);
@@ -509,7 +509,7 @@ int main()
 				set_display_atrib(F_YELLOW);
 			    printf("\n\t\t\t\t№    Имя\tКоличество ходов");
 			    resetcolor();
-			    
+
 			    for(int i = 1; i <= 10; i++){
 					if(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
 					    if(i < 10){
