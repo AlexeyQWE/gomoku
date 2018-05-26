@@ -45,6 +45,8 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 	if(playerScoreVertikal[8] >= playerScoreGorizont[8] && playerScoreVertikal[8] >= playerScoreLeftDiagonal[8] && playerScoreVertikal[8] >= playerScoreRightDiagonal[8] && *hodBot != 1){
 		up = height - 4;
 		exit = up - 1;
+		printf("%d-----------------he\n", height);
+		printf("%d-----------------we\n", widht);
 		printf("сюда заходь 565");
 				scanf("%d", &rak);
 		if((playerScoreVertikal[8] - playerScoreVertikalLeft[8]) <= playerScoreVertikalLeft[8] || playerScoreVertikal[8] == playerScoreVertikalLeft[8]){
@@ -52,6 +54,8 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 				if(i > 0 && i <= 15){
 					move_bot_vertical(choice, tableGame, &i, widht, &*hodBot, exit, &height);
 					if(*hodBot == 1){
+						printf("%d-----------------he\n", height);
+						printf("%d-----------------we\n", widht);
 						hightAtakBot[2] = height;
 						weightAtakBot[2] = widht;
 					}
@@ -233,7 +237,7 @@ char move_bot_diagonal_plus(int j, int choice, char tableGame[TABLE_Y][TABLE_Y],
 	if(choice == 1){
 		if(tableGame[*i][*widht + j] == 'O'){
 			*i = exit;
-		}else if(tableGame[*i][*widht + j] == '_' && tableGame[*i][*widht + j] != 'O' && *widht + j <= 10){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		}else if(tableGame[*i][*widht + j] == '_' && tableGame[*i][*widht + j] != 'O' && *widht + j <= 15){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[*i][*widht + j] = 'O';
 			*height = *i;
 			*widht = *widht + j;
@@ -245,7 +249,7 @@ char move_bot_diagonal_plus(int j, int choice, char tableGame[TABLE_Y][TABLE_Y],
 	}else{
 		if(tableGame[*i][*widht + j] == 'X'){
 			*i = exit;
-		}else if(tableGame[*i][*widht + j] == '_' && tableGame[*i][*widht + j] != 'X' && *widht + j <= 10){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		}else if(tableGame[*i][*widht + j] == '_' && tableGame[*i][*widht + j] != 'X' && *widht + j <= 15){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[*i][*widht + j] = 'X';
 			*height = *i;
 			*widht = *widht + j;
