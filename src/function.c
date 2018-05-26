@@ -827,3 +827,75 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 	}
 	i = 0;
 }
+
+void rules(int menu, int settings)
+{
+	while(menu == 3){
+		system("clear");
+		set_display_atrib(BRIGHT);
+		    set_display_atrib(F_RED);
+		printf("\t\t\t\t   ________\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   \\    / /\n");
+		printf("\t\t\t\t    \\__/_/\n");
+		printf("\t\t\t\t     ____\n");
+		printf("\t\t\t\t    /  \\ \\\n");
+		printf("\t\t\t\t    \\__/_/\n");
+		resetcolor();
+		set_display_atrib(BLINK);
+		    set_display_atrib(F_YELLOW);
+		printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 15Х15\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+		    resetcolor();
+		menu = 0;
+	        menu = correct_entering(menu, settings);
+
+	}
+}
+void table_name(int menu, int settings, struct winner tablname[15])
+{
+	
+	while(menu == 4){
+		system("clear");
+		set_display_atrib(BRIGHT);
+		    set_display_atrib(F_YELLOW);	
+		printf("\t\t\t\t       __\n");
+		printf("\t\t\t\t      / /\\\n");
+		printf("\t\t\t\t ____/_/  \\___\n");
+		printf("\t\t\t\t | |   ___   |\n");
+		printf("\t\t\t\t  \\ \\  \\_/  /\n");
+		printf("\t\t\t\t   \\_\\_   _/\n");
+		printf("\t\t\t\t     \\ \\ /\n");
+		printf("\t\t\t\t      || |\n");
+		printf("\t\t\t\t     ||___|\n");
+		FILE *winTabl;
+		winTabl = fopen("data/hall/LeadTable.txt", "r");
+		set_display_atrib(BLINK);
+		    set_display_atrib(F_YELLOW);
+		printf("\n\t\t\t\t№    Имя\tКоличество ходов");
+		resetcolor();
+
+		for(int i = 1; i <= 10; i++){
+			    if(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+				if(i < 10){
+				    set_display_atrib(BLINK);
+					    set_display_atrib(F_YELLOW);
+					printf("\n\t\t\t\t%d  - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves);
+				    resetcolor();
+				}else{
+				    set_display_atrib(BLINK);
+					    set_display_atrib(F_YELLOW);
+					printf("\n\t\t\t\t%d - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves); 
+				    resetcolor();
+				}
+			}
+		    }
+		fclose(winTabl);
+		set_display_atrib(BLINK);
+		    set_display_atrib(F_YELLOW);
+		printf("\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+		menu = 0;
+		menu = correct_entering(menu, settings);
+	}
+}
