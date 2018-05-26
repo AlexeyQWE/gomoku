@@ -127,17 +127,22 @@ int correct_entering(int menu, int settings)
 				continue;
 			}
 			error++;
-		}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && (strChoose[0] != '3' || settings != 0) && (strChoose[0] != '4' || settings != 0)) || strChoose[1] != '\0');
+		}while((strChoose[0] != '1' && strChoose[0] != '2' && (strChoose[0] != '3' || settings != 10) && (strChoose[0] != '3' || settings != 0) 
+												&&  (strChoose[0] != '4' || settings != 0) && (strChoose[0] != '5' || settings != 0)) || strChoose[1] != '\0');
 		if(strChoose[0] == '1')
 			return 1;
 		else if(strChoose[0] == '2' && settings == 0)
 			return 2;
 		else if(strChoose[0] == '2' && settings != 0)
 			return 0;
-		else if(strChoose[0] == '3')
+		else if(strChoose[0] == '3' && settings == 0)
+			return 3;
+		else if(strChoose[0] == '3' && settings == 10)
 			return 3;
 		else if(strChoose[0] == '4')
 			return 4;
+		else if(strChoose[0] == '5')
+			return 5;
 		else
 			return 0;	
 	}else if(menu == 10){
@@ -750,7 +755,7 @@ void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int 
 	}
 }
 
-void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
+void game_settings(int menu, int *settings, int *level, int *choice, int *bot, int *otladka)
 {
 	int i = 0;
 
@@ -803,6 +808,14 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 2.Играть первым за О");
 		}
 		printf("\n\t\t\t\t   4.Отладочная информация - ");
+		if (*otladka == 1) {
+			printf("Включена");
+		} else {
+			printf("Отключена");
+		}
+		if(*settings == 4){
+			printf("\n\t\t\t\t\t|-------- 1.Включена\n\t\t\t\t\t|-------- 2.Отключена");
+		}
 		printf("\n\t\t\t\t   5.Выход в меню\n");
 		resetcolor();
 
@@ -822,7 +835,11 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 			*choice = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
-		}else if(*settings == 4){
+		}else if(*settings == 4 && i == 1){
+			*otladka = correct_entering(menu, *settings);
+			i = 0;
+			*settings = 0;	
+		}else if(*settings == 5){
 			menu = *settings;
 		}
 		i = 1;
