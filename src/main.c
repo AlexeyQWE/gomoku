@@ -411,6 +411,47 @@ int main()
 				}
 
 			}while(winExit != 1);
+			if(outPutReplics == 4 && bot == 1){
+					printf("\n\tBot: %s", repl[59 + rand()%(67 - 59 + 1)].replics);
+			}
+			if(choice == 1 && bot == 1 && winO == 1){
+					printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
+			}else if(choice == 0 && bot == 1 && winX == 1){
+					printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
+			}
+			if(bot == 1 && ((choice == 1 && winX == 1) || (choice == 0 && winO == 1))){
+				FILE *winTabl;
+				winTabl = fopen("data/Hall/LeadTable.txt", "r");
+				i = 1;
+				while(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF)
+					i++;
+				for(int k = 1; k <= 10; k++){
+					if(choice == 0){
+						result[1].num_moves = result[2].num_moves;
+					}
+					if(result[1].num_moves < tablname[k].num_moves){
+						tablname[k].num_moves = result[1].num_moves;
+						fclose(winTabl);
+						if(k == 1){
+							printf("\n\t\t\tТы - Чемпион!\n\t\t\tТебе нет равных!");
+						}else if(k == 2){
+							printf("\n\t\t\tМолодец!\n\t\t\tТы занял 2 место, но надо еще потренироваться!");
+						}else if(k == 3){
+							printf("\n\t\t\tОго, ты вошел в тройку лучших из лучших!\n\t\t\tТы занимаешь почетное 3 место!");
+						}
+						printf("\n\t\t\tВведи свое имя, победитель, дабы история запомнила тебя!\n\t\t\t");
+						scanf("%14s", tablname[k].name);
+						winTabl = fopen("data/Hall/LeadTable.txt", "r+");
+						for(int j = 1; j <= 10; j++){
+							fprintf(winTabl, "%s %u\n", tablname[j].name, tablname[j].num_moves);
+						}
+						k = 11;
+						fclose(winTabl);
+					}
+				}
+			}else if(bot == 1){
+				printf("\n\t\t\tТы жалок, тебя выиграл бот");
+			}
 			menu = 10;
 			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[2] - Выйти из игры\n");
 			menu = correct_entering(menu, settings);// ФУНКЦИЯ ПРОВЕРКИ ВВОДИМЫХ ЗНАЧЕНИЙ
