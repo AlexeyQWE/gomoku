@@ -1,5 +1,5 @@
 /bin/gom:  build build/main.o build/function.o build/bot_defender.o build/bot_attacking.o build/bot_easy.o
-		gcc build/main.o build/function.o build/bot_defender.o build/bot_attacking.o build/bot_easy.o -o gom
+		gcc build/main.o build/function.o build/bot_defender.o build/bot_attacking.o build/bot_easy.o -o bin/gom
 
 build/main.o: src/main.c
 		gcc -Wall -Werror -g -std=c99 -c src/main.c -o build/main.o

@@ -214,10 +214,10 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y], int limitMovesO, int
 	printf("limitMovesO - %d\n", limitMovesO);
 	set_display_atrib(BRIGHT);
     set_display_atrib(F_RED);
-	printf("\n\t\t   ____   __      _    _      __    _   __ __   __\n");
-	printf("\t\t  (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /\n");
-	printf("\t\t  ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /\n");
-	printf("\t\t  (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/\n");
+	printf("                       ____   __      _    _      __    _   __ __   __\n");
+	printf("  Кол-во оставшихся   (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /    Кол-во оставшихся\n");
+	printf("       ходов X        ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /	       ходов O \n");
+	printf("       -[%d]-         (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/	       -[%d]-\n", limitMovesX, limitMovesO);
 	resetcolor();
 	for(int i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
 		printf("\n\t\t");
@@ -759,7 +759,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 	while(menu == 2){
 		system("clear");
 		set_display_atrib(BRIGHT);
-	    set_display_atrib(F_GREEN);
+	            set_display_atrib(F_GREEN);
 		printf("\t\t\t\t      _____   _\n");
 		printf("\t\t\t\t     /   //  /\\\\\n");
 		printf("\t\t\t\t    /   //  /  \\\\\n");				
@@ -771,7 +771,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		printf("\t\t\t\t    /   //\n");
 		resetcolor();
 		set_display_atrib(BLINK);
-	    set_display_atrib(F_YELLOW);
+	    	    set_display_atrib(F_YELLOW);
 		printf("\n\n\t\t\t\t   НАСТРОЙКИ");
 		printf("\n\n\t\t\t\t   1.Бот - ");
 
@@ -826,4 +826,96 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		i = 1;
 	}
 	i = 0;
+}
+
+void rules(int menu, int settings)
+{
+	while(menu == 3){
+		system("clear");
+		set_display_atrib(BRIGHT);
+		    set_display_atrib(F_RED);
+		printf("\t\t\t\t   ________\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   \\    / /\n");
+		printf("\t\t\t\t    \\__/_/\n");
+		printf("\t\t\t\t     ____\n");
+		printf("\t\t\t\t    /  \\ \\\n");
+		printf("\t\t\t\t    \\__/_/\n");
+		resetcolor();
+		set_display_atrib(BLINK);
+		    set_display_atrib(F_YELLOW);
+		printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 15Х15\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+		    resetcolor();
+		menu = 0;
+	        menu = correct_entering(menu, settings);
+
+	}
+}
+void table_name(int menu, int settings, struct winner tablname[15])
+{
+	
+	while(menu == 4){
+		system("clear");
+		set_display_atrib(BRIGHT);
+		    set_display_atrib(F_YELLOW);	
+		printf("\t\t\t\t       __\n");
+		printf("\t\t\t\t      / /\\\n");
+		printf("\t\t\t\t ____/_/  \\___\n");
+		printf("\t\t\t\t | |   ___   |\n");
+		printf("\t\t\t\t  \\ \\  \\_/  /\n");
+		printf("\t\t\t\t   \\_\\_   _/\n");
+		printf("\t\t\t\t     \\ \\ /\n");
+		printf("\t\t\t\t      || |\n");
+		printf("\t\t\t\t     ||___|\n");
+		FILE *winTabl;
+		winTabl = fopen("data/hall/LeadTable.txt", "r");
+		set_display_atrib(BLINK);
+		    set_display_atrib(F_YELLOW);
+		printf("\n\t\t\t\t№    Имя\tКоличество ходов");
+		resetcolor();
+
+		for(int i = 1; i <= 10; i++){
+			    if(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+				if(i < 10){
+				    set_display_atrib(BLINK);
+					    set_display_atrib(F_YELLOW);
+					printf("\n\t\t\t\t%d  - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves);
+				    resetcolor();
+				}else{
+				    set_display_atrib(BLINK);
+					    set_display_atrib(F_YELLOW);
+					printf("\n\t\t\t\t%d - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves); 
+				    resetcolor();
+				}
+			}
+		    }
+		fclose(winTabl);
+		set_display_atrib(BLINK);
+		    set_display_atrib(F_YELLOW);
+		printf("\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+		menu = 0;
+		menu = correct_entering(menu, settings);
+	}
+}
+
+void easter_egg(int menu, int settings)
+{
+	while(menu == 6){
+		system("clear");
+                printf("\t\t\t\t    _______\n");
+		printf("\t\t\t\t   /  ---  \\\n");
+		printf("\t\t\t\t  /         \\\n");
+		printf("\t\t\t\t |  !EASTER  |\n");
+		printf("\t\t\t\t |    EGG    |\n");
+		printf("\t\t\t\t |  -------  |\n");
+		printf("\t\t\t\t |    ___    |\n");
+		printf("\t\t\t\t  \\         /\n");
+		printf("\t\t\t\t   \\_______/\n");
+		printf("\n\n\t\t\tПривет!\n\t\t\tЭтого пункта в меню нет!\n\t\t\tПотому что он секретный...\n\t\t\tПоздравляю! Ты нашёл пасхальное яйцо!\n\t\t\tА сейчас, дорогой друг, я хочу тебе рассказать\n\t\t\tпару интересных фактов о твоей любимой игре'Гомоку'.\n\n\t\t\tИгра появилась более четырех тысяч лет назад на территории\n\t\t\tодной из самых древних цивилизаций в долине реки Хуанхэ.\n\t\t\tВ VII веке она была привезена на Японские острова,\n\t\t\tгде получила название «гомоку», что означает «пять камней».\n\n\t\t\tТак как у чёрных камней есть преимущество первого хода и при грамотном\n\t\t\tподходе, не зависимо от того, как будут строить оборону белые камни,\n\t\t\tпобеждают именно чёрные, были введены специальные ограничения,\n\t\t\tчтобы уровнять шансы на победу, и сделать тем самым игру более\n\t\t\tсбалансированной и интересной.\n\n\t\t\tТак, для черных фишек в спортивном рэндзю ввели следующие фолы (запрещенные ходы):\n\n\t\t\t • запрещается строить 'вилки' 3х3 и 4х4\n\n\t\t\t • запрещается строить ряд из 6 или более камней\n\n\t\t\t • запрещается строить любые вилки кратностью более двух.\n\n\t\t\tДля белых камней-фишек никаких фолов нет, и для победы им нужно\n\t\t\tпостроить ряд из пяти камней, либо дождаться ошибки чёрных камней\n\t\t\t(совершение ими фола).\n\n\t\t\tВ том случае, когда наступает ход игрока и он считает, что хороших для\n\t\t\tнего ходов не осталось, он может отказаться делать свой ход, то есть\n\t\t\tсделать пас. Если после этого второй игрок тоже спасует, то игра\n\t\t\tзавершается вничью. Также игра заканчивается вничью, если вся доска\n\t\t\tбудет заставлена камнями, но никто из игроков не смог построить\n\t\t\tпобедную линию в 5 камней.\n\n\t\t\t\tCreated BY:\n\t\t\t • Вашов Алексей\n\t\t\t • Карасев Алексей\n\t\t\t • Рамус Евгений\n\n\n\t\t\t1.Хочу играть!\n\t\t\t");
+			
+		menu = 0;
+	        menu = correct_entering(menu, settings);
+	}
 }

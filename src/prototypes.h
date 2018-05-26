@@ -81,3 +81,9 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 	int checkWin(int score, int choice, int *winX, int *winO);
 
 	void game_settings(int menu, int *settings, int *level, int *choice, int *bot);
+	
+	void rules(int menu, int settings);
+	
+	void table_name(int menu, int settings, struct winner tablname[15]);
+
+	void easter_egg(int menu, int settings);

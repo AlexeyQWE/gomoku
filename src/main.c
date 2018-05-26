@@ -173,10 +173,16 @@ int main()
 						
 
 				if(winX == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
 					printf("\n\n\t\t\tХ - ПОБЕДИЛ\a");
+					resetcolor();
 					winExit = 1;
 				}else if(winO == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
 					printf("\n\n\t\t\tO - ПОБЕДИЛ");
+					resetcolor();
 					winExit = 1;
 				}
 				if(winExit != 1){
@@ -348,6 +354,15 @@ int main()
 						scanf("%d", &menu);
 						move_bot_easy(level, tableGame, choice, hightAtakBot, weightAtakBot, &hodBot, &winX, &winO, height, widht);
 					}
+					
+					if(hodBot == 1){
+					    result[3].num_moves++;
+					    if(choice == 1 && result[3].num_moves > 50){
+						winX = 1;
+					    }else if(choice == 0 && result[3].num_moves > 50){
+						winO = 1;
+					    }
+					}
 
 					if(hodBot == 1){
 						result[3].num_moves++;
@@ -408,8 +423,76 @@ int main()
 				}
 
 			}while(winExit != 1);
+			if(outPutReplics == 4 && bot == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
+					printf("\n\tBot: %s", repl[59 + rand()%(67 - 59 + 1)].replics);
+					resetcolor();
+			}
+			if(choice == 1 && bot == 1 && winO == 1){
+				    set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
+					printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
+					resetcolor();
+			}else if(choice == 0 && bot == 1 && winX == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
+					printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
+					resetcolor();
+			}
+			if(bot == 1 && ((choice == 1 && winX == 1) || (choice == 0 && winO == 1))){
+				FILE *winTabl;
+				winTabl = fopen("data/hall/LeadTable.txt", "r");
+				i = 1;
+				while(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF)
+					i++;
+				for(int k = 1; k <= 10; k++){
+					if(choice == 0){
+						result[1].num_moves = result[2].num_moves;
+					}
+					if(result[1].num_moves < tablname[k].num_moves){
+						tablname[k].num_moves = result[1].num_moves;
+						fclose(winTabl);
+						if(k == 1){
+							set_display_atrib(BRIGHT);
+							set_display_atrib(F_YELLOW);
+							printf("\n\t\t\tТы - Чемпион!\n\t\t\tТебе нет равных!");
+							resetcolor();
+						}else if(k == 2){
+							set_display_atrib(BRIGHT);
+							set_display_atrib(F_YELLOW);
+							printf("\n\t\t\tМолодец!\n\t\t\tТы занял 2 место, но надо еще потренироваться!");
+							resetcolor();
+						}else if(k == 3){
+							set_display_atrib(BRIGHT);
+							set_display_atrib(F_YELLOW);
+							printf("\n\t\t\tОго, ты вошел в тройку лучших из лучших!\n\t\t\tТы занимаешь почетное 3 место!");
+							resetcolor();
+						}
+						set_display_atrib(BRIGHT);
+						set_display_atrib(F_YELLOW);
+						printf("\n\t\t\tВведи свое имя, победитель, дабы история запомнила тебя!\n\t\t\t");
+						resetcolor();
+						scanf("%14s", tablname[k].name);
+						winTabl = fopen("data/hall/LeadTable.txt", "r+");
+						for(int j = 1; j <= 10; j++){
+							fprintf(winTabl, "%s %u\n", tablname[j].name, tablname[j].num_moves);
+						}
+						k = 11;
+						fclose(winTabl);
+					}
+				}
+			}else if(bot == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
+				printf("\n\t\t\tТы жалок, тебя выиграл бот");
+				resetcolor();
+			}
 			menu = 10;
+			set_display_atrib(BLINK);
+			set_display_atrib(F_YELLOW);
 			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[2] - Выйти из игры\n");
+			resetcolor();
 			menu = correct_entering(menu, settings);// ФУНКЦИЯ ПРОВЕРКИ ВВОДИМЫХ ЗНАЧЕНИЙ
 			if(menu == 0)
 				break;
@@ -418,64 +501,23 @@ int main()
 		if(menu == 2){// НАСТРОЙКИ
 			game_settings(menu, &settings, &level, &choice, &bot);
 		}
-
-		if(menu == 3){
-		    while(menu == 3){
-			    system("clear");
-			    printf("\t\t\t\t   ________\n");
-			    printf("\t\t\t\t   |    | |\n");
-			    printf("\t\t\t\t   |    | |\n");
-			    printf("\t\t\t\t   |    | |\n");
-			    printf("\t\t\t\t   \\    / /\n");
-			    printf("\t\t\t\t    \\__/_/\n");
-			    printf("\t\t\t\t     ____\n");
-			    printf("\t\t\t\t    /  \\ \\\n");
-			    printf("\t\t\t\t    \\__/_/\n");
-			    printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 9Х9\n\t\t\t\tили 19 Х 19 за Х и О\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
-
-			    scanf("%d", &settings);
-			    if(settings == 1)
-				    menu = settings;
-		    }
+		
+		if(menu == 3){// ПРАВИЛА
+			rules(menu, settings);
 		}
 
-		if(menu == 4){
-		    while(menu == 4){
-			    system("clear");
-			    printf("\t\t\t\t       __\n");
-			    printf("\t\t\t\t      / /\\\n");
-			    printf("\t\t\t\t ____/_/  \\___\n");
-			    printf("\t\t\t\t | |   ___   |\n");
-			    printf("\t\t\t\t  \\ \\  \\_/  /\n");
-			    printf("\t\t\t\t   \\_\\_   _/\n");
-			    printf("\t\t\t\t     \\ \\ /\n");
-			    printf("\t\t\t\t      || |\n");
-			    printf("\t\t\t\t     ||___|\n");
-			    FILE *winTabl;
-			    i = 1;
-			    winTabl = fopen("data/Hall/LeadTable.txt", "r");
-			    printf("\n\t\t\t\t№    Имя\tКоличество ходов");
-
-			    for(int i = 1; i <= 10; i++){
-					if(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
-					    if(i < 10){
-						    printf("\n\t\t\t\t%d  - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves);
-					    }else{
-						    printf("\n\t\t\t\t%d - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves); 
-					    }
-				    }
-				}
-			    fclose(winTabl);
-			    printf("\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
-			    menu = 0;
-			    menu = correct_entering(menu, settings);
-		    }
+		if(menu == 4){// ЗАЛ СЛАВЫ
+			table_name(menu, settings, tablname);
 		}
 
 		if(menu == 5){// ВЫХОД
 			break;
 		}
+		
+		if(menu == 6){// ПАСХАЛКА
+			easter_egg(menu, settings);
+		}
+	
 	}
-
 	return 0;
 }
