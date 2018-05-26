@@ -657,7 +657,7 @@ void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertika
 			playerScoreVertikalLeft[8] = playerScoreVertikalLeft[key];
 			playerScoreLeftDiagonalLeft[8] = playerScoreLeftDiagonalLeft[key];
 			playerScoreRightDiagonalLeft[8] = playerScoreRightDiagonalLeft[key];
-			if(level != 0 && dopusk != 0){
+			if(level != 1 && dopusk != 0){
 				hightStepPlayer[8] = hightStepPlayer[key];
 				weightStepPlayer[8] = weightStepPlayer[key];
 			}
