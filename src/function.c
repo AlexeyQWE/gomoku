@@ -214,10 +214,10 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y], int limitMovesO, int
 	printf("limitMovesO - %d\n", limitMovesO);
 	set_display_atrib(BRIGHT);
     set_display_atrib(F_RED);
-	printf("\n\t\t   ____   __      _    _      __    _   __ __   __\n");
-	printf("\t\t  (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /\n");
-	printf("\t\t  ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /\n");
-	printf("\t\t  (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/\n");
+	printf("                       ____   __      _    _      __    _   __ __   __\n");
+	printf("  Кол-во оставшихся   (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /    Кол-во оставшихся\n");
+	printf("       ходов X        ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /	       ходов O \n");
+	printf("       -[%d]-         (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/	       -[%d]-\n", limitMovesX, limitMovesO);
 	resetcolor();
 	for(int i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
 		printf("\n\t\t");
