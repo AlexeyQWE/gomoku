@@ -61,6 +61,8 @@ int main()
 
 				print_gameboard(tableGame);
 
+				/*
+
 				printf("\nplayer h - ");
 						for(int i = 0; i < 9; i++)
 							printf("%d ", hightStepPlayer[i]);
@@ -126,6 +128,8 @@ int main()
 						printf("\nplayerScore %d", playerScore);
 						printf("\nbotScore %d", botScore);
 
+						*/
+
 				if(winX == 1){
 					printf("\n\n\t\t\tХ - ПОБЕДИЛ\a");
 					winExit = 1;
@@ -166,6 +170,8 @@ int main()
 					prioritization(level, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, &playerScore, hightStepPlayer, weightStepPlayer, dopusk);
 				}
 
+				/*
+
 				printf("he--------------------------- %d\n",hightStepPlayer[8]);
 				printf("weuty--------------------------- %d\n",weightStepPlayer[8]);
 
@@ -200,6 +206,8 @@ int main()
 						for(int i = 0; i <= 8; i++)
 							printf(" %d ", playerScoreRightDiagonalLeft[i]);
 
+						*/
+
 				if((choice == 1 || choice == 0) && winExit != 1 && level == 2){
 					if(choice == 1){
 						choice = 0;
@@ -218,6 +226,8 @@ int main()
 				if(level == 2 || level == 0){
 					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot, dopusk);
 				}
+
+				/*
 				printf("he--------------------------- %d\n",hightStepPlayer[8]);
 				printf("weuty--------------------------- %d\n",weightStepPlayer[8]);
 
@@ -257,6 +267,8 @@ int main()
 
 
 				scanf("%d", &menu);
+
+				*/
 
 				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){
 					printf("172 main\n");
