@@ -103,7 +103,7 @@ int main()
 				printf("%d -------------------------------- outPutReplics\n", outPutReplics);
 				outPutReplics = 0;
 
-				/*
+				
 
 				printf("\nplayer h - ");
 						for(int i = 0; i < 9; i++)
@@ -170,7 +170,7 @@ int main()
 						printf("\nplayerScore %d", playerScore);
 						printf("\nbotScore %d", botScore);
 
-						*/
+						
 
 				if(winX == 1){
 					printf("\n\n\t\t\tХ - ПОБЕДИЛ\a");
@@ -223,8 +223,7 @@ int main()
 				if(level == 2 || level == 0){
 					prioritization(level, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, &playerScore, hightStepPlayer, weightStepPlayer, dopusk, &outPutReplics);
 				}
-
-				/*
+				
 
 				printf("he--------------------------- %d\n",hightStepPlayer[8]);
 				printf("weuty--------------------------- %d\n",weightStepPlayer[8]);
@@ -260,7 +259,7 @@ int main()
 						for(int i = 0; i <= 8; i++)
 							printf(" %d ", playerScoreRightDiagonalLeft[i]);
 
-						*/
+						
 
 				if((choice == 1 || choice == 0) && winExit != 1 && level == 2){
 					if(choice == 1){
@@ -281,7 +280,7 @@ int main()
 					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot, dopusk, &outPutReplics);
 				}
 
-				/*
+				
 				printf("he--------------------------- %d\n",hightStepPlayer[8]);
 				printf("weuty--------------------------- %d\n",weightStepPlayer[8]);
 
@@ -322,8 +321,6 @@ int main()
 
 				scanf("%d", &menu);
 
-				*/
-
 				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){
 					printf("172 main\n");
 					scanf("%d", &menu);
@@ -352,7 +349,16 @@ int main()
 						move_bot_easy(level, tableGame, choice, hightAtakBot, weightAtakBot, &hodBot, &winX, &winO, height, widht);
 					}
 
-					if(level == 2 && choice == 1 && dopusk == 0){
+					if(hodBot == 1){
+						result[3].num_moves++;
+						if(choice == 1 && result[3].num_moves > 50){
+							winX = 1;
+						}else if(choice == 0 && result[3].num_moves > 50){
+							winO = 1;
+						}
+					}
+
+					if((level == 2 || level == 0) && choice == 1 && dopusk == 0){
 						int triger = 0;
 						for(int p = 1; p < 9; p++){
 							if(hightAtakBot[p] == 0){
@@ -426,6 +432,7 @@ int main()
 			    printf("\t\t\t\t    /  \\ \\\n");
 			    printf("\t\t\t\t    \\__/_/\n");
 			    printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 9Х9\n\t\t\t\tили 19 Х 19 за Х и О\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+
 			    scanf("%d", &settings);
 			    if(settings == 1)
 				    menu = settings;
@@ -460,7 +467,8 @@ int main()
 				}
 			    fclose(winTabl);
 			    printf("\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
-			    correct_entering(menu, settings);
+			    menu = 0;
+			    menu = correct_entering(menu, settings);
 		    }
 		}
 
