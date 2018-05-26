@@ -466,6 +466,8 @@ int main()
 		if(menu == 3){
 		    while(menu == 3){
 			    system("clear");
+			    set_display_atrib(BRIGHT);
+				set_display_atrib(F_RED);
 			    printf("\t\t\t\t   ________\n");
 			    printf("\t\t\t\t   |    | |\n");
 			    printf("\t\t\t\t   |    | |\n");
@@ -475,7 +477,11 @@ int main()
 			    printf("\t\t\t\t     ____\n");
 			    printf("\t\t\t\t    /  \\ \\\n");
 			    printf("\t\t\t\t    \\__/_/\n");
+			    resetcolor();
+			    set_display_atrib(BLINK);
+				set_display_atrib(F_YELLOW);
 			    printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 9Х9\n\t\t\t\tили 19 Х 19 за Х и О\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+			   	resetcolor();
 			    menu = 0;
 			    menu = correct_entering(menu, settings);
 		    }
