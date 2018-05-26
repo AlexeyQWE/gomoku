@@ -490,6 +490,8 @@ int main()
 		if(menu == 4){
 		    while(menu == 4){
 			    system("clear");
+			    set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
 			    printf("\t\t\t\t       __\n");
 			    printf("\t\t\t\t      / /\\\n");
 			    printf("\t\t\t\t ____/_/  \\___\n");
@@ -499,23 +501,36 @@ int main()
 			    printf("\t\t\t\t     \\ \\ /\n");
 			    printf("\t\t\t\t      || |\n");
 			    printf("\t\t\t\t     ||___|\n");
+			    resetcolor();
 			    FILE *winTabl;
 			    i = 1;
 			    winTabl = fopen("data/hall/LeadTable.txt", "r");
+			    set_display_atrib(BLINK);
+				set_display_atrib(F_YELLOW);
 			    printf("\n\t\t\t\t№    Имя\tКоличество ходов");
-
+			    resetcolor();
+			    
 			    for(int i = 1; i <= 10; i++){
 					if(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
 					    if(i < 10){
+					    	set_display_atrib(BLINK);
+							set_display_atrib(F_YELLOW);
 						    printf("\n\t\t\t\t%d  - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves);
+					    	resetcolor();
 					    }else{
+					    	set_display_atrib(BLINK);
+							set_display_atrib(F_YELLOW);
 						    printf("\n\t\t\t\t%d - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves); 
+					    	resetcolor();
 					    }
 				    }
 				}
 			    fclose(winTabl);
 			    menu = 0;
+			    set_display_atrib(BLINK);
+				set_display_atrib(F_YELLOW);
 			    printf("\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+			    resetcolor();
 			    menu = correct_entering(menu, settings);
 		    }
 		}
