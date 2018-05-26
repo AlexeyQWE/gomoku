@@ -215,7 +215,7 @@ char move_bot_diagonal_plus(int j, int choice, char tableGame[TABLE_Y][TABLE_Y],
 	if(choice == 1){
 		if(tableGame[*i][*widht + j] == 'O'){
 			*i = exit;
-		}else if(tableGame[*i][*widht + j] == '_' && tableGame[*i][*widht + j] != 'O' && *widht + j <= 10){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		}else if(tableGame[*i][*widht + j] == '_' && tableGame[*i][*widht + j] != 'O' && *widht + j <= 15){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[*i][*widht + j] = 'O';
 			*height = *i;
 			*widht = *widht + j;
@@ -227,7 +227,7 @@ char move_bot_diagonal_plus(int j, int choice, char tableGame[TABLE_Y][TABLE_Y],
 	}else{
 		if(tableGame[*i][*widht + j] == 'X'){
 			*i = exit;
-		}else if(tableGame[*i][*widht + j] == '_' && tableGame[*i][*widht + j] != 'X' && *widht + j <= 10){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		}else if(tableGame[*i][*widht + j] == '_' && tableGame[*i][*widht + j] != 'X' && *widht + j <= 15){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[*i][*widht + j] = 'X';
 			*height = *i;
 			*widht = *widht + j;
