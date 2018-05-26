@@ -421,7 +421,7 @@ int main()
 			}
 			if(bot == 1 && ((choice == 1 && winX == 1) || (choice == 0 && winO == 1))){
 				FILE *winTabl;
-				winTabl = fopen("data/Hall/LeadTable.txt", "r");
+				winTabl = fopen("data/hall/LeadTable.txt", "r");
 				i = 1;
 				while(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF)
 					i++;
@@ -441,7 +441,7 @@ int main()
 						}
 						printf("\n\t\t\tВведи свое имя, победитель, дабы история запомнила тебя!\n\t\t\t");
 						scanf("%14s", tablname[k].name);
-						winTabl = fopen("data/Hall/LeadTable.txt", "r+");
+						winTabl = fopen("data/hall/LeadTable.txt", "r+");
 						for(int j = 1; j <= 10; j++){
 							fprintf(winTabl, "%s %u\n", tablname[j].name, tablname[j].num_moves);
 						}
@@ -476,9 +476,8 @@ int main()
 			    printf("\t\t\t\t    /  \\ \\\n");
 			    printf("\t\t\t\t    \\__/_/\n");
 			    printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 9Х9\n\t\t\t\tили 19 Х 19 за Х и О\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
-			    scanf("%d", &settings);
-			    if(settings == 1)
-				    menu = settings;
+			    menu = 0;
+			    menu = correct_entering(menu, settings);
 		    }
 		}
 
@@ -496,7 +495,7 @@ int main()
 			    printf("\t\t\t\t     ||___|\n");
 			    FILE *winTabl;
 			    i = 1;
-			    winTabl = fopen("data/Hall/LeadTable.txt", "r");
+			    winTabl = fopen("data/hall/LeadTable.txt", "r");
 			    printf("\n\t\t\t\t№    Имя\tКоличество ходов");
 
 			    for(int i = 1; i <= 10; i++){
@@ -509,8 +508,9 @@ int main()
 				    }
 				}
 			    fclose(winTabl);
+			    menu = 0;
 			    printf("\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
-			    correct_entering(menu, settings);
+			    menu = correct_entering(menu, settings);
 		    }
 		}
 
