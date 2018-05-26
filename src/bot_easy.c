@@ -7,12 +7,8 @@ void move_bot_easy(int level, char tableGame[TABLE_Y][TABLE_Y], int choice, int 
 	int heightBot[8] = {'\0'};
 	int menu;
 	srand(time(NULL));
-	printf("сюда заходь 991");
-	scanf("%d", &menu);
 	int difference, i, randomStep, j = 0;
 	while(j == 0){
-		printf("сюда заходь 14");
-	scanf("%d", &menu);
 		i = 0;
 		difference = 0;
 		do{// ЗДЕСЬ ПРОВЕРКА НА СВОБОДНОЕ МЕСТО ВОКРУГ ТЕХ КООРДИНАТ, КОТОРЫЕ ВВЕЛ ЧЕЛОВЕК, ЧТОБЫ ОПРЕДЕЛИТЬ КУДА МОЖНО СХОДИТЬ
@@ -60,17 +56,11 @@ void move_bot_easy(int level, char tableGame[TABLE_Y][TABLE_Y], int choice, int 
 		}while(i == 0);// ВЫХОД ИЗ ЦИКЛА, ЕСЛИ УСЛОВИЯ БУДУТ ВЫПОЛНЯТЬСЯ, ТО RAZN УВЕЛИЧИВЕТСЯ ДО ТЕХ ПОР ПОКА УСЛОВИЕ НЕ ВЫПОЛНИТСЯ,
 		// ЧТОБ ВЫЙТИ ИЗ ЦИКЛА
 		if(i > 0){
-			printf("сюда заходь 63");
-			scanf("%d", &menu);
 			randomStep = rand()%i; // СЧЕТЧИК i НУЖЕН БЫЛ ДЛЯ ТОГО ЧТОБЫ ВЫБРАТЬ РАНДОМНУЮ ПУСТУЮ ЯЧЕЙКУ ВОКРУГ КООРДИНАТ ВВЕДЕНЫХ ПОЛЬЩОВАТЕЛЕМ
 			if(choice == 0){// ЗДЕСЬ ИИ СМОТРИТ ЗА КОГО ОН ИГРАЕТ, ЕСЛИ VIBOR = 0, ТО ЗНАЧИТ ИИ ИГРАЕТ ЗА КРЕСТИКИ И НАОБОРОТ
 				tableGame[heightBot[randomStep]][widhtBot[randomStep]] = 'X';
 				*hodBot = 1;
 			}else{
-				printf("сюда заходь 70");
-				printf("hi ------- %d\n", heightBot[randomStep]);
-				printf("hiwe ------- %d\n", widhtBot[randomStep]);
-				scanf("%d", &menu);
 				tableGame[heightBot[randomStep]][widhtBot[randomStep]] = 'O';
 				*hodBot = 1;
 			}

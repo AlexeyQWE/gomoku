@@ -828,6 +828,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot, i
 			i = 0;
 			*settings = 0;
 		}else if(*settings == 2 && i == 1){
+			*settings = 10;
 			*level = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
@@ -845,4 +846,73 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot, i
 		i = 1;
 	}
 	i = 0;
+}
+
+void debugging_bot(int *hightAtakBot, int *weightAtakBot, int *botScoreGorizont, int *botScoreVertikal, int *botScoreLeftDiagonal, int *botScoreRightDiagonal, int *botScoreGorizontLeft, int *botScoreVertikalLeft, int *botScoreLeftDiagonalLeft, int *botScoreRightDiagonalLeft)
+{
+	printf("\nbot h - ");
+	for(int i = 0; i < 9; i++)
+		printf("%d ", hightAtakBot[i]);
+	printf("\nbot w - ");
+	for(int i = 0; i < 9; i++)
+		printf("%d ", weightAtakBot[i]);
+	printf("\nbotScoreGorizont         ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", botScoreGorizont[i]);
+	printf("\nbotScoreVertikal         ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", botScoreVertikal[i]);
+	printf("\nbotScoreLeftDiagonal     ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", botScoreLeftDiagonal[i]);
+	printf("\nbotScoreRightDiagonal    ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", botScoreRightDiagonal[i]);
+	printf("\nbotScoreGorizontLeft     ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", botScoreGorizontLeft[i]);
+	printf("\nbotScoreVertikalLeft     ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", botScoreVertikalLeft[i]);
+	printf("\nbotScoreLeftDiagonalLeft ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", botScoreLeftDiagonalLeft[i]);
+	printf("\nbotScoreRightDiagonalLeft");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", botScoreRightDiagonalLeft[i]);
+	printf("\n");
+}
+
+void debugging_player(int *hightStepPlayer, int *weightStepPlayer, int *playerScoreGorizont, int  *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft)
+{
+	printf("\nplayer h - ");
+	for(int i = 0; i < 9; i++)
+		printf("%d ", hightStepPlayer[i]);
+	printf("\nplayer w - ");
+	for(int i = 0; i < 9; i++)
+		printf("%d ", weightStepPlayer[i]);
+	printf("\nplayerScoreGorizont         ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", playerScoreGorizont[i]);
+	printf("\nplayerScoreVertikal         ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", playerScoreVertikal[i]);
+	printf("\nplayerScoreLeftDiagonal     ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", playerScoreLeftDiagonal[i]);
+	printf("\nplayerScoreRightDiagonal    ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", playerScoreRightDiagonal[i]);
+	printf("\nplayerScoreGorizontLeft     ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", playerScoreGorizontLeft[i]);
+	printf("\nplayerScoreVertikalLeft     ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", playerScoreVertikalLeft[i]);
+	printf("\nplayerScoreLeftDiagonalLeft ");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", playerScoreLeftDiagonalLeft[i]);
+	printf("\nplayerScoreRightDiagonalLeft");
+	for(int i = 0; i <= 8; i++)
+		printf(" %d ", playerScoreRightDiagonalLeft[i]);
 }

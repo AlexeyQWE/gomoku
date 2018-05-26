@@ -23,8 +23,6 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 
 #define TABLE_Y 16
 
-	void neoWords(const char * str);
-
 	int correct_entering(int menu, int settings);
 
 	int main_menu(void);
@@ -68,3 +66,7 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 	int checkWin(int score, int choice, int *winX, int *winO);
 
 	void game_settings(int menu, int *settings, int *level, int *choice, int *bot, int *otladka);
+
+	void debugging_bot(int *hightAtakBot, int *weightAtakBot, int *botScoreGorizont, int *botScoreVertikal, int *botScoreLeftDiagonal, int *botScoreRightDiagonal, int *botScoreGorizontLeft, int *botScoreVertikalLeft, int *botScoreLeftDiagonalLeft, int *botScoreRightDiagonalLeft);
+
+	void debugging_player(int *hightStepPlayer, int *weightStepPlayer, int *playerScoreGorizont, int  *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft);
