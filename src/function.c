@@ -802,7 +802,8 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		if(*settings == 3){
 			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 2.Играть первым за О");
 		}
-		printf("\n\t\t\t\t   4.Выход в меню\n");
+		printf("\n\t\t\t\t   4.Отладочная информация - ");
+		printf("\n\t\t\t\t   5.Выход в меню\n");
 		resetcolor();
 
 		if(*settings == 0){	
