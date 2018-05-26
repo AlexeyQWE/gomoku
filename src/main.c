@@ -100,6 +100,7 @@ int main()
 						printf("\n\tBot: %s", repl[40 + rand()%(50 - 40 + 1)].replics);
 					}
 				}
+				printf("%d -------------------------------- outPutReplics\n", outPutReplics);
 				outPutReplics = 0;
 
 				/*
@@ -214,8 +215,6 @@ int main()
 					if(result[2].num_moves > 50)
 						winX = 1;
 				}
-
-				entering_coord(choice, winExit, &height, &widht, tableGame);
 
 				if((choice == 1 || choice == 0) && winExit != 1){
 					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, hightStepPlayer, weightStepPlayer);
