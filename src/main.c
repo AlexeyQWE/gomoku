@@ -1,24 +1,24 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "prototypes.h"
+#include <stdio.h>
 
 int main()
 {
-	int i = 1, level = 1, choice = 1, bot = 1;
+	int i = 1, level = 2, choice = 1, bot = 1;
 	int height = 0, widht = 0; // КООРДИНАТЫ
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
 	int outPutReplics = 0;
 	int limitMovesX, limitMovesO;
+	struct winner tablname[15];
+	struct afterVictory result[11];
 
 	while (i == 1) {
-		int gorizontScore, vertikalScore, leftDiagonalScore, rightDiagonalScore, gorizontScoreLeft, vertikalScoreLeft, leftDiagonalScoreLeft, rightDiagonalScoreLeft, hodBot = 0; // перменные для бота
-		int left, right, up, down;
+		int hodBot = 0; // перменные для бота
 		int settings = 0;
 		int menu = 0;
+		int playerScore = 0;
 		menu = main_menu();
 
 		if(menu == 1){// ИГРА
-
 			struct Replica repl[67];
 			result[1].num_moves = 0;
 			result[2].num_moves = 0;
@@ -30,13 +30,48 @@ int main()
 				fgets (repl[i].replics, 65, replic);
 
 			fclose(replic);
+				/*массивы для анализа ботом*/
+
+				int botScoreGorizont[9] = {'\0'};
+				int botScoreVertikal[9] = {'\0'};
+				int botScoreLeftDiagonal[9] = {'\0'};
+				int botScoreRightDiagonal[9] = {'\0'};
+				int botScoreGorizontLeft[9] = {'\0'};
+				int botScoreVertikalLeft[9] = {'\0'};
+				int botScoreLeftDiagonalLeft[9] = {'\0'};
+				int botScoreRightDiagonalLeft[9] = {'\0'};
+			
+
+
+				int hightStepPlayer[9] = {'\0'};
+				int weightStepPlayer[9] = {'\0'};
+				int hightAtakBot[9] = {'\0'};
+				int weightAtakBot[9] = {'\0'};
+				int playerScoreGorizont[9] = {'\0'};
+				int playerScoreVertikal[9] = {'\0'};
+				int playerScoreLeftDiagonal[9] = {'\0'};
+				int playerScoreRightDiagonal[9] = {'\0'};
+				int playerScoreGorizontLeft[9] = {'\0'};
+				int playerScoreVertikalLeft[9] = {'\0'};
+				int playerScoreLeftDiagonalLeft[9] = {'\0'};
+				int playerScoreRightDiagonalLeft[9] = {'\0'};
+			
 
 			fill_gameboard(tableGame);
-			int winExit = 0, winX = 0, winO = 0;
+			int winExit = 0, winX = 0, winO = 0, scoreHandPlayer = 0, botScore = 0;
+
+			int dopusk = 0;
 
 			do{
-				print_gameboard(tableGame);
-				
+				if(choice == 0 && bot == 1 && settings == 0){// ЕСЛИ БОТ ХОДИТ ПЕРВЫМ, ТО ОН ХОДИТ В РАНДОМНУЮ ТОЧКУ ИГРОВОГО ПОЛЯ
+					tableGame[7][8] = 'X';
+					settings = 20;
+					for(int i = 0; i < 9; i++){
+						hightAtakBot[i] = 7;
+						weightAtakBot[i] = 8;
+					}
+				}
+
 				if(choice == 1 && bot == 1){
 					limitMovesX = 50 - result[1].num_moves;
 					limitMovesO = 50 - result[3].num_moves;
@@ -47,6 +82,10 @@ int main()
 					limitMovesX = 50 - result[1].num_moves;
 					limitMovesO = 50 - result[2].num_moves;
 				}
+
+
+				print_gameboard(tableGame, limitMovesO, limitMovesX);
+
 				
 				if(bot == 1){
 					if((result[1].num_moves == 0 || result[2].num_moves == 0) && result[3].num_moves == 0){
@@ -62,7 +101,76 @@ int main()
 					}
 				}
 				outPutReplics = 0;
-		
+
+				/*
+
+				printf("\nplayer h - ");
+						for(int i = 0; i < 9; i++)
+							printf("%d ", hightStepPlayer[i]);
+						printf("\nplayer w - ");
+						for(int i = 0; i < 9; i++)
+							printf("%d ", weightStepPlayer[i]);
+						printf("\nplayerScoreGorizont         ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreGorizont[i]);
+						printf("\nplayerScoreVertikal         ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreVertikal[i]);
+						printf("\nplayerScoreLeftDiagonal     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreLeftDiagonal[i]);
+						printf("\nplayerScoreRightDiagonal    ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreRightDiagonal[i]);
+						printf("\nplayerScoreGorizontLeft     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreGorizontLeft[i]);
+						printf("\nplayerScoreVertikalLeft     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreVertikalLeft[i]);
+						printf("\nplayerScoreLeftDiagonalLeft ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreLeftDiagonalLeft[i]);
+						printf("\nplayerScoreRightDiagonalLeft");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreRightDiagonalLeft[i]);
+
+						printf("\nbot h - ");
+						for(int i = 0; i < 9; i++)
+							printf("%d ", hightAtakBot[i]);
+						printf("\nbot w - ");
+						for(int i = 0; i < 9; i++)
+							printf("%d ", weightAtakBot[i]);
+						printf("\nbotScoreGorizont         ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreGorizont[i]);
+						printf("\nbotScoreVertikal         ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreVertikal[i]);
+						printf("\nbotScoreLeftDiagonal     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreLeftDiagonal[i]);
+						printf("\nbotScoreRightDiagonal    ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreRightDiagonal[i]);
+						printf("\nbotScoreGorizontLeft     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreGorizontLeft[i]);
+						printf("\nbotScoreVertikalLeft     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreVertikalLeft[i]);
+						printf("\nbotScoreLeftDiagonalLeft ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreLeftDiagonalLeft[i]);
+						printf("\nbotScoreRightDiagonalLeft");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreRightDiagonalLeft[i]);
+						printf("\n");
+						printf("\nplayerScore %d", playerScore);
+						printf("\nbotScore %d", botScore);
+
+						*/
+
 				if(winX == 1){
 					printf("\n\n\t\t\tХ - ПОБЕДИЛ\a");
 					winExit = 1;
@@ -70,38 +178,234 @@ int main()
 					printf("\n\n\t\t\tO - ПОБЕДИЛ");
 					winExit = 1;
 				}
+				if(winExit != 1){
+					entering_coord(choice, winExit, &height, &widht, tableGame);
+				}
+
+				printf("he--------------------------- %d\n",hightStepPlayer[8]);
+				printf("weuty--------------------------- %d\n",weightStepPlayer[8]);
+
+				if((choice == 0 || choice == 1) && (level == 1 || level == 0 || level == 2) && settings != 300){
+					hightStepPlayer[8] = height;
+					weightStepPlayer[8] = widht;
+					settings = 300;
+				}
+
+				printf("he--------------------------- %d\n",hightStepPlayer[8]);
+				printf("weuty--------------------------- %d\n",weightStepPlayer[8]);
+	
+				if(scoreHandPlayer != 8){
+					hightStepPlayer[scoreHandPlayer] = height;
+					weightStepPlayer[scoreHandPlayer] = widht;
+				}else if(scoreHandPlayer == 8){
+					scoreHandPlayer = 0;
+				}
+				scoreHandPlayer++;
 
 				// ПОДСЧЕТ ХОДОВ ИГРОКА
+				if(choice == 1){
+					tableGame[height][widht] = 'X';
 					result[1].num_moves++;
 					if(result[1].num_moves > 50)
 						winO = 1;
-				
+				}else{
+					tableGame[height][widht] = 'O';
 					result[2].num_moves++;
 					if(result[2].num_moves > 50)
 						winX = 1;
+				}
 
 				entering_coord(choice, winExit, &height, &widht, tableGame);
-				
-				outPutReplics = score;
 
 				if((choice == 1 || choice == 0) && winExit != 1){
-					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO, &gorizontScore, &vertikalScore, &leftDiagonalScore, &rightDiagonalScore, &gorizontScoreLeft, &vertikalScoreLeft, &leftDiagonalScoreLeft, &rightDiagonalScoreLeft, &left, &right, &up, &down, &outPutReplics);
+					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, hightStepPlayer, weightStepPlayer);
 				}
 
-				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){
-					move_bot(tableGame, level, gorizontScore, vertikalScore, leftDiagonalScore, rightDiagonalScore, gorizontScoreLeft, vertikalScoreLeft, leftDiagonalScoreLeft, rightDiagonalScoreLeft, hodBot, left, right, down, up, choice, height, widht);
+				if(level == 2 || level == 0){
+					prioritization(level, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, &playerScore, hightStepPlayer, weightStepPlayer, dopusk, &outPutReplics);
 				}
+
+				/*
+
+				printf("he--------------------------- %d\n",hightStepPlayer[8]);
+				printf("weuty--------------------------- %d\n",weightStepPlayer[8]);
+
+				printf("\nplayer h - ");
+						for(int i = 0; i < 9; i++)
+							printf("%d ", hightStepPlayer[i]);
+						printf("\nplayer w - ");
+						for(int i = 0; i < 9; i++)
+							printf("%d ", weightStepPlayer[i]);
+						printf("\nplayerScoreGorizont         ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreGorizont[i]);
+						printf("\nplayerScoreVertikal         ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreVertikal[i]);
+						printf("\nplayerScoreLeftDiagonal     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreLeftDiagonal[i]);
+						printf("\nplayerScoreRightDiagonal    ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreRightDiagonal[i]);
+						printf("\nplayerScoreGorizontLeft     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreGorizontLeft[i]);
+						printf("\nplayerScoreVertikalLeft     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreVertikalLeft[i]);
+						printf("\nplayerScoreLeftDiagonalLeft ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreLeftDiagonalLeft[i]);
+						printf("\nplayerScoreRightDiagonalLeft");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", playerScoreRightDiagonalLeft[i]);
+
+						*/
+
+				if((choice == 1 || choice == 0) && winExit != 1 && level == 2){
+					if(choice == 1){
+						choice = 0;
+					}else if(choice == 0){
+						choice = 1;
+					}
+					check_to_win_bot(tableGame, choice, widht, height, winExit, &winX, &winO, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, hightAtakBot, weightAtakBot);
+					if(choice == 1){
+						choice = 0;
+					}else if(choice == 0){
+						choice = 1;
+					}
+				}
+
+
+				if(level == 2 || level == 0){
+					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot, dopusk, &outPutReplics);
+				}
+
+				/*
+				printf("he--------------------------- %d\n",hightStepPlayer[8]);
+				printf("weuty--------------------------- %d\n",weightStepPlayer[8]);
+
+				printf("\nbot h - ");
+						for(int i = 0; i < 9; i++)
+							printf("%d ", hightAtakBot[i]);
+						printf("\nbot w - ");
+						for(int i = 0; i < 9; i++)
+							printf("%d ", weightAtakBot[i]);
+						printf("\nbotScoreGorizont         ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreGorizont[i]);
+						printf("\nbotScoreVertikal         ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreVertikal[i]);
+						printf("\nbotScoreLeftDiagonal     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreLeftDiagonal[i]);
+						printf("\nbotScoreRightDiagonal    ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreRightDiagonal[i]);
+						printf("\nbotScoreGorizontLeft     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreGorizontLeft[i]);
+						printf("\nbotScoreVertikalLeft     ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreVertikalLeft[i]);
+						printf("\nbotScoreLeftDiagonalLeft ");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreLeftDiagonalLeft[i]);
+						printf("\nbotScoreRightDiagonalLeft");
+						for(int i = 0; i <= 8; i++)
+							printf(" %d ", botScoreRightDiagonalLeft[i]);
+						printf("\n");
+						printf("\nplayerScore %d", playerScore);
+						printf("\nbotScore %d", botScore);
+
+
+				scanf("%d", &menu);
+
+				*/
+
+				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){
+					printf("172 main\n");
+					scanf("%d", &menu);
+
+					if(level == 2){
+						printf("176 main\n");
+					scanf("%d", &menu);
+						move_bot_attacking(tableGame, botScore, playerScore, choice, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, hightAtakBot, weightAtakBot, height, widht, &hodBot);
+					}
+
+					height = hightStepPlayer[8];
+					widht = weightStepPlayer[8];
+
+					printf("184 main\n");
+					scanf("%d", &menu);
+					
+
+					if(level == 0 || (level == 2 && hodBot == 0)){
+						printf("189 main\n");
+						scanf("%d", &menu);
+						move_bot_defender(tableGame, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, &hodBot, choice, height, widht, hightAtakBot, weightAtakBot);
+					}
+					if(level == 1 || hodBot == 0){// ЕСЛИ БОТ НЕ СДЕЛАЛ ХОД, ТО ОН ПЕРЕХОДИТ К ЛЕГКОМУ БОТУ
+						printf("195 main\n");
+						scanf("%d", &menu);
+						move_bot_easy(level, tableGame, choice, hightAtakBot, weightAtakBot, &hodBot, &winX, &winO, height, widht);
+					}
+
+					if(level == 2 && choice == 1 && dopusk == 0){
+						int triger = 0;
+						for(int p = 1; p < 9; p++){
+							if(hightAtakBot[p] == 0){
+								triger++;
+							}
+							if(triger != 0){
+								for(int l = 1; l < 9; l++){
+									hightAtakBot[l] = hightAtakBot[0];
+									weightAtakBot[l] = weightAtakBot[0];
+								}
+								p = 9;
+							}
+						}
+					}
+					dopusk++;
+				}
+
+				botScoreGorizont[8] = 0;
+				botScoreVertikal[8] = 0;
+				botScoreLeftDiagonal[8] = 0;
+				botScoreRightDiagonal[8] = 0;
+
+				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){
+					if(choice == 1){
+						choice = 0;
+					}else if(choice == 0){
+						choice = 1;
+					}
+					check_to_win_bot(tableGame, choice, widht, height, winExit, &winX, &winO, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, hightAtakBot, weightAtakBot);
+					if(choice == 1){
+						choice = 0;
+					}else if(choice == 0){
+						choice = 1;
+					}
+				}
+
+				if(level == 2 || level == 1){
+					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot, dopusk, &outPutReplics);
+				}
+
+				hodBot = 0;
 
 				if(choice == 1 && bot != 1){// ЗДЕСЬ ОПРЕДЕЛЯЕТСЯ ОЧЕРЕДНОСТЬ ХОДОВ
 					choice = 0;
 				}else if(choice == 0 && bot != 1){
 					choice = 1;
 				}
-				gorizontScore = 1, vertikalScore = 1, leftDiagonalScore = 1, rightDiagonalScore = 1, gorizontScoreLeft = 5, vertikalScoreLeft = 1, leftDiagonalScoreLeft = 1, rightDiagonalScoreLeft = 1;
 
 			}while(winExit != 1);
-			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[0] - Выйти из игры\n");
-			input_nubmers_test(&menu);// ФУНКЦИЯ ПРОВЕРКИ ВВОДИМЫХ ЗНАЧЕНИЙ
+			menu = 10;
+			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[2] - Выйти из игры\n");
+			menu = correct_entering(menu, settings);// ФУНКЦИЯ ПРОВЕРКИ ВВОДИМЫХ ЗНАЧЕНИЙ
 			if(menu == 0)
 				break;
 		}
@@ -147,18 +451,19 @@ int main()
 			    printf("\n\t\t\t\t№    Имя\tКоличество ходов");
 
 			    for(int i = 1; i <= 10; i++){
-				if(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
-				    if(i < 10){
-					    printf("\n\t\t\t\t%d  - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves);
-				    }else{
-					    printf("\n\t\t\t\t%d - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves); 
+					if(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+					    if(i < 10){
+						    printf("\n\t\t\t\t%d  - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves);
+					    }else{
+						    printf("\n\t\t\t\t%d - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves); 
+					    }
 				    }
 				}
-			    }
 			    fclose(winTabl);
 			    printf("\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
-			    input_nubmers_test(&menu);
+			    correct_entering(menu, settings);
 		    }
+		}
 
 		if(menu == 5){// ВЫХОД
 			break;
