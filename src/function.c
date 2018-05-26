@@ -127,7 +127,7 @@ int correct_entering(int menu, int settings)
 				continue;
 			}
 			error++;
-		}while((strChoose[0] != '1' && strChoose[0] != '2' && (strChoose[0] != '3' || settings != 0) && (strChoose[0] != '4' || settings != 0)) || strChoose[1] != '\0');
+		}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && (strChoose[0] != '3' || settings != 0) && (strChoose[0] != '4' || settings != 0)) || strChoose[1] != '\0');
 		if(strChoose[0] == '1')
 			return 1;
 		else if(strChoose[0] == '2' && settings == 0)
@@ -783,12 +783,15 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		}
 		printf("\n\t\t\t\t   2.Уровень бота - ");
 		if(*level == 1){
-			printf("новичок");
+			printf("Легкий");
 		}else if(*level == 0){
-			printf("защитник");
+			printf("Средний");
+		}
+		else {
+			printf("Сильный");
 		}
 		if(*settings == 2){
-			printf("\n\t\t\t\t\t|-------- 1.Новичок\n\t\t\t\t\t|-------- 2.Защитник");
+			printf("\n\t\t\t\t\t|-------- 1.Легкий\n\t\t\t\t\t|-------- 2.Средний\n\t\t\t\t\t|-------- 3.Сильный");
 		}
 		printf("\n\t\t\t\t   3.Автоматически Вы играете за - ");
 		if(*choice == 1){
