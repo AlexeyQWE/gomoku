@@ -1,57 +1,182 @@
-#include <stdio.h>
-#include <stdlib.h> 
-#include <ctype.h>
+
 #include "prototypes.h"
+#include <stdio_ext.h>//-----------------------------------------
 
-void input_nubmers_test(int *numbers)// ПРОВЕРКА НА ВВОДИМЫЕ ЦИФРЫ 
+
+static int LEN = 3, GLEN = 4;
+
+int correct_entering(int menu, int settings)
 {
-	for(int i = 0; i < 1; i++){
-		scanf("%d", numbers);
-		if((*numbers < 0) || (*numbers > 1)){
-			printf("Эй, не шали, такого варианта нет!\n");
-			--i;
-		}
-	}
-}
-
-static int LEN = 3;
-
-int correct_entering()
-{
-	char strChoose[LEN];
-	int c;
+	__fpurge(stdin);//------------------------
+	int c, error = 0;
 	char *ptr;
-	do{
-		for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
-			*ptr = c;
+	if(menu == 0){
+		char strChoose[LEN];
+		do{
+			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_RED);
+				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				resetcolor();
+				error = 0;
+			}
+			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
+				*ptr = c;
 
-		if(c == '\n')
-			*ptr = '\0';
+			if(c == '\n')
+				*ptr = '\0';
 
-		while(c != '\n'){
-			c = getchar();
-			continue;
+			while(c != '\n'){
+				c = getchar();
+				continue;
+			}
+			error++;
+		}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5') || strChoose[1] != '\0');
+		if(strChoose[0] == '1')
+			return 1;
+		else if(strChoose[0] == '2')
+			return 2;
+		else if(strChoose[0] == '3')
+			return 3;
+		else if(strChoose[0] == '4')
+			return 4;
+		else if(strChoose[0] == '5')
+			return 5;
+		else
+			return 0;
+	}else if(menu == 1){
+		char strChoose[GLEN];
+		do{
+			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_RED);
+				printf("[Ошибка! Попробуйте снова]-----> ");
+				resetcolor();
+				error = 0;
+			}
+			for(ptr = strChoose; ptr - strChoose < GLEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
+				*ptr = c;
+
+			if(c == '\n')
+				*ptr = '\0';
+
+			while(c != '\n'){
+				c = getchar();
+				continue;
+			}
+			error++;
+		}while((((strChoose[0] != '1' || strChoose[1] != '0') && (strChoose[0] != '1' || strChoose[1] != '1') && (strChoose[0] != '1' || strChoose[1] != '2') && (strChoose[0] != '1' || strChoose[1] != '3') && (strChoose[0] != '1' || strChoose[1] != '4') && (strChoose[0] != '1' || strChoose[1] != '5')) || strChoose[2] != '\0') && (strChoose[0] != '1' || strChoose[1] != '\0') && (strChoose[0] != '2' || strChoose[1] != '\0') && (strChoose[0] != '3' || strChoose[1] != '\0') && strChoose[0] != '4' && (strChoose[0] != '5' || strChoose[1] != '\0') && (strChoose[0] != '6' || strChoose[1] != '\0') && (strChoose[0] != '7' || strChoose[1] != '\0') && (strChoose[0] != '8' || strChoose[1] != '\0') && (strChoose[0] != '9' || strChoose[1] != '\0'));
+		switch(strChoose[0]){
+			case '1':
+				if(strChoose[1] == '\0'){
+					return 1;
+				}
+				switch(strChoose[1]){
+					case '0':
+						return 10;
+					case '1':
+						return 11;
+					case '2':
+						return 12;
+					case '3':
+						return 13;
+					case '4':
+						return 14;
+					case '5':
+						return 15;
+				}
+			case '2':
+				return 2;
+			case '3':
+				return 3;
+			case '4':
+				return 4;
+			case '5':
+				return 5;
+			case '6':
+				return 6;
+			case '7':
+				return 7;
+			case '8':
+				return 8;
+			case '9':
+				return 9;
 		}
-	}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5') || strChoose[1] != '\0');
-	if(strChoose[0] == '1')
-		return 1;
-	else if(strChoose[0] == '2')
-		return 2;
-	else if(strChoose[0] == '3')
-		return 3;
-	else if(strChoose[0] == '4')
-		return 4;
-	else if(strChoose[0] == '5')
-		return 5;
-	else
-		return 0;
+	}else if(menu == 2){
+		char strChoose[LEN];
+		do{
+			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_RED);
+				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				resetcolor();
+				error = 0;
+			}
+
+			set_display_atrib(BLINK);
+	    	set_display_atrib(F_YELLOW);
+			printf("\nВыберите нужный вам пункт ");
+			resetcolor();
+			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
+				*ptr = c;
+
+			if(c == '\n')
+				*ptr = '\0';
+
+			while(c != '\n'){
+				c = getchar();
+				continue;
+			}
+			error++;
+		}while((strChoose[0] != '1' && strChoose[0] != '2' && (strChoose[0] != '3' || settings != 0) && (strChoose[0] != '4' || settings != 0)) || strChoose[1] != '\0');
+		if(strChoose[0] == '1')
+			return 1;
+		else if(strChoose[0] == '2' && settings == 0)
+			return 2;
+		else if(strChoose[0] == '2' && settings != 0)
+			return 0;
+		else if(strChoose[0] == '3')
+			return 3;
+		else if(strChoose[0] == '4')
+			return 4;
+		else
+			return 0;	
+	}else if(menu == 10){
+		char strChoose[LEN];
+		do{
+			if(error == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_RED);
+				printf("\t\t\t\t   [Ошибка!]\n\t\t\t\t   ");
+				resetcolor();
+				error = 0;
+			}
+			for(ptr = strChoose; ptr - strChoose < LEN - 1 && (c = getchar()) != EOF && c != '\n'; ++ptr)
+				*ptr = c;
+
+			if(c == '\n')
+				*ptr = '\0';
+
+			while(c != '\n'){
+				c = getchar();
+				continue;
+			}
+			error++;
+		}while((strChoose[0] != '1' && strChoose[0] != '2') || strChoose[1] != '\0');
+		if(strChoose[0] == '1')
+			return 1;
+		else if(strChoose[0] == '2')
+			return 0;	
+	}
+	return 0;
 }
 
 int main_menu()
 {
-	int menu;
-
-	/*system("clear")*/;// УДАЛЯЕТ В ТЕРМИНАЛЕ ВСЕ НАПИСАННОЕ ВЫШЕ
+	int menu = 0, settings = 0;
+	system("clear");// УДАЛЯЕТ В ТЕРМИНАЛЕ ВСЕ НАПИСАННОЕ ВЫШЕ
+	set_display_atrib(BRIGHT);
+	set_display_atrib(F_RED);
 	printf("\t\t __   __   ______   __        __         ______    \n");
 	printf("\t\t/_/| /_/| /_____/| /_/|      /_/|       /______\\   \n");
 	printf("\t\t|-|| |-|| |- ___|/ |-||      |-||      /- ___ -\\\\  \n");
@@ -61,15 +186,19 @@ int main_menu()
 	printf("\t\t|-|| |-|| |-||___  |-||____  |-||____  |-||__|-||   \n");
 	printf("\t\t|-|| |-|| |-|___/| |-|____/| |-|____/| |-\\___/-|/ \n");
 	printf("\t\t|_|/ |_|/ |_____|/ |______|/ |______|/ \\_______/  \n");
+	resetcolor();
+	set_display_atrib(BRIGHT);
+	set_display_atrib(F_YELLOW);
 	printf("\n\n\t\t\t\t   GOMOKU\n\n\t\t\t\t   1.Играть\n\t\t\t\t   2.Настройки\n\t\t\t\t   3.Правила игры\n\t\t\t\t   4.Таблица лидеров\n\t\t\t\t   5.Выход\n\t\t\t\t   ");
 	printf("\n");
 	printf("Выберите нужный вам пункт ");
-	menu = correct_entering();
+	resetcolor();
+	menu = correct_entering(menu, settings);
 
 	return menu;
 }
 
-int fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
+void fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 {
 	int i = 0, j = 0;
 	/*system("clear");*/// ОЧИЩАЕМ ОБЛАСТЬ ВЫШЕ, В ДАЛЬНЕЙШЕМ, БУДЕТ ВЫГЯДИТЬ ТАК, ЧТО ДОСКА СТАТИЧНА
@@ -78,66 +207,111 @@ int fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 			gameboard_mass[i][j] = '_';
 		}
 	}
-	if ( i >= TABLE_Y ||  j >= TABLE_Y)
-		return NULL;
-  	else 
-  		return 0;
 }
 
-int print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
+void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y], int limitMovesO, int limitMovesX)
 {
-	int i = 0, j = 0;
-	/*system("clear");*/
-	printf("\n\t\t   ____   __      _    _      __    _   __ __   __\n");
-	printf("\t\t  (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /\n");
-	printf("\t\t  ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /\n");
-	printf("\t\t  (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/\n");
-	for( i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
+	//system("clear"); 
+	printf("limitMovesX - %d\n", limitMovesX);
+	printf("limitMovesO - %d\n", limitMovesO);
+	set_display_atrib(BRIGHT);
+    set_display_atrib(F_RED);
+	printf("                       ____   __      _    _      __    _   __ __   __\n");
+	printf("  Кол-во оставшихся   (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /    Кол-во оставшихся\n");
+	printf("       ходов X        ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /	       ходов O \n");
+	printf("       -[%d]-         (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/	       -[%d]-\n", limitMovesX, limitMovesO);
+	resetcolor();
+	for(int i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
 		printf("\n\t\t");
-		for(j = 0; j < TABLE_Y; j++){
+		for(int j = 0; j < TABLE_Y; j++){
 			if(i == 0){
 				if(j == 0){// ВЫВОДЯТСЯ ОРИЕНТИРОВОЧНЫЕ КООРДИНАТЫ ПО БОКАМ ИГРОВОГО ПОЛЯ ПО ГОРИЗОНТАЛИ
 					printf("   ");
 				}else if(j < 10){
-					printf(" %d ", j);
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf("  %d", j);
+					resetcolor();
 				}else if(j == 9){
-					printf("%d ", j);
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf("  %d", j);
+					resetcolor();
 				}else{
-					printf(" %d", j);
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf(" %2d", j);
+					resetcolor();
 				}
 			}else if(j == 0){// ТЕ ЖЕ САМЫЕ КООРДИНАТЫ, ТОЛЬКО ПО ВЕРТИКАЛИ
 				if(i < 10){
-					printf(" %d ", i);
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf(" %2d ", i);
+					resetcolor();
 				}else{
-						printf("%d ", i);
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf(" %d ", i);
+					resetcolor();
 					}
 			}else{
-				printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+				if(gameboard_mass[i][j] == 'X'){
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_WHITE);
+					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+					resetcolor();
+				}else if(gameboard_mass[i][j] == 'O'){
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_WHITE);
+					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+					resetcolor();
+				}else{
+					set_display_atrib(BRIGHT);
+    				set_display_atrib(F_CYAN);
+					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
+					resetcolor();
+				}
 			}
 		}
 	}
-	if ( i >= TABLE_Y ||  j >= TABLE_Y)
-		return NULL;
-  	else
-  		return 0;
 }
 
 void entering_coord(int choice, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y])
 {
+	int menu = 1, settings = 0;
 	if((choice == 1 || choice == 0) && winExit != 1){
 		if(choice == 1){
-			printf("\nХод делает X [Высота] [Ширина]\n");
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_GREEN);
+			printf("\nХод делает X");
+			resetcolor();
 		}else{
-			printf("\nХод делает O [Высота] [Ширина]\n");
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_GREEN);
+			printf("\nХод делает O");
+			resetcolor();
 		}
 		for(int i = 0; i < 1; i++){// ПРОВЕРКА НА ВВОДИМЫЕ СИМВОЛЫ
-			scanf("%d %d", &*height, &*widht);
-			if(((*height <= 0) || (*height > 15)) || ((*widht <= 0) || (*widht > 15))){
-				printf("Наверно руки дрожат? Попробуй еще раз\n");
-				--i;
+			if(choice == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
+				printf("\n[Высота] - ");
+				resetcolor();
+			}else{
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
+				printf("\n[Высота] - ");
+				resetcolor();
 			}
+			*height = correct_entering(menu, settings);
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_YELLOW);
+			printf("[Ширина] - ");
+			resetcolor();
+			*widht = correct_entering(menu, settings);
 			if(tableGame[*height][*widht] == 'X' || tableGame[*height][*widht] == 'O'){// ПРОВЕРКА НА ЗАНЯТОСТЬ КЛЕТКИ
-				printf("Эта клетка уже занята\n");
+				printf("---!!!Эта клетка уже занята!!!---");
 				--i;
 			}
 		}
@@ -150,116 +324,361 @@ void entering_coord(int choice, int winExit, int *height, int *widht, char table
 	}
 }
 
-void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *gorizontScore, int *vertikalScore, int *leftDiagonalScore, int *rightDiagonalScore, int *gorizontScoreLeft, int *vertikalScoreLeft, int *leftDiagonalScoreLeft, int *rightDiagonalScoreLeft, int *left, int *right, int *up, int *down)
+void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *hightStepPlayer, int *weightStepPlayer)
 {
-		int score = 0, j = 0;
-		*left = widht - 4;
-		*right = widht + 4; 
-		*up = height - 4;
-		*down = height + 4;
+	int scoreHand = 0;
+	int score = 0, j = 0;
+	int left, right, up, down;
+	int zamok = 0;
+	while(scoreHand != 8){
+		if(scoreHand <= 7){
+			if(hightStepPlayer[scoreHand] != 0 && weightStepPlayer[scoreHand] != 0){
+				height = hightStepPlayer[scoreHand];
+				widht = weightStepPlayer[scoreHand];
+			}else{
+				height = 0;
+				widht = 0;
+			}
+			if(height == 0 || widht == 0)
+				scoreHand = 7;
+		}
+		score = 0, j = 0;
+		left = widht - 4;
+		right = widht + 4; 
+		up = height - 4;
+		down = height + 4;
 		// ГОРИЗОНТАЛЬНАЯ ПРОВЕРКА, СОСТОИТ В ТОМ
 		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
 		// В ЛЕВО НА 4 КЛЕТКИ И В ПРАВО НА 4 КЛЕТКИ
 		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
 		// ПОШАГОВО ОПИШУ НА СЛЕДУЩЕЙ ПРОВЕРКЕ ПО ГОРИЗОНТАЛИ
-		int exit = *left - 1;
+		int exit = left - 1;
 		int check = 0;
 		int spaceFinder = 0;
-		for(int i = widht - 1; i >= *left; i--){// НАЧИНАЕТСЯ ОТСЧЕТ С ЛЕВОЙ КЛЕТКИ, КОТОРАЯ НАХОДИТСЯ РАДОМ С ТОЙ КЛЕКТОЙ, КОТОРУЮ УКАЗАЛ ЮЗЕР
-			control(exit, i, choice, tableGame, height, &score, &spaceFinder, height, height, widht - 1, widht + 1, &check, i);
+		for(int i = widht - 1; i >= left; i--){// НАЧИНАЕТСЯ ОТСЧЕТ С ЛЕВОЙ КЛЕТКИ, КОТОРАЯ НАХОДИТСЯ РАДОМ С ТОЙ КЛЕКТОЙ, КОТОРУЮ УКАЗАЛ ЮЗЕР
+			control(exit, i, choice, tableGame, height, &score, &spaceFinder, height, height, i - 1, i + 1, &check, i, &zamok);
 			if(check != 0)
 				i = check;
 		}
-		*gorizontScoreLeft = score;
+		playerScoreGorizontLeft[scoreHand] = score + spaceFinder;
 		check = 0;
-		exit = *right + 1;
-		for(int i = widht + 1; i <= *right; i++){
-			control(exit, i, choice, tableGame, height, &score, &spaceFinder, height, height, widht - 1, widht + 1, &check, i);
+		exit = right + 1;
+		for(int i = widht + 1; i <= right; i++){
+			control(exit, i, choice, tableGame, height, &score, &spaceFinder, height, height, i - 1, i + 1, &check, i, &zamok);
 			if(check != 0)
 				i = check;
 		}
-		*gorizontScore = score;
+		playerScoreGorizont[scoreHand] = score + spaceFinder;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
 		spaceFinder = 0;
+		if(zamok >= 2){
+			playerScoreGorizontLeft[scoreHand] = 0;
+			playerScoreGorizont[scoreHand] = 0;
+		}
+		zamok = 0;
 		// ВЕРТИКАЛЬНАЯ ПРОВЕРКА, СОСТОИТ В ТОМ
 		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
 		// В ВЕРХ НА 4 КЛЕТКИ И ВНИЗ НА 4 КЛЕТКИ
 		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
-		exit = *up - 1;
-		for(int i = height - 1; i >= *up; i--){
-			control(exit, widht, choice, tableGame, i, &score, &spaceFinder, height - 1, height + 1, widht, widht, &check, i);
+		exit = up - 1;
+		for(int i = height - 1; i >= up; i--){
+			control(exit, widht, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht, widht, &check, i, &zamok);
 			if(check != 0)
 				i = check;
 		}
-		*vertikalScoreLeft = score;
+		playerScoreVertikalLeft[scoreHand] = score + spaceFinder;
 		check = 0;
-		exit = *down + 1;
-		for(int i = height + 1; i <= *down; i++){
-			control(exit, widht, choice, tableGame, i, &score, &spaceFinder, height - 1, height + 1, widht, widht, &check, i);
+		exit = down + 1;
+		for(int i = height + 1; i <= down; i++){
+			control(exit, widht, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht, widht, &check, i, &zamok);
 			if(check != 0)
 				i = check;
 		}
-		*vertikalScore = score;
+		playerScoreVertikal[scoreHand] = score + spaceFinder;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
 		spaceFinder = 0;
+		if(zamok >= 2){
+			playerScoreVertikalLeft[scoreHand] = 0;
+			playerScoreVertikal[scoreHand] = 0;
+		}
+		zamok = 0;
 		// ЛЕВАЯ ДИАГОНАЛЬНАЯ ПРОВЕРКА (ТО ЕСТЬ ТАКАЯ \ ), СОСТОИТ В ТОМ
 		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
 		// В ВЕРХ И ВЛЕВО НА 4 КЛЕТКИ И ВНИЗ ВПРАВО НА 4 КЛЕТКИ
 		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
-		exit = *up - 1;
+		exit = up - 1;
 		j = 0;
-		for(int i = height - 1; i >= *up; i--){//4 1
+		for(int i = height - 1; i >= up; i--){//4 1
 			++j;
-			control(exit, widht - j, choice, tableGame, i, &score, &spaceFinder, height - 1, height + 1, widht - j - 1, widht - j + 1, &check, i);
+			control(exit, widht - j, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht - j - 1, widht - j + 1, &check, i, &zamok);
 			if(check != 0)
 				i = check;
 		}
-		*leftDiagonalScoreLeft = score;
+		playerScoreLeftDiagonalLeft[scoreHand] = score + spaceFinder;
 		check = 0;
-		exit = *down + 1;
+		exit = down + 1;
 		j = 0;
-		for(int i = height + 1; i <= *down; i++){
+		for(int i = height + 1; i <= down; i++){
 			++j;
-			control(exit, widht + j, choice, tableGame, i, &score, &spaceFinder, height - 1, height + 1, widht + j - 1, widht + j + 1, &check, i);
+			control(exit, widht + j, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht + j - 1, widht + j + 1, &check, i, &zamok);
 			if(check != 0)
 				i = check;
 		}
-		*leftDiagonalScore = score;
+		playerScoreLeftDiagonal[scoreHand] = score + spaceFinder;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
 		spaceFinder = 0;
+		if(zamok >= 2){
+			playerScoreLeftDiagonalLeft[scoreHand] = 0;
+			playerScoreLeftDiagonal[scoreHand] = 0;
+		}
+		zamok = 0;
 		// ПРАВАЯ ДИАГОНАЛЬНАЯ ПРОВЕРКА (ТО ЕСТЬ ТАКАЯ / ), СОСТОИТ В ТОМ
 		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
 		// В ВЕРХ И !!!ВПРАВО!!! НА 4 КЛЕТКИ И ВНИЗ !!!ВЛЕВО!!! НА 4 КЛЕТКИ
 		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
-		exit = *up - 1;
+		exit = up - 1;
 		j = 0;
-		for(int i = height - 1; i >= *up; i--){
+		for(int i = height - 1; i >= up; i--){
 			++j;
-			control(exit, widht + j, choice, tableGame, i, &score, &spaceFinder, height - 1, height + 1, widht + j - 1, widht + j + 1, &check, i);
+			control(exit, widht + j, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht + j - 1, widht + j + 1, &check, i, &zamok);
 			if(check != 0)
 				i = check;
 		}
-		*rightDiagonalScoreLeft = score;
+		playerScoreRightDiagonalLeft[scoreHand] = score + spaceFinder;
 		check = 0;
-		exit = *down + 1;
+		exit = down + 1;
 		j = 0;
-		for(int i = height + 1; i <= *down; i++){// 6 > 9
+		for(int i = height + 1; i <= down; i++){// 6 > 9
 			++j;
+			control(exit, widht - j, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht - j - 1, widht - j + 1, &check, i, &zamok);
 			if(check != 0)
 				i = check;
 		}
-		*rightDiagonalScore = score;
+		playerScoreRightDiagonal[scoreHand] = score + spaceFinder;
 		check = 0;
 		checkWin(score, choice, &*winX, &*winO);
 		score = 0;
 		j = 0;
 		spaceFinder = 0;
+		if(zamok >= 2){
+			playerScoreRightDiagonalLeft[scoreHand] = 0;
+			playerScoreRightDiagonal[scoreHand] = 0;
+		}
+		zamok = 0;
+		if(scoreHand != 8)
+			scoreHand++;
+	}
+}
+
+void check_to_win_bot(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *hightStepPlayer, int *weightStepPlayer)
+{
+	int scoreHand = 0;
+	int score = 0, j = 0;
+	int left, right, up, down;
+	int zamok = 0;
+	while(scoreHand != 8){
+		if(scoreHand <= 7){
+			height = hightStepPlayer[scoreHand];
+			widht = weightStepPlayer[scoreHand];
+		}
+		score = 0, j = 0;
+		left = widht - 4;
+		right = widht + 4; 
+		up = height - 4;
+		down = height + 4;
+		// ГОРИЗОНТАЛЬНАЯ ПРОВЕРКА, СОСТОИТ В ТОМ
+		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
+		// В ЛЕВО НА 4 КЛЕТКИ И В ПРАВО НА 4 КЛЕТКИ
+		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
+		// ПОШАГОВО ОПИШУ НА СЛЕДУЩЕЙ ПРОВЕРКЕ ПО ГОРИЗОНТАЛИ
+		int exit = left - 1;
+		int check = 0;
+		int spaceFinder = 0;
+		for(int i = widht - 1; i >= left; i--){// НАЧИНАЕТСЯ ОТСЧЕТ С ЛЕВОЙ КЛЕТКИ, КОТОРАЯ НАХОДИТСЯ РАДОМ С ТОЙ КЛЕКТОЙ, КОТОРУЮ УКАЗАЛ ЮЗЕР
+			control(exit, i, choice, tableGame, height, &score, &spaceFinder, height, height, i - 1, i + 1, &check, i, &zamok);
+			if(check != 0)
+				i = check;
+		}
+		playerScoreGorizontLeft[scoreHand] = score;
+		check = 0;
+		exit = right + 1;
+		for(int i = widht + 1; i <= right; i++){
+			control(exit, i, choice, tableGame, height, &score, &spaceFinder, height, height, i - 1, i + 1, &check, i, &zamok);
+			if(check != 0)
+				i = check;
+		}
+		playerScoreGorizont[scoreHand] = score;
+		check = 0;
+		checkWin(score, choice, &*winX, &*winO);
+		score = 0;
+		spaceFinder = 0;
+		if(zamok >= 2){
+			playerScoreGorizontLeft[scoreHand] = 0;
+			playerScoreGorizont[scoreHand] = 0;
+		}
+		zamok = 0;
+		// ВЕРТИКАЛЬНАЯ ПРОВЕРКА, СОСТОИТ В ТОМ
+		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
+		// В ВЕРХ НА 4 КЛЕТКИ И ВНИЗ НА 4 КЛЕТКИ
+		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
+		exit = up - 1;
+		for(int i = height - 1; i >= up; i--){
+			control(exit, widht, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht, widht, &check, i, &zamok);
+			if(check != 0)
+				i = check;
+		}
+		playerScoreVertikalLeft[scoreHand] = score;
+		check = 0;
+		exit = down + 1;
+		for(int i = height + 1; i <= down; i++){
+			control(exit, widht, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht, widht, &check, i, &zamok);
+			if(check != 0)
+				i = check;
+		}
+		playerScoreVertikal[scoreHand] = score;
+		check = 0;
+		checkWin(score, choice, &*winX, &*winO);
+		score = 0;
+		spaceFinder = 0;
+		if(zamok >= 2){
+			playerScoreVertikalLeft[scoreHand] = 0;
+			playerScoreVertikal[scoreHand] = 0;
+		}
+		zamok = 0;
+		// ЛЕВАЯ ДИАГОНАЛЬНАЯ ПРОВЕРКА (ТО ЕСТЬ ТАКАЯ \ ), СОСТОИТ В ТОМ
+		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
+		// В ВЕРХ И ВЛЕВО НА 4 КЛЕТКИ И ВНИЗ ВПРАВО НА 4 КЛЕТКИ
+		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
+		exit = up - 1;
+		j = 0;
+		for(int i = height - 1; i >= up; i--){//4 1
+			++j;
+			control(exit, widht - j, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht - j - 1, widht - j + 1, &check, i, &zamok);
+			if(check != 0)
+				i = check;
+		}
+		playerScoreLeftDiagonalLeft[scoreHand] = score;
+		check = 0;
+		exit = down + 1;
+		j = 0;
+		for(int i = height + 1; i <= down; i++){
+			++j;
+			control(exit, widht + j, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht + j - 1, widht + j + 1, &check, i, &zamok);
+			if(check != 0)
+				i = check;
+		}
+		playerScoreLeftDiagonal[scoreHand] = score;
+		check = 0;
+		checkWin(score, choice, &*winX, &*winO);
+		score = 0;
+		spaceFinder = 0;
+		if(zamok >= 2){
+			playerScoreLeftDiagonalLeft[scoreHand] = 0;
+			playerScoreLeftDiagonal[scoreHand] = 0;
+		}
+		zamok = 0;
+		// ПРАВАЯ ДИАГОНАЛЬНАЯ ПРОВЕРКА (ТО ЕСТЬ ТАКАЯ / ), СОСТОИТ В ТОМ
+		// ЧТО ПРОВЕРКА ПРОВОДИТСЯ ОТНОСИТЕЛЬНО КООРДИНАТ ВВЕДЕННЫХ ИГРОКОМ
+		// В ВЕРХ И !!!ВПРАВО!!! НА 4 КЛЕТКИ И ВНИЗ !!!ВЛЕВО!!! НА 4 КЛЕТКИ
+		// СРАВНИВАЯ СОДЕРЖИМОЕ МАССИВА
+		exit = up - 1;
+		j = 0;
+		for(int i = height - 1; i >= up; i--){
+			++j;
+			control(exit, widht + j, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht + j - 1, widht + j + 1, &check, i, &zamok);
+			if(check != 0)
+				i = check;
+		}
+		playerScoreRightDiagonalLeft[scoreHand] = score;
+		check = 0;
+		exit = down + 1;
+		j = 0;
+		for(int i = height + 1; i <= down; i++){
+			++j;
+			control(exit, widht - j, choice, tableGame, i, &score, &spaceFinder, i - 1, i + 1, widht - j - 1, widht - j + 1, &check, i, &zamok);
+			if(check != 0)
+				i = check;
+		}
+		playerScoreRightDiagonal[scoreHand] = score;
+		check = 0;
+		checkWin(score, choice, &*winX, &*winO);
+		score = 0;
+		j = 0;
+		spaceFinder = 0;
+		if(zamok >= 2){
+			playerScoreRightDiagonalLeft[scoreHand] = 0;
+			playerScoreRightDiagonal[scoreHand] = 0;
+		}
+		zamok = 0;
+		scoreHand++;
+	}
+}
+
+void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *playerScore,  int *hightStepPlayer, int *weightStepPlayer, int dopusk, int *outPutReplics){
+	int checking = 0;
+	int resultat[9] = {'\0'};
+	int key;
+
+	for(int i = 0; i < 8; i++){
+		resultat[i] = playerScoreGorizont[i] + playerScoreVertikal[i] + playerScoreLeftDiagonal[i] + playerScoreRightDiagonal[i] + playerScoreGorizontLeft[i] + playerScoreVertikalLeft[i] + playerScoreLeftDiagonalLeft[i] + playerScoreRightDiagonalLeft[i];
+	}
+
+	for(int i = 0; i < 8; i++){
+		if(resultat[i] == 0){
+			checking++;
+		}
+	}
+	if(checking == 7){
+		for(int i = 0; i < 8; i++){
+			resultat[i] = playerScoreGorizontLeft[i] + playerScoreVertikalLeft[i] + playerScoreLeftDiagonalLeft[i] + playerScoreRightDiagonalLeft[i];
+		}
+	}
+	checking = 0;
+
+	for(int i = 0; i < 8; i++){
+		printf("resultat[%d] - %d\n", i, resultat[i]);
+	}
+	resultat[8] = 0;
+	for(int i = 0; i < 8; i++){
+		if(resultat[8] <= resultat[i]){
+			resultat[8] = resultat[i];
+			key = i;
+		}
+		if(i == 7){
+			playerScoreGorizont[8] = playerScoreGorizont[key];
+			playerScoreVertikal[8] = playerScoreVertikal[key];
+			playerScoreLeftDiagonal[8] = playerScoreLeftDiagonal[key];
+			playerScoreRightDiagonal[8] = playerScoreRightDiagonal[key];
+			playerScoreGorizontLeft[8] = playerScoreGorizontLeft[key];
+			playerScoreVertikalLeft[8] = playerScoreVertikalLeft[key];
+			playerScoreLeftDiagonalLeft[8] = playerScoreLeftDiagonalLeft[key];
+			playerScoreRightDiagonalLeft[8] = playerScoreRightDiagonalLeft[key];
+			if(level != 1 && dopusk != 0){
+				hightStepPlayer[8] = hightStepPlayer[key];
+				weightStepPlayer[8] = weightStepPlayer[key];
+			}
+		}
+	}
+	*playerScore = playerScoreGorizont[8];
+	if(*playerScore < playerScoreVertikal[8])
+		*playerScore = playerScoreVertikal[8];
+	if(*playerScore < playerScoreLeftDiagonal[8])
+		*playerScore = playerScoreLeftDiagonal[8];
+	if(*playerScore < playerScoreRightDiagonal[8])
+		*playerScore = playerScoreRightDiagonal[8];
+	if(*playerScore < playerScoreVertikalLeft[8])
+		*playerScore = playerScoreVertikalLeft[8];
+	if(*playerScore < playerScoreLeftDiagonalLeft[8])
+		*playerScore = playerScoreLeftDiagonalLeft[8];
+	if(*playerScore < playerScoreRightDiagonalLeft[8])
+		*playerScore = playerScoreRightDiagonalLeft[8];
+	*outPutReplics = *playerScore;
 }
 
 int checkWin(int score, int choice, int *winX, int *winO)// ПРОВЕРКА НА ПОБЕДУ
@@ -280,7 +699,7 @@ int checkWin(int score, int choice, int *winX, int *winO)// ПРОВЕРКА Н�
 	return 0;
 }
 
-void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo)
+void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo, int *zamok)
 {
 	if(i > 0 && checkTwo <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
 		if(choice == 1){
@@ -289,8 +708,21 @@ void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int 
 			}else if(tableGame[coord][i] == '_'){
 				if(tableGame[hightCoordLeft][weightCoordLeft] == 'X' && tableGame[hightCoordRight][weightCoordRight] == 'X'){
 					++*spaceFinder;
+				}
+				if(*spaceFinder >= 1){
+					*spaceFinder = 0;
 					*check = exit;
 				}
+			}else if(tableGame[coord][i] == 'O'){
+				++*zamok;
+				*check = exit;
+			}else if(*score == 3 && tableGame[coord][i] == 'O'){
+				++*zamok;
+				*score = 0;
+				*spaceFinder = 0;
+				*check = exit;
+			}else if(*spaceFinder >= 1){
+				*check = exit;
 			}else{// ЕСЛИ В КАКОЙ-ТО ОБЛАСТИ ИЗ 4 КЛЕТОК ЕСТЬ БРЕШЬ, ТО ПРОВЕРКА СБРАСЫВАЕТСЯ
 				*check = exit;
 			}
@@ -300,8 +732,21 @@ void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int 
 			}else if(tableGame[coord][i] == '_'){
 				if(tableGame[hightCoordLeft][weightCoordLeft] == 'O' && tableGame[hightCoordRight][weightCoordRight] == 'O'){
 					++*spaceFinder;
+				}
+				if(*spaceFinder >= 1){
+					*spaceFinder = 0;
 					*check = exit;
 				}
+			}else if(tableGame[coord][i] == 'X'){
+				++*zamok;
+				*check = exit;
+			}else if(*score == 3 && tableGame[coord][i] == 'X'){
+				++*zamok;
+				*score = 0;
+				*spaceFinder = 0;
+				*check = exit;
+			}else if(*spaceFinder >= 1){
+				*check = exit;
 			}else{// ЕСЛИ В КАКОЙ-ТО ОБЛАСТИ ИЗ 4 КЛЕТОК ЕСТЬ БРЕШЬ, ТО ПРОВЕРКА СБРАСЫВАЕТСЯ
 				*check = exit;
 			}
@@ -314,7 +759,9 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 	int i = 0;
 
 	while(menu == 2){
-		/*system("clear");*/
+		system("clear");
+		set_display_atrib(BRIGHT);
+	    set_display_atrib(F_GREEN);
 		printf("\t\t\t\t      _____   _\n");
 		printf("\t\t\t\t     /   //  /\\\\\n");
 		printf("\t\t\t\t    /   //  /  \\\\\n");				
@@ -324,6 +771,9 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		printf("\t\t\t\t      /   //\n");
 		printf("\t\t\t\t     /   //\n");
 		printf("\t\t\t\t    /   //\n");
+		resetcolor();
+		set_display_atrib(BLINK);
+	     set_display_atrib(F_YELLOW);
 		printf("\n\n\t\t\t\t   НАСТРОЙКИ");
 		printf("\n\n\t\t\t\t   1.Бот - ");
 
@@ -333,7 +783,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 			printf("выключен");
 		}
 		if(*settings == 1){
-			printf("\n\t\t\t\t\t|-------- 1.Включить\n\t\t\t\t\t|-------- 0.Выключить");
+			printf("\n\t\t\t\t\t|-------- 1.Включить\n\t\t\t\t\t|-------- 2.Выключить");
 		}
 		printf("\n\t\t\t\t   2.Уровень бота - ");
 		if(*level == 1){
@@ -342,7 +792,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 			printf("защитник");
 		}
 		if(*settings == 2){
-			printf("\n\t\t\t\t\t|-------- 1.Новичок\n\t\t\t\t\t|-------- 0.Защитник");
+			printf("\n\t\t\t\t\t|-------- 1.Новичок\n\t\t\t\t\t|-------- 2.Защитник");
 		}
 		printf("\n\t\t\t\t   3.Автоматически Вы играете за - ");
 		if(*choice == 1){
@@ -351,29 +801,25 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 			printf("O");
 		}
 		if(*settings == 3){
-			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 0.Играть первым за О");
+			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 2.Играть первым за О");
 		}
-		printf("\n\t\t\t\t   4.Выход в меню\n\t\t\t\t   ");
+		printf("\n\t\t\t\t   4.Выход в меню\n");
+		resetcolor();
+
 		if(*settings == 0){	
-			for(int i = 0; i < 1; i++){
-				scanf("%d", settings);
-				if((*settings < 1) || (*settings > 4)){
-					printf("Эй, не шали, такого варианта нет!\n");
-					--i;
-				}
-			}
+			*settings = correct_entering(menu, *settings);
 			i = 0;
 		}
 		if(*settings == 1 && i == 1){
-			input_nubmers_test(bot);
+			*bot = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
 		}else if(*settings == 2 && i == 1){
-			input_nubmers_test(level);
+			*level = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
 		}else if(*settings == 3 && i == 1){
-			input_nubmers_test(choice);
+			*choice = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
 		}else if(*settings == 4){
@@ -382,4 +828,96 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot)
 		i = 1;
 	}
 	i = 0;
+}
+
+void rules(int menu, int settings)
+{
+	while(menu == 3){
+		system("clear");
+		set_display_atrib(BRIGHT);
+	    set_display_atrib(F_RED);
+		printf("\t\t\t\t   ________\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   \\    / /\n");
+		printf("\t\t\t\t    \\__/_/\n");
+		printf("\t\t\t\t     ____\n");
+		printf("\t\t\t\t    /  \\ \\\n");
+		printf("\t\t\t\t    \\__/_/\n");
+		resetcolor();
+		set_display_atrib(BLINK);
+		set_display_atrib(F_YELLOW);
+		printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 15Х15\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+		    resetcolor();
+		menu = 0;
+	        menu = correct_entering(menu, settings);
+
+	}
+}
+void table_name(int menu, int settings, struct winner tablname[15])
+{
+	
+	while(menu == 4){
+		system("clear");
+		set_display_atrib(BRIGHT);
+	    set_display_atrib(F_YELLOW);	
+		printf("\t\t\t\t       __\n");
+		printf("\t\t\t\t      / /\\\n");
+		printf("\t\t\t\t ____/_/  \\___\n");
+		printf("\t\t\t\t | |   ___   |\n");
+		printf("\t\t\t\t  \\ \\  \\_/  /\n");
+		printf("\t\t\t\t   \\_\\_   _/\n");
+		printf("\t\t\t\t     \\ \\ /\n");
+		printf("\t\t\t\t      || |\n");
+		printf("\t\t\t\t     ||___|\n");
+		FILE *winTabl;
+		winTabl = fopen("data/hall/LeadTable.txt", "r");
+		set_display_atrib(BLINK);
+		set_display_atrib(F_YELLOW);
+		printf("\n\t\t\t\t№    Имя\tКоличество ходов");
+		resetcolor();
+
+		for(int i = 1; i <= 10; i++){
+			    if(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+				if(i < 10){
+				    set_display_atrib(BLINK);
+					set_display_atrib(F_YELLOW);
+					printf("\n\t\t\t\t%d  - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves);
+				    resetcolor();
+				}else{
+				    set_display_atrib(BLINK);
+					set_display_atrib(F_YELLOW);
+					printf("\n\t\t\t\t%d - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves); 
+				    resetcolor();
+				}
+			}
+		    }
+		fclose(winTabl);
+		set_display_atrib(BLINK);
+	    set_display_atrib(F_YELLOW);
+		printf("\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+		menu = 0;
+		menu = correct_entering(menu, settings);
+	}
+}
+
+void easter_egg(int menu, int settings)
+{
+	while(menu == 6){
+		system("clear");
+                printf("\t\t\t\t    _______\n");
+		printf("\t\t\t\t   /  ---  \\\n");
+		printf("\t\t\t\t  /         \\\n");
+		printf("\t\t\t\t |  !EASTER  |\n");
+		printf("\t\t\t\t |    EGG    |\n");
+		printf("\t\t\t\t |  -------  |\n");
+		printf("\t\t\t\t |    ___    |\n");
+		printf("\t\t\t\t  \\         /\n");
+		printf("\t\t\t\t   \\_______/\n");
+		printf("\n\n\t\t\tПривет!\n\t\t\tЭтого пункта в меню нет!\n\t\t\tПотому что он секретный...\n\t\t\tПоздравляю! Ты нашёл пасхальное яйцо!\n\t\t\tА сейчас, дорогой друг, я хочу тебе рассказать\n\t\t\tпару интересных фактов о твоей любимой игре'Гомоку'.\n\n\t\t\tИгра появилась более четырех тысяч лет назад на территории\n\t\t\tодной из самых древних цивилизаций в долине реки Хуанхэ.\n\t\t\tВ VII веке она была привезена на Японские острова,\n\t\t\tгде получила название «гомоку», что означает «пять камней».\n\n\t\t\tТак как у чёрных камней есть преимущество первого хода и при грамотном\n\t\t\tподходе, не зависимо от того, как будут строить оборону белые камни,\n\t\t\tпобеждают именно чёрные, были введены специальные ограничения,\n\t\t\tчтобы уровнять шансы на победу, и сделать тем самым игру более\n\t\t\tсбалансированной и интересной.\n\n\t\t\tТак, для черных фишек в спортивном рэндзю ввели следующие фолы (запрещенные ходы):\n\n\t\t\t • запрещается строить 'вилки' 3х3 и 4х4\n\n\t\t\t • запрещается строить ряд из 6 или более камней\n\n\t\t\t • запрещается строить любые вилки кратностью более двух.\n\n\t\t\tДля белых камней-фишек никаких фолов нет, и для победы им нужно\n\t\t\tпостроить ряд из пяти камней, либо дождаться ошибки чёрных камней\n\t\t\t(совершение ими фола).\n\n\t\t\tВ том случае, когда наступает ход игрока и он считает, что хороших для\n\t\t\tнего ходов не осталось, он может отказаться делать свой ход, то есть\n\t\t\tсделать пас. Если после этого второй игрок тоже спасует, то игра\n\t\t\tзавершается вничью. Также игра заканчивается вничью, если вся доска\n\t\t\tбудет заставлена камнями, но никто из игроков не смог построить\n\t\t\tпобедную линию в 5 камней.\n\n\t\t\t\tCreated BY:\n\t\t\t • Вашов Алексей\n\t\t\t • Карасев Алексей\n\t\t\t • Рамус Евгений\n\n\n\t\t\t1.Хочу играть!\n\t\t\t");
+			
+		menu = 0;
+	        menu = correct_entering(menu, settings);
+	}
 }

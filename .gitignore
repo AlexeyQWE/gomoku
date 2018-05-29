@@ -1,7 +1,11 @@
 /bin/gom
 /bin/testing
-/build/function.o
-/build/main.o
-/build/bot.o
 /build/test/main.o
 /build/test/tests.o
+/build/function.o
+/build/main.o
+/build/bot_easy.o
+/build/bot_defender.o
+/build/bot_attacking.o
+
+

@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h> 
 #include "prototypes.h"
 
-void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, int vertikalScore, int leftDiagonalScore, int rightDiagonalScore, int gorizontScoreLeft, int vertikalScoreLeft, int leftDiagonalScoreLeft, int rightDiagonalScoreLeft, int hodBot, int left, int right, int down, int up, int choice, int height, int widht){
+void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, int vertikalScore, int leftDiagonalScore, int rightDiagonalScore, int gorizontScoreLeft, int vertikalScoreLeft, int leftDiagonalScoreLeft, int rightDiagonalScoreLeft, int hodBot, int left, int right, int down, int up, int choice, int *height, int *widht){
 	int exit;
 	if(level == 2){
 		level = 1;// ЗДЕСБ БУДЕТ СЛОЖНЫЙ БОТ (ТИПА *СЛОЖНЫЙ*)
@@ -13,17 +11,17 @@ void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, in
 		if(gorizontScore >= vertikalScore && gorizontScore >= leftDiagonalScore && gorizontScore >= rightDiagonalScore){
 			exit = left - 1;// СЧЕТЧИК ДЛЯ ВЫХОДА И ПОСЛЕДУЮЩЕГО ЦИКЛА for
 				if((gorizontScore - gorizontScoreLeft) <= gorizontScoreLeft || gorizontScore == gorizontScoreLeft){
-					for(int i = widht - 1; i >= left; i--){
+					for(int i = *widht - 1; i >= left; i--){
 						if(i > 0 && i <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
-							move_bot_gotizont(choice, tableGame, &i, height, &hodBot, exit, &widht);// САМ ПРОЦЕСС ХОДА БОТА
+							move_bot_gotizont(choice, tableGame, &i, *height, &hodBot, exit, &*widht);// САМ ПРОЦЕСС ХОДА БОТА
 						}	
 					}
 				}
 				if(hodBot == 0){
 					exit = right + 1;
-					for(int i = widht + 1; i <= right; i++){
+					for(int i = *widht + 1; i <= right; i++){
 						if(i > 0 && i <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
-							move_bot_gotizont(choice, tableGame, &i, height, &hodBot, exit, &widht);
+							move_bot_gotizont(choice, tableGame, &i, *height, &hodBot, exit, &*widht);
 						}	
 					}
 				}
@@ -31,17 +29,17 @@ void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, in
 		if(vertikalScore >= gorizontScore && vertikalScore >= leftDiagonalScore && vertikalScore >= rightDiagonalScore && hodBot != 1){
 			exit = up - 1;
 			if((vertikalScore - vertikalScoreLeft) <= vertikalScoreLeft || vertikalScore == vertikalScoreLeft){
-				for(int i = height - 1; i >= up; i--){
+				for(int i = *height - 1; i >= up; i--){
 					if(i > 0 && i <= 15){
-						move_bot_vertical(choice, tableGame, &i, widht, &hodBot, exit, &height);
+						move_bot_vertical(choice, tableGame, &i, *widht, &hodBot, exit, &*height);
 					}
 				}
 			}
 			if(hodBot == 0){
 				exit = down + 1;
-				for(int i = height + 1; i <= down; i++){
+				for(int i = *height + 1; i <= down; i++){
 					if(i > 0 && i <= 15){
-						move_bot_vertical(choice, tableGame, &i, widht, &hodBot, exit, &height);
+						move_bot_vertical(choice, tableGame, &i, *widht, &hodBot, exit, &*height);
 					}
 				}
 			}
@@ -51,21 +49,21 @@ void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, in
 			exit = up - 1;
 			int j = 0;
 			// leftDiagonalScore - leftDiagonalScoreLeft --- ЭТО СЧЕТЧИК КАК БЫ ВЕРХНЕЙ ПОЛОВИНЫ ЛЕВОЙ ДИАГОНАЛИ, leftDiagonalScoreLeft ---- ЭТО СЧЕТЧИК НИЖНЕЙ ЛЕВОЙ ДИАГОНАЛИ
-			if(((leftDiagonalScore - leftDiagonalScoreLeft) > leftDiagonalScoreLeft || leftDiagonalScore == leftDiagonalScoreLeft) && (widht - leftDiagonalScore) > 0) {
-				for(int i = height - 1; i >= up; i--){//4 1
+			if(((leftDiagonalScore - leftDiagonalScoreLeft) > leftDiagonalScoreLeft || leftDiagonalScore == leftDiagonalScoreLeft) && (*widht - leftDiagonalScore) > 0) {
+				for(int i = *height - 1; i >= up; i--){//4 1
 					if(i > 0 && i <= 15){
 						++j;
-						move_bot_diagonal_minus(j, choice, tableGame, &i, &widht, &hodBot, exit, &height);
+						move_bot_diagonal_minus(j, choice, tableGame, &i, &*widht, &hodBot, exit, &*height);
 					}
 				}
 			}
-			if(hodBot == 0 && (height + leftDiagonalScore - leftDiagonalScoreLeft) <= 15){
+			if(hodBot == 0 && (*height + leftDiagonalScore - leftDiagonalScoreLeft) <= 15){
 				exit = down + 1;
 				int j = 0;
-				for(int i = height + 1; i <= down; i++){
+				for(int i = *height + 1; i <= down; i++){
 					if(i > 0 && i <= 15){
 						++j;
-						move_bot_diagonal_plus(j, choice, tableGame, &i, &widht, &hodBot, exit, &height);
+						move_bot_diagonal_plus(j, choice, tableGame, &i, &*widht, &hodBot, exit, &*height);
 					}
 				}
 			}
@@ -75,21 +73,21 @@ void move_bot(char tableGame[TABLE_Y][TABLE_Y], int level, int gorizontScore, in
 			exit = up - 1;
 			int j = 0;
 			// rightDiagonalScore - rightDiagonalScoreLeft --- ЭТО СЧЕТЧИК КАК БЫ НИЖНЕЙ ПОЛОВИНЫ ПРАВОЙ ДИАГОНАЛИ, rightDiagonalScoreLeft ---- ЭТО СЧЕТЧИК ВЕРХНЕЙ ПРАВОЙ ДИАГОНАЛИ
-			if(((rightDiagonalScore - rightDiagonalScoreLeft) > rightDiagonalScoreLeft || rightDiagonalScore == rightDiagonalScoreLeft) && (widht + 1) != 11){
-				for(int i = height - 1; i >= up; i--){
+			if(((rightDiagonalScore - rightDiagonalScoreLeft) > rightDiagonalScoreLeft || rightDiagonalScore == rightDiagonalScoreLeft) && (*widht + 1) != 11){
+				for(int i = *height - 1; i >= up; i--){
 					if(i > 0 && i <= 15){
 						++j;
-						move_bot_diagonal_plus(j, choice, tableGame, &i, &widht, &hodBot, exit, &height);
+						move_bot_diagonal_plus(j, choice, tableGame, &i, &*widht, &hodBot, exit, &*height);
 					}
 				}
 			}
 			if(hodBot == 0){
 				exit = down + 1;
 				j = 0;
-				for(int i = height + 1; i <= down; i++){// 6 > 9
+				for(int i = *height + 1; i <= down; i++){// 6 > 9
 					if(i > 0 && i <= 15){
 						++j;
-						move_bot_diagonal_minus(j, choice, tableGame, &i, &widht, &hodBot, exit, &height);
+						move_bot_diagonal_minus(j, choice, tableGame, &i, &*widht, &hodBot, exit, &*height);
 					}
 				}
 			}
