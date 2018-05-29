@@ -827,11 +827,12 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot, i
 			*settings = correct_entering(menu, *settings);
 			i = 0;
 		}
-		if(*settings == 1 && i == 1){
+		if(*settings == 1 && i == 1){	
 			*bot = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
 		}else if(*settings == 2 && i == 1){
+			*settings = 10;
 			*level = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
