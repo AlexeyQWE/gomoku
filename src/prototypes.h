@@ -78,11 +78,11 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 	void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo, int *zamok);
 
 	int checkWin(int score, int choice, int *winX, int *winO);
-
-	void game_settings(int menu, int *settings, int *level, int *choice, int *bot);
 	
 	void rules(int menu, int settings);
 	
 	void table_name(int menu, int settings, struct winner tablname[15]);
 
 	void easter_egg(int menu, int settings);
+
+	void game_settings(int menu, int *settings, int *level, int *choice, int *bot, int *otladka);

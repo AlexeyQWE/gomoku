@@ -3,7 +3,7 @@
 
 int main()
 {
-	int i = 1, level = 2, choice = 1, bot = 1;
+	int i = 1, level = 2, choice = 1, bot = 1, otladka = 1;
 	int height = 0, widht = 0; // КООРДИНАТЫ
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
 	int outPutReplics = 0;
@@ -499,7 +499,7 @@ int main()
 		}
 
 		if(menu == 2){// НАСТРОЙКИ
-			game_settings(menu, &settings, &level, &choice, &bot);
+			game_settings(menu, &settings, &level, &choice, &bot, &otladka);
 		}
 		
 		if(menu == 3){// ПРАВИЛА
