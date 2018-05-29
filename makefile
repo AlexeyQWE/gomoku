@@ -1,3 +1,4 @@
+all: bin/gom bin/testing
 
 /bin/gom: build/main.o build/function.o build/bot_defender.o build/bot_attacking.o build/bot_easy.o
 		gcc build/main.o build/function.o build/bot_defender.o build/bot_attacking.o build/bot_easy.o -o bin/gom
@@ -21,5 +22,15 @@ build/bot_easy.o: src/bot_easy.c
 
 		gcc -Wall -g -std=c99 -c src/bot_easy.c -o build/bot_easy.o
 
+bin/testing: build/test/main.o build/test/tests.o build/function.o build/bot_defender.o build/bot_attacking.o build/bot_easy.o
+		gcc -Wall build/test/main.o build/test/tests.o build/function.o  build/bot_defender.o build/bot_attacking.o build/bot_easy.o -o bin/testing
+
+build/test/main.o: test/main.c
+
+		gcc -Wall -std=c99 -c test/main.c -o build/test/main.o -Ithirdparty 
+
+build/test/tests.o: test/tests.c
+
+		gcc -Wall -std=c99 -c test/tests.c -o build/test/tests.o -Ithirdparty -Isrc
 
 
