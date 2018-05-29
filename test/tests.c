@@ -2,7 +2,21 @@
 #include <stdio.h>
 #include <prototypes.h>
 
+CTEST(testing_suite, entering_coord) 
+{
+	//GIVEN
+	char tableGame[16][16];
+	int choice = 0, height = 0, widht = 0, winExit = 0;
 
+	//WHEN
+	entering_coord( choice,  winExit,  &height,  &widht, tableGame);
+
+	//THEN
+	ASSERT_INTERVAL(0, 1, choice);
+	ASSERT_INTERVAL(0, 1, winExit);
+	ASSERT_INTERVAL(1, 15, height);
+	ASSERT_INTERVAL(1, 15, widht);
+}
 
 CTEST(testing_suite, game_settings) 
 {
