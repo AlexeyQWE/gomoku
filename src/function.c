@@ -778,7 +778,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot, i
 		printf("\t\t\t\t    /   //\n");
 		resetcolor();
 		set_display_atrib(BLINK);
-	     set_display_atrib(F_YELLOW);
+	    set_display_atrib(F_YELLOW);
 		printf("\n\n\t\t\t\t   НАСТРОЙКИ");
 		printf("\n\n\t\t\t\t   1.Бот - ");
 
