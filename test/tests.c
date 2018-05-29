@@ -2,6 +2,15 @@
 #include <stdio.h>
 #include <prototypes.h>
 
+CTEST(testing_suite, main_menu) 
+{
+	//WHEN
+	const int result = main_menu();
+
+	//THEN
+	ASSERT_INTERVAL(0, 5, result);
+}
+
 CTEST(testing_suite, entering_coord) 
 {
 	//GIVEN
