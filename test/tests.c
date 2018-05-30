@@ -338,3 +338,25 @@ CTEST(testing_suite, move_bot_defender)
 	ASSERT_EQUAL(expended1, hodBot);
 	ASSERT_INTERVAL(0, 1, hodBot);
 }
+
+CTEST(testing_suite,move_bot_gotizont) 
+{
+	//GIVEN
+	char tableGame[16][16];
+	for(int i = 0; i < TABLE_Y; i++){
+		for(int j = 0; j < TABLE_Y; j++){
+			tableGame[i][j] = '_';
+		}
+	}
+	tableGame[6][6] = 'X';
+	int choice = 1, hodBot = 0, height = 6, widht = 6, exit = 1, i = 5;
+
+	//WHEN
+	move_bot_gotizont(choice, tableGame, &i, height, &hodBot, exit, &widht);
+
+	//THEN
+	const int expected = 1;
+	ASSERT_EQUAL(expected, hodBot);
+	ASSERT_EQUAL(5, widht);
+	ASSERT_EQUAL(exit, i);
+}
