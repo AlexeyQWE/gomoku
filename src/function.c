@@ -173,7 +173,6 @@ int correct_entering(int menu, int settings)
 int main_menu()
 {
 	int menu = 0, settings = 0;
-	top_table_player(&menu);
 	system("clear");// УДАЛЯЕТ В ТЕРМИНАЛЕ ВСЕ НАПИСАННОЕ ВЫШЕ
 	set_display_atrib(BRIGHT);
 	set_display_atrib(F_RED);
@@ -187,6 +186,7 @@ int main_menu()
 	printf("\t\t|-|| |-|| |-|___/| |-|____/| |-|____/| |-\\___/-|/ \n");
 	printf("\t\t|_|/ |_|/ |_____|/ |______|/ |______|/ \\_______/  \n");
 	resetcolor();
+	top_table_player(&menu);
 	set_display_atrib(BRIGHT);
 	set_display_atrib(F_YELLOW);
 	printf("\n\n\t\t\t\t   GOMOKU\n\n\t\t\t\t   1.Играть\n\t\t\t\t   2.Настройки\n\t\t\t\t   3.Правила игры\n\t\t\t\t   4.Таблица лидеров\n\t\t\t\t   5.Выход\n\t\t\t\t   ");
@@ -856,7 +856,6 @@ void rules(int menu, int settings)
 }
 void table_name(int menu, int settings)
 {
-	struct top topPlayer[3];
 	struct winner tablname[15];
 	while(menu == 4){
 		system("clear");
@@ -870,17 +869,6 @@ void table_name(int menu, int settings)
 		printf("\t\t\t\t\t\t\t      || |\n");
 		printf("\t\t\t\t\t\t\t     ||___|\n");
 		top_table_player(&menu);
-		FILE *top;
-		top = fopen("data/hall/top_player", "r");
-		printf("\n\t\t\t\t\t\t┌───────ТОП─────ИГРОКОВ─────────┐");
-		printf("\n\t\t\t\t\t\t│№    Имя\tКоличество очков│");
-		for(int i = 0; i < 3; i++){
-			if(fscanf (top, "%s%u", topPlayer[i].name, &(topPlayer[i].num_moves)) != EOF){
-				printf("\n\t\t\t\t\t\t│%d  - %s\t\t%u\t│", i + 1, topPlayer[i].name, topPlayer[i].num_moves);
-			}
-		}
-		printf("\n\t\t\t\t\t\t└───────────────────────────────┘");
-		fclose(top);
 
 		FILE *winTabl1;
 		FILE *winTabl2;
@@ -932,9 +920,9 @@ void top_table_player(int *menu)
     FILE *winTabl2;
     FILE *winTabl3;
 
-    winTabl1 = fopen("tabl_easy_bot", "r");
-    winTabl2 = fopen("tabl_medium_bot", "r");
-    winTabl3 = fopen("tabl_hard_bot", "r");
+    winTabl1 = fopen("data/hall/tabl_easy_bot", "r");
+    winTabl2 = fopen("data/hall/tabl_medium_bot", "r");
+    winTabl3 = fopen("data/hall/tabl_hard_bot", "r");
 
     for(int i = 0; i < 33; i++){
 	if(i < 10){
