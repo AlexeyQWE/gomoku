@@ -45,6 +45,25 @@ CTEST(testing_suite, entering_coord)
 	ASSERT_INTERVAL(1, 15, widht);
 }
 
+CTEST(testing_suite, fill_gameboard) 
+{
+	//GIVEN
+	char tableGame[16][16];
+	int limitMovesX = 50, limitMovesO = 50;
+
+	//WHEN
+	fill_gameboard(tableGame);
+	print_gameboard(tableGame, limitMovesX, limitMovesO);
+
+	//THEN
+	const char expected = '_';
+	for(int i = 0; i < 16; i++) {
+		for(int j = 0; j < 16; j++) {
+			ASSERT_EQUAL(expected, tableGame[i][j]);
+		}
+	}
+}
+
 CTEST(testing_suite, check_to_win) 
 {
 	//GIVEN
