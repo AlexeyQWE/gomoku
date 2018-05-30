@@ -4,14 +4,14 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 	int exit;
 	int j;
 	int left, right, down, up;
-	int rak;
+	/*int rak;
 	printf("сюда заходь 524");
-				scanf("%d", &rak);
+				scanf("%d", &rak);*/
 	// ПРОВЕРКА СЧЕТЧИКОВ, КОТОРЫЕ СЧИТАЛИСЬ ПРИ ПРОВЕРКЕ ХОДА ИГРОКА, ТО ЕСТЬ, ЕСЛИ ГДЕ-ТО СЧЕТЧИК БОЛЬШЕ, ТО ЗНАЧИТ БОТ БУДЕТ ХОДИТЬ ИМЕННО В ТОЙ ПЛОСКОСТИ
 	// НАПРИМЕР gorizontScore = 5  А ОСТАЛЬНЫЕ РАВНЫ ПО 1 (СЧЕТЧИКИ), ЗНАЧИТ ОН ПОЙДЕТ ИМЕННО ПО ПЛОСКОСТИ ГОРИЗОНТАЛИ (ВПРАВО ИЛИ ВЛЕВО БУДЕТ РЕШАТЬСЯ ДАЛЬШЕ)
 	if(playerScoreGorizont[8] >= playerScoreVertikal[8] && playerScoreGorizont[8] >= playerScoreLeftDiagonal[8] && playerScoreGorizont[8] >= playerScoreRightDiagonal[8] && *hodBot != 1){
-		printf("сюда заходь 529");
-				scanf("%d", &rak);
+		/*printf("сюда заходь 529");
+				scanf("%d", &rak);*/
 		left = widht - 4;
 		exit = left - 1;// СЧЕТЧИК ДЛЯ ВЫХОДА И ПОСЛЕДУЮЩЕГО ЦИКЛА for
 		if((playerScoreGorizont[8] - playerScoreGorizontLeft[8]) <= playerScoreGorizontLeft[8] || playerScoreGorizont[8] == playerScoreGorizontLeft[8] || playerScoreGorizont[8] == 3 || playerScoreGorizont[8] == 2){
@@ -27,8 +27,8 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 		}
 
 		if(*hodBot == 0){
-			printf("сюда заходь 546");
-				scanf("%d", &rak);
+			/*printf("сюда заходь 546");
+				scanf("%d", &rak);*/
 			right = widht + 4; 
 			exit = right + 1;
 			for(int i = widht + 1; i <= right; i++){
@@ -45,17 +45,17 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 	if(playerScoreVertikal[8] >= playerScoreGorizont[8] && playerScoreVertikal[8] >= playerScoreLeftDiagonal[8] && playerScoreVertikal[8] >= playerScoreRightDiagonal[8] && *hodBot != 1){
 		up = height - 4;
 		exit = up - 1;
-		printf("%d-----------------he\n", height);
+		/*printf("%d-----------------he\n", height);
 		printf("%d-----------------we\n", widht);
 		printf("сюда заходь 565");
-				scanf("%d", &rak);
+				scanf("%d", &rak);*/
 		if((playerScoreVertikal[8] - playerScoreVertikalLeft[8]) <= playerScoreVertikalLeft[8] || playerScoreVertikal[8] == playerScoreVertikalLeft[8]){
 			for(int i = height - 1; i >= up; i--){
 				if(i > 0 && i <= 15){
 					move_bot_vertical(choice, tableGame, &i, widht, &*hodBot, exit, &height);
 					if(*hodBot == 1){
-						printf("%d-----------------he\n", height);
-						printf("%d-----------------we\n", widht);
+						/*printf("%d-----------------he\n", height);
+						printf("%d-----------------we\n", widht);*/
 						hightAtakBot[2] = height;
 						weightAtakBot[2] = widht;
 					}
@@ -63,8 +63,8 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 			}
 		}
 		if(*hodBot == 0){
-			printf("сюда заходь 579");
-				scanf("%d", &rak);
+			/*printf("сюда заходь 579");
+				scanf("%d", &rak);*/
 			down = height + 4;
 			exit = down + 1;
 			for(int i = height + 1; i <= down; i++){
@@ -84,8 +84,8 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 		down = height + 4;
 		exit = up - 1;
 		j = 0;
-		printf("сюда заходь 599");
-				scanf("%d", &rak);
+		/*printf("сюда заходь 599");
+				scanf("%d", &rak);*/
 		// leftDiagonalSchet - leftDiagonalSchetLeft --- ЭТО СЧЕТЧИК КАК БЫ ВЕРХНЕЙ ПОЛОВИНЫ ЛЕВОЙ ДИАГОНАЛИ, leftDiagonalSchetLeft ---- ЭТО СЧЕТЧИК НИЖНЕЙ ЛЕВОЙ ДИАГОНАЛИ
 		if(((playerScoreLeftDiagonal[8] - playerScoreLeftDiagonalLeft[8]) > playerScoreLeftDiagonalLeft[8] || playerScoreLeftDiagonal[8] == playerScoreLeftDiagonalLeft[8]) && (widht - playerScoreLeftDiagonal[8]) > 0) {
 			for(int i = height - 1; i >= up; i--){//4 1
@@ -100,8 +100,8 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 			}
 		}
 		if(*hodBot == 0 && (height + playerScoreLeftDiagonal[8] - playerScoreLeftDiagonalLeft[8]) <= 15){
-			printf("сюда заходь 615");
-				scanf("%d", &rak);
+			/*printf("сюда заходь 615");
+				scanf("%d", &rak);*/
 			exit = down + 1;
 			j = 0;
 			for(int i = height + 1; i <= down; i++){
@@ -122,8 +122,8 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 		down = height + 4;
 		exit = up - 1;
 		j = 0;
-		printf("сюда заходь 637");
-				scanf("%d", &rak);
+		/*printf("сюда заходь 637");
+				scanf("%d", &rak);*/
 		// rightDiagonalSchet - rightDiagonalSchetLeft --- ЭТО СЧЕТЧИК КАК БЫ НИЖНЕЙ ПОЛОВИНЫ ПРАВОЙ ДИАГОНАЛИ, rightDiagonalSchetLeft ---- ЭТО СЧЕТЧИК ВЕРХНЕЙ ПРАВОЙ ДИАГОНАЛИ
 		if(((playerScoreRightDiagonal[8] - playerScoreRightDiagonalLeft[8]) > playerScoreRightDiagonalLeft[8] || playerScoreRightDiagonal[8] == playerScoreRightDiagonal[8]) && (widht + 1) != 16){
 			for(int i = height - 1; i >= up; i--){
@@ -138,8 +138,8 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 			}
 		}
 		if(*hodBot == 0){
-			printf("сюда заходь 653");
-				scanf("%d", &rak);
+			/*printf("сюда заходь 653");
+				scanf("%d", &rak);*/
 			exit = down + 1;
 			j = 0;
 			for(int i = height + 1; i <= down; i++){// 6 > 9

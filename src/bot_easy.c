@@ -5,7 +5,7 @@ void move_bot_easy(int level, char tableGame[TABLE_Y][TABLE_Y], int choice, int 
 {
 	int widhtBot[8] = {'\0'};
 	int heightBot[8] = {'\0'};
-	int menu;
+	/*int menu;*/
 	srand(time(NULL));
 	/*printf("сюда заходь 991");
 	scanf("%d", &menu);*/
