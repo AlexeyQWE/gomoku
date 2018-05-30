@@ -507,7 +507,7 @@ int main()
 		}
 
 		if(menu == 4){// ЗАЛ СЛАВЫ
-			table_name(menu, settings, tablname);
+			table_name(menu, settings);
 		}
 
 		if(menu == 5){// ВЫХОД

@@ -853,48 +853,70 @@ void rules(int menu, int settings)
 
 	}
 }
-void table_name(int menu, int settings, struct winner tablname[15])
+void table_name(int menu, int settings)
 {
-	
+	struct top topPlayer[3];
+	struct winner tablname[15];
 	while(menu == 4){
 		system("clear");
-		set_display_atrib(BRIGHT);
-		    set_display_atrib(F_YELLOW);	
-		printf("\t\t\t\t       __\n");
-		printf("\t\t\t\t      / /\\\n");
-		printf("\t\t\t\t ____/_/  \\___\n");
-		printf("\t\t\t\t | |   ___   |\n");
-		printf("\t\t\t\t  \\ \\  \\_/  /\n");
-		printf("\t\t\t\t   \\_\\_   _/\n");
-		printf("\t\t\t\t     \\ \\ /\n");
-		printf("\t\t\t\t      || |\n");
-		printf("\t\t\t\t     ||___|\n");
-		FILE *winTabl;
-		winTabl = fopen("data/hall/LeadTable.txt", "r");
-		set_display_atrib(BLINK);
-		    set_display_atrib(F_YELLOW);
-		printf("\n\t\t\t\t№    Имя\tКоличество ходов");
-		resetcolor();
+		printf("\t\t\t\t\t\t\t       __\n");
+		printf("\t\t\t\t\t\t\t      / /\\\n");
+		printf("\t\t\t\t\t\t\t ____/_/  \\___\n");
+		printf("\t\t\t\t\t\t\t | |   ___   |\n");
+		printf("\t\t\t\t\t\t\t  \\ \\  \\_/  /\n");
+		printf("\t\t\t\t\t\t\t   \\_\\_   _/\n");
+		printf("\t\t\t\t\t\t\t     \\ \\ /\n");
+		printf("\t\t\t\t\t\t\t      || |\n");
+		printf("\t\t\t\t\t\t\t     ||___|\n");
+		FILE *top;
+		top = fopen("data/hall/top_player", "r");
+		printf("\n\t\t\t\t\t\t┌───────ТОП─────ИГРОКОВ─────────┐");
+		printf("\n\t\t\t\t\t\t│№    Имя\tКоличество очков│");
+		for(int i = 0; i < 3; i++){
+			if(fscanf (top, "%s%u", topPlayer[i].name, &(topPlayer[i].num_moves)) != EOF){
+				printf("\n\t\t\t\t\t\t│%d  - %s\t\t%u\t│", i + 1, topPlayer[i].name, topPlayer[i].num_moves);
+			}
+		}
+		printf("\n\t\t\t\t\t\t└───────────────────────────────┘");
+		fclose(top);
 
-		for(int i = 1; i <= 10; i++){
-			    if(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
-				if(i < 10){
-				    set_display_atrib(BLINK);
-					    set_display_atrib(F_YELLOW);
-					printf("\n\t\t\t\t%d  - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves);
-				    resetcolor();
+		FILE *winTabl1;
+		FILE *winTabl2;
+		FILE *winTabl3;
+
+		winTabl1 = fopen("data/hall/tabl_easy_bot", "r");
+		winTabl2 = fopen("data/hall/tabl_medium_bot", "r");
+		winTabl3 = fopen("data/hall/tabl_hard_bot", "r");
+		printf("\n\n\t┌───────────ЛЕГКИЙ──────────────┐\t┌──────────СРЕДНИЙ──────────────┐\t┌───────────ТЯЖЕЛЫЙ─────────────┐");
+		printf("\n\t│№    Имя\tКоличество ходов│\t│№    Имя\tКоличество ходов│\t│№    Имя\tКоличество ходов│");
+
+		for(int i = 0; i < 10; i++){
+			if(fscanf (winTabl1, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+				if(i < 9){
+					printf("\n\t│%d  - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+					if(fscanf (winTabl2, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+						printf("\t│%d  - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+						if(fscanf (winTabl3, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+							printf("\t│%d  - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+						}
+					}
 				}else{
-				    set_display_atrib(BLINK);
-					    set_display_atrib(F_YELLOW);
-					printf("\n\t\t\t\t%d - %s\t\t%u", i, tablname[i].name, tablname[i].num_moves); 
-				    resetcolor();
+					printf("\n\t│%d - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+					if(fscanf (winTabl2, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+						printf("\t│%d - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+						if(fscanf (winTabl3, "%s%u\t│", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+							printf("\t│%d - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+						}
+					} 
 				}
 			}
-		    }
-		fclose(winTabl);
-		set_display_atrib(BLINK);
-		    set_display_atrib(F_YELLOW);
-		printf("\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+		}
+		printf("\n\t└───────────────────────────────┘\t└───────────────────────────────┘\t└───────────────────────────────┘");
+		printf("\n      └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+		fclose(winTabl1);
+		fclose(winTabl2);
+		fclose(winTabl3);
+		printf("\n\n\t\t\t\t\t\t\t1.Выход в меню\n\t\t\t\t\t\t\t");
 		menu = 0;
 		menu = correct_entering(menu, settings);
 	}

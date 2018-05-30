@@ -37,6 +37,10 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 		int num_moves;// ХРАНИТ КОЛИЧЕСТВО ХОДОВ ПОБЕДИТЕЛЯ
 	};
 
+	struct top{// ИСПОЛЬЗУЕТСЯ ДЛЯ ВЫВОДА ТАЛБИЦЫ ЛИДЕРОВ НА СТРАНИЦЕ ТАБЛИЦА ЛИДЕРОВ
+		char name[20];// ХРАНИТ ИМЕНА ПОБЕДИТЕЛЕЙ ИЗ ФАЙЛА
+		unsigned num_moves;// ХРАНИТ КОЛИЧЕСТВО ХОДОВ ЗА КОТОРОЕ ПОБЕДИЛ ПОБЕДИТЕЛЬ
+	};
 
 	int correct_entering(int menu, int settings);
 
@@ -84,6 +88,6 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 	
 	void rules(int menu, int settings);
 	
-	void table_name(int menu, int settings, struct winner tablname[15]);
+	void table_name(int menu, int settings);
 
 	void easter_egg(int menu, int settings);
