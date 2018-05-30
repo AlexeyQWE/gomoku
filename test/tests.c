@@ -361,10 +361,12 @@ CTEST(testing_suite,move_bot_gotizont)
 	int choice = 1, hodBot = 0, height = 6, widht = 6, exit = 1, i = 5;
 
 	//WHEN
-	move_bot_gotizont(choice, tableGame, &i, height, &hodBot, exit, &widht);
+	const int result = move_bot_gotizont(choice, tableGame, &i, height, &hodBot, exit, &widht);
 
 	//THEN
 	const int expected = 1;
+	const int expected1 = 0;
+	ASSERT_EQUAL(expected1, result);
 	ASSERT_EQUAL(expected, hodBot);
 	ASSERT_EQUAL(5, widht);
 	ASSERT_EQUAL(exit, i);
@@ -383,11 +385,36 @@ CTEST(testing_suite,move_bot_vertical)
 	int choice = 1, hodBot = 0, height = 6, widht = 6, exit = 1, i = 5;
 
 	//WHEN
-	move_bot_vertical(choice, tableGame, &i, widht, &hodBot, exit, &height);
+	const int result = move_bot_vertical(choice, tableGame, &i, widht, &hodBot, exit, &height);
+
+	//THEN
+	const int expected = 1;
+	const int expected1 = 0;
+	ASSERT_EQUAL(expected1, result);
+	ASSERT_EQUAL(expected, hodBot);
+	ASSERT_EQUAL(5, height);
+	ASSERT_EQUAL(exit, i);
+}
+
+CTEST(testing_suite, move_bot_diagonal_minus) 
+{
+	//GIVEN
+	char tableGame[16][16];
+	for(int i = 0; i < TABLE_Y; i++){
+		for(int j = 0; j < TABLE_Y; j++){
+			tableGame[i][j] = '_';
+		}
+	}
+	tableGame[6][6] = 'X';
+	int choice = 1, hodBot = 0, height = 6, widht = 6, exit = 1, i = 5, j = 1;
+
+	//WHEN
+	move_bot_diagonal_minus(j, choice, tableGame, &i, &widht, &hodBot, exit, &height);
 
 	//THEN
 	const int expected = 1;
 	ASSERT_EQUAL(expected, hodBot);
 	ASSERT_EQUAL(5, height);
+	ASSERT_EQUAL(5, widht);
 	ASSERT_EQUAL(exit, i);
 }
