@@ -301,3 +301,40 @@ CTEST(testing_suite, move_bot_easy)
 	ASSERT_INTERVAL(0, 1, winO);
 
 }
+
+CTEST(testing_suite, move_bot_defender) 
+{
+	//GIVEN
+	int choice = 1, hodBot = 0, height = 6, widht = 6;
+	char tableGame[16][16];
+	for(int i = 0; i < TABLE_Y; i++){
+		for(int j = 0; j < TABLE_Y; j++){
+			tableGame[i][j] = '_';
+		}
+	}
+	tableGame[6][6] = 'X';
+	int playerScoreGorizont[9] = {'\0'};
+	int playerScoreVertikal[9] = {'\0'};
+	int playerScoreLeftDiagonal[9] = {'\0'};
+	int playerScoreRightDiagonal[9] = {'\0'};
+	int playerScoreGorizontLeft[9] = {'\0'};
+	int playerScoreVertikalLeft[9] = {'\0'};
+	int playerScoreLeftDiagonalLeft[9] = {'\0'};
+	int playerScoreRightDiagonalLeft[9] = {'\0'};
+	int hightAtakBot[9] = {0,0,0,0,0,0,0,0,6};
+	int weightAtakBot[9] = {0,0,0,0,0,0,0,0,6};
+
+	//WHEN
+	move_bot_defender(tableGame, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, 
+		playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, &hodBot, choice, height, widht, hightAtakBot, weightAtakBot);
+
+	//THEN
+
+	const int expended1 = 1;
+	const int expended2 = 6;
+	ASSERT_EQUAL(expended1, choice);
+	ASSERT_EQUAL(expended2, height);
+	ASSERT_EQUAL(expended2, widht);
+	ASSERT_EQUAL(expended1, hodBot);
+	ASSERT_INTERVAL(0, 1, hodBot);
+}
