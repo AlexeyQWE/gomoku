@@ -448,3 +448,36 @@ CTEST(testing_suite, move_bot_diagonal_plus)
 
 
 //bot_attacking.c
+
+CTEST(testing_suite, move_bot_attacking) 
+{
+	//GIVEN
+	int choice = 1, hodBot = 0, height = 6, widht = 6, playerScore = 0, botScore = 0;
+
+	char tableGame[16][16];
+	for(int i = 0; i < TABLE_Y; i++){
+		for(int j = 0; j < TABLE_Y; j++){
+			tableGame[i][j] = '_';
+		}
+	}
+	tableGame[6][6] = 'X';
+
+	int botScoreGorizont[9] = {'\0'};
+	int botScoreVertikal[9] = {'\0'};
+	int botScoreLeftDiagonal[9] = {'\0'};
+	int botScoreRightDiagonal[9] = {'\0'};
+	int botScoreGorizontLeft[9] = {'\0'};
+	int botScoreVertikalLeft[9] = {'\0'};
+	int botScoreLeftDiagonalLeft[9] = {'\0'};
+	int botScoreRightDiagonalLeft[9] = {'\0'};
+	int hightAtakBot[9] = {0,0,0,0,0,0,0,0,6};
+	int weightAtakBot[9] = {0,0,0,0,0,0,0,0,6};
+
+	//WHEN
+	move_bot_attacking(tableGame, botScore, playerScore, choice, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, 
+		botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, hightAtakBot, weightAtakBot, height, widht, &hodBot);
+	
+	//THEN
+	const int expected = 0;
+	ASSERT_EQUAL(expected, hodBot);
+}
