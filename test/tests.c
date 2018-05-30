@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <prototypes.h>
 
+#define TABLE_Y 16
+
 CTEST(testing_suite, main_menu) 
 {
 	//WHEN
@@ -32,7 +34,7 @@ CTEST(testing_suite, game_settings)
 CTEST(testing_suite, fill_gameboard) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	int limitMovesX = 50, limitMovesO = 50;
 
 	//WHEN
@@ -41,8 +43,8 @@ CTEST(testing_suite, fill_gameboard)
 
 	//THEN
 	const char expected = '_';
-	for(int i = 0; i < 16; i++) {
-		for(int j = 0; j < 16; j++) {
+	for(int i = 0; i < TABLE_Y; i++) {
+		for(int j = 0; j < TABLE_Y; j++) {
 			ASSERT_EQUAL(expected, tableGame[i][j]);
 		}
 	}
@@ -51,7 +53,7 @@ CTEST(testing_suite, fill_gameboard)
 CTEST(testing_suite, entering_coord) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	int choice = 0, height = 0, widht = 0, winExit = 0;
 
 	//WHEN
@@ -64,10 +66,40 @@ CTEST(testing_suite, entering_coord)
 	ASSERT_INTERVAL(1, 15, widht);
 }
 
+CTEST(testing_suite, prioritization) 
+{
+	//GIVEN
+	int level = 2, playerScore = 0, dopusk = 0, outPutReplics = 0;
+	int playerScoreGorizont[9] = {'\0'};
+	int playerScoreVertikal[9] = {'\0'};
+	int playerScoreLeftDiagonal[9] = {'\0'};
+	int playerScoreRightDiagonal[9] = {'\0'};
+	int playerScoreGorizontLeft[9] = {'\0'};
+	int playerScoreVertikalLeft[9] = {'\0'};
+	int playerScoreLeftDiagonalLeft[9] = {'\0'};
+	int playerScoreRightDiagonalLeft[9] = {'\0'};
+	int hightStepPlayer[9] = {'\0'};
+	int weightStepPlayer[9] = {'\0'};
+
+	//WHEN
+	prioritization(level, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, 
+		playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, &playerScore, hightStepPlayer, weightStepPlayer, dopusk, 
+		&outPutReplics);
+
+	//THEN
+	const int expected1 = 2;
+	const int expected2 = 0;
+	ASSERT_EQUAL(expected1, level);
+	ASSERT_EQUAL(expected2, dopusk);
+	ASSERT_INTERVAL(0, 10, playerScore);
+	ASSERT_INTERVAL(0, 10, outPutReplics);
+}
+
+
 CTEST(testing_suite, check_to_win) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	int choice = 0, widht = 1, height = 1, winExit = 0, winX = 0, winO = 0;
 	int playerScoreGorizont[9] = {'\0'};
 	int playerScoreVertikal[9] = {'\0'};
@@ -120,7 +152,7 @@ CTEST(testing_suite, check_to_win)
 CTEST(testing_suite, check_to_win_bot) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	int choice = 0, widht = 1, height = 1, winExit = 0, winX = 0, winO = 0;
 	int botScoreGorizont[9] = {'\0'};
 	int botScoreVertikal[9] = {'\0'};
