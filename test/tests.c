@@ -13,22 +13,16 @@ CTEST(testing_suite, main_menu)
 	ASSERT_INTERVAL(0, 5, result);
 }
 
-CTEST(testing_suite, game_settings) 
+CTEST(testing_suite, correct_entering) 
 {
 	//GIVEN
-	int  level = 2, choice = 1, bot = 1, settings = 0, otladka = 1;
+	int menu = 1, settings = 0;
 
 	//WHEN
-	game_settings(2, &settings, &level, &choice, &bot, &otladka);
+	const int result = correct_entering(menu, settings);
 
-	//THEN
-	const int expected = 5;
-	ASSERT_EQUAL(expected, settings); //Проверка на то, что параметр settings, по завершению работы функции, будет равен 5
-	ASSERT_INTERVAL(0, 3, level);   //Проверка на то, что параметр level, по завершению работы функциии, будет в диапозоне от 0 до 3
-	ASSERT_INTERVAL(0, 1, choice);   //Проверка на то, что параметр choice, по завершению работы функциии, будет в диапозоне от 0 до 1
-	ASSERT_INTERVAL(0, 1, bot);		//Проверка на то, что параметр bot, по завершению работы функциии, будет в диапозоне от 0 до 1
-	ASSERT_INTERVAL(0, 1, otladka);  //Проверка на то, что параметр otladka, по завершению работы функциии, будет в диапозоне от 0 до 1
-
+	//THEN 
+	ASSERT_INTERVAL(0, 15, result);
 }
 
 CTEST(testing_suite, fill_gameboard) 
@@ -128,7 +122,6 @@ CTEST(testing_suite, control)
 
 }
 
-
 CTEST(testing_suite, check_to_win) 
 {
 	//GIVEN
@@ -227,6 +220,24 @@ CTEST(testing_suite, checkWwin)
 	ASSERT_INTERVAL(0, 1, winX);
 	ASSERT_INTERVAL(0, 1, winO);
 	ASSERT_INTERVAL(0, 5, score);
+}
+
+CTEST(testing_suite, game_settings) 
+{
+	//GIVEN
+	int  level = 2, choice = 1, bot = 1, settings = 0, otladka = 1;
+
+	//WHEN
+	game_settings(2, &settings, &level, &choice, &bot, &otladka);
+
+	//THEN
+	const int expected = 5;
+	ASSERT_EQUAL(expected, settings); //Проверка на то, что параметр settings, по завершению работы функции, будет равен 5
+	ASSERT_INTERVAL(0, 3, level);   //Проверка на то, что параметр level, по завершению работы функциии, будет в диапозоне от 0 до 3
+	ASSERT_INTERVAL(0, 1, choice);   //Проверка на то, что параметр choice, по завершению работы функциии, будет в диапозоне от 0 до 1
+	ASSERT_INTERVAL(0, 1, bot);		//Проверка на то, что параметр bot, по завершению работы функциии, будет в диапозоне от 0 до 1
+	ASSERT_INTERVAL(0, 1, otladka);  //Проверка на то, что параметр otladka, по завершению работы функциии, будет в диапозоне от 0 до 1
+
 }
 
 CTEST(testing_suite, rules) 
