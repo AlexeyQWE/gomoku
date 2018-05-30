@@ -4,6 +4,8 @@
 
 #define TABLE_Y 16
 
+//function.c
+
 CTEST(testing_suite, main_menu) 
 {
 	//WHEN
@@ -267,6 +269,10 @@ CTEST(testing_suite, table_name)
 	ASSERT_EQUAL(expended, menu);
 }
 
+
+
+//bot_easy.c
+
 CTEST(testing_suite, move_bot_easy) 
 {
 	//GIVEN
@@ -301,6 +307,9 @@ CTEST(testing_suite, move_bot_easy)
 	ASSERT_INTERVAL(0, 1, winO);
 
 }
+
+
+//bot_defender.c
 
 CTEST(testing_suite, move_bot_defender) 
 {
@@ -358,5 +367,27 @@ CTEST(testing_suite,move_bot_gotizont)
 	const int expected = 1;
 	ASSERT_EQUAL(expected, hodBot);
 	ASSERT_EQUAL(5, widht);
+	ASSERT_EQUAL(exit, i);
+}
+
+CTEST(testing_suite,move_bot_vertical) 
+{
+	//GIVEN
+	char tableGame[16][16];
+	for(int i = 0; i < TABLE_Y; i++){
+		for(int j = 0; j < TABLE_Y; j++){
+			tableGame[i][j] = '_';
+		}
+	}
+	tableGame[6][6] = 'X';
+	int choice = 1, hodBot = 0, height = 6, widht = 6, exit = 1, i = 5;
+
+	//WHEN
+	move_bot_vertical(choice, tableGame, &i, widht, &hodBot, exit, &height);
+
+	//THEN
+	const int expected = 1;
+	ASSERT_EQUAL(expected, hodBot);
+	ASSERT_EQUAL(5, height);
 	ASSERT_EQUAL(exit, i);
 }
