@@ -242,3 +242,16 @@ CTEST(testing_suite, rules)
 	ASSERT_EQUAL(expended, menu);
 }
 
+CTEST(testing_suite, table_name) 
+{
+	//GIVEN
+	struct winner tablname[15];
+	int menu = 4, settings = 0;
+
+	//WHEN
+	table_name(menu, settings, tablname);
+
+	//THEN 
+	const int expended = 4;
+	ASSERT_EQUAL(expended, menu);
+}
