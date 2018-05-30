@@ -27,7 +27,7 @@ CTEST(testing_suite, correct_entering)
 	ASSERT_INTERVAL(0, 15, result);
 }
 
-CTEST(testing_suite, fill_gameboard) 
+CTEST(testing_suite, fill_and_print_gameboard) 
 {
 	//GIVEN
 	char tableGame[TABLE_Y][TABLE_Y];
@@ -39,11 +39,14 @@ CTEST(testing_suite, fill_gameboard)
 
 	//THEN
 	const char expected = '_';
+	const int expected1 = 50;
 	for(int i = 0; i < TABLE_Y; i++) {
 		for(int j = 0; j < TABLE_Y; j++) {
 			ASSERT_EQUAL(expected, tableGame[i][j]);
 		}
 	}
+	ASSERT_EQUAL(expected1, limitMovesX);
+	ASSERT_EQUAL(expected1, limitMovesO);
 }
 
 CTEST(testing_suite, entering_coord) 
