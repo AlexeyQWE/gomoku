@@ -95,6 +95,39 @@ CTEST(testing_suite, prioritization)
 	ASSERT_INTERVAL(0, 10, outPutReplics);
 }
 
+CTEST(testing_suite, control) 
+{
+	//GIVEN
+	char tableGame[16][16];
+
+	for(int i = 0; i < TABLE_Y; i++){
+		for(int j = 0; j < TABLE_Y; j++){
+			tableGame[i][j] = '_';
+		}
+	}
+	tableGame[6][6] = 'X';
+
+	int exit = 0, widht = 6, i = widht - 1, choice = 0, score = 0, height = 6, spaceFinder = 0, zamok = 0, check = 0;
+
+	//WHEN
+	control(exit, i, choice, tableGame, height, &score, &spaceFinder, height, height, i - 1, i + 1, &check, i, &zamok);
+
+	//THEN
+	const int expended1 = 0;
+	const int expended2 = 6;
+	const int expended3 = 5;
+	ASSERT_EQUAL(expended1, exit);
+	ASSERT_EQUAL(expended2, widht);
+	ASSERT_EQUAL(expended2, height);
+	ASSERT_EQUAL(expended3, i);
+	ASSERT_EQUAL(expended1, choice);
+	ASSERT_INTERVAL(0, 5, score);
+	ASSERT_INTERVAL(0, 1, spaceFinder);
+	ASSERT_INTERVAL(0, 1, zamok);
+	ASSERT_INTERVAL(0, 1, check);
+
+}
+
 
 CTEST(testing_suite, check_to_win) 
 {
