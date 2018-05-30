@@ -481,3 +481,28 @@ CTEST(testing_suite, move_bot_attacking)
 	const int expected = 0;
 	ASSERT_EQUAL(expected, hodBot);
 }
+
+CTEST(testing_suite,step_attack_bot_gorizont) 
+{
+	//GIVEN
+	char tableGame[16][16];
+	for(int i = 0; i < TABLE_Y; i++){
+		for(int j = 0; j < TABLE_Y; j++){
+			tableGame[i][j] = '_';
+		}
+	}
+	tableGame[6][6] = 'X';
+
+	int choice = 1, hodBot = 0, height = 6, widht = 6, exit = 1, i = 5;
+
+	//WHEN
+	const int result = step_attack_bot_gorizont(choice, tableGame, &i, height, &hodBot, exit, &widht);
+
+	//THEN
+	const int expected = 1;
+	const int expected1 = 0;
+	ASSERT_EQUAL(expected1, result);
+	ASSERT_EQUAL(expected, hodBot);
+	ASSERT_EQUAL(5, widht);
+	ASSERT_EQUAL(exit, i);
+}
