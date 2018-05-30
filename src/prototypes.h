@@ -89,5 +89,7 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 	void rules(int menu, int settings);
 	
 	void table_name(int menu, int settings);
-
+	
+	void top_table_player(int *menu);
+	
 	void easter_egg(int menu, int settings);
