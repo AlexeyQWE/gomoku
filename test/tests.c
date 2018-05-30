@@ -29,22 +29,6 @@ CTEST(testing_suite, game_settings)
 
 }
 
-CTEST(testing_suite, entering_coord) 
-{
-	//GIVEN
-	char tableGame[16][16];
-	int choice = 0, height = 0, widht = 0, winExit = 0;
-
-	//WHEN
-	entering_coord( choice,  winExit,  &height,  &widht, tableGame);
-
-	//THEN
-	ASSERT_INTERVAL(0, 1, choice);
-	ASSERT_INTERVAL(0, 1, winExit);
-	ASSERT_INTERVAL(1, 15, height);
-	ASSERT_INTERVAL(1, 15, widht);
-}
-
 CTEST(testing_suite, fill_gameboard) 
 {
 	//GIVEN
@@ -62,6 +46,22 @@ CTEST(testing_suite, fill_gameboard)
 			ASSERT_EQUAL(expected, tableGame[i][j]);
 		}
 	}
+}
+
+CTEST(testing_suite, entering_coord) 
+{
+	//GIVEN
+	char tableGame[16][16];
+	int choice = 0, height = 0, widht = 0, winExit = 0;
+
+	//WHEN
+	entering_coord( choice,  winExit,  &height,  &widht, tableGame);
+
+	//THEN
+	ASSERT_INTERVAL(0, 1, choice);
+	ASSERT_INTERVAL(0, 1, winExit);
+	ASSERT_INTERVAL(1, 15, height);
+	ASSERT_INTERVAL(1, 15, widht);
 }
 
 CTEST(testing_suite, check_to_win) 
@@ -115,6 +115,36 @@ CTEST(testing_suite, check_to_win)
 	ASSERT_DATA(EplayerScoreRightDiagonalLeft, 9, playerScoreRightDiagonalLeft, 9);
 	ASSERT_DATA(EhightStepPlayer, 9, hightStepPlayer, 9);
 	ASSERT_DATA(EweightStepPlayer, 9,weightStepPlayer, 9);*/
+}
+
+CTEST(testing_suite, check_to_win_bot) 
+{
+	//GIVEN
+	char tableGame[16][16];
+	int choice = 0, widht = 1, height = 1, winExit = 0, winX = 0, winO = 0;
+	int botScoreGorizont[9] = {'\0'};
+	int botScoreVertikal[9] = {'\0'};
+	int botScoreLeftDiagonal[9] = {'\0'};
+	int botScoreRightDiagonal[9] = {'\0'};
+	int botScoreGorizontLeft[9] = {'\0'};
+	int botScoreVertikalLeft[9] = {'\0'};
+	int botScoreLeftDiagonalLeft[9] = {'\0'};
+	int botScoreRightDiagonalLeft[9] = {'\0'};
+	int hightAtakBot[9] = {'\0'};
+	int weightAtakBot[9] = {'\0'};
+
+	//WHEN
+	check_to_win_bot(tableGame, choice, widht, height, winExit, &winX, &winO, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, 
+					botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, hightAtakBot, weightAtakBot);
+
+	//THEN
+	const int expected = 0;
+	ASSERT_INTERVAL(0, 1, choice);
+	ASSERT_INTERVAL(1, 15, widht);
+	ASSERT_INTERVAL(1, 15, height);
+	ASSERT_EQUAL(expected, winExit);
+	ASSERT_EQUAL(expected, winX);
+	ASSERT_EQUAL(expected, winO);
 }
 
 CTEST(testing_suite, checkWwin) 
