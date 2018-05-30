@@ -228,3 +228,17 @@ CTEST(testing_suite, checkWwin)
 	ASSERT_INTERVAL(0, 1, winO);
 	ASSERT_INTERVAL(0, 5, score);
 }
+
+CTEST(testing_suite, rules) 
+{
+	//GIVEN
+	int menu = 3, settings = 0;
+
+	//WHEN
+	rules(menu, settings);
+
+	//THEN 
+	const int expended = 3;
+	ASSERT_EQUAL(expended, menu);
+}
+
