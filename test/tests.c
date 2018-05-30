@@ -266,3 +266,38 @@ CTEST(testing_suite, table_name)
 	const int expended = 4;
 	ASSERT_EQUAL(expended, menu);
 }
+
+CTEST(testing_suite, move_bot_easy) 
+{
+	//GIVEN
+	char tableGame[16][16];
+
+	for(int i = 0; i < TABLE_Y; i++){
+		for(int j = 0; j < TABLE_Y; j++){
+			tableGame[i][j] = '_';
+		}
+	}
+	tableGame[6][6] = 'X';
+
+	int level = 2, choice = 1, hodBot = 0, height = 6, widht = 6, winX = 0, winO = 0;
+	int hightAtakBot[9] = {'\0'};
+	int weightAtakBot[9] = {'\0'};
+
+	//WNEN
+	move_bot_easy(level, tableGame, choice, hightAtakBot, weightAtakBot, &hodBot, &winX, &winO, height, widht);
+
+	//THEN
+
+	const int expended1 = 2;
+	const int expended2 = 1;
+	const int expended3 = 6;
+	ASSERT_EQUAL(expended1, level);
+	ASSERT_EQUAL(expended2, choice);
+	ASSERT_EQUAL(expended3, height);
+	ASSERT_EQUAL(expended3, widht);
+	ASSERT_EQUAL(expended2, hodBot);
+	ASSERT_INTERVAL(0, 1, hodBot);
+	ASSERT_INTERVAL(0, 1, winX);
+	ASSERT_INTERVAL(0, 1, winO);
+
+}
