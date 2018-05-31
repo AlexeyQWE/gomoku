@@ -23,17 +23,36 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 
 #define TABLE_Y 16
 
+	struct winner{// ИСПОЛЬЗУЕТСЯ ДЛЯ ВЫВОДА ТАБЛИЦЫ ЛИДЕРОВ НА СТРАНИЦЕ ТАБЛИЦА ЛИДЕРОВ
+    	char name[20];// ХРАНИТ ИМЕНА ПОБЕДИТЕЛЕЙ ИЗ ФАЙЛА
+    	unsigned num_moves;// ХРАНИТ КОЛИЧЕСТВО ХОДОВ ЗА КОТОРОЕ ПОБЕДИЛ ПОБЕДИТЕЛЬ
+	};
+
+	struct Replica{// ИСПОЛЬЗУЕТСЯ ВО ВРЕМЯ ИГРЫ
+    	char replics[100];// ХРАНИТ РЕПЛИКИ БОТА
+	};
+
+	struct afterVictory{// ИСПОЛЬЗУЕТСЯ ВО ВРЕМЯ ИГРЫ
+		char name[20];// ХРАНИТ ИМЯ ПОБЕДИТЕЛЯ
+		int num_moves;// ХРАНИТ КОЛИЧЕСТВО ХОДОВ ПОБЕДИТЕЛЯ
+	};
+
+	struct top{// ИСПОЛЬЗУЕТСЯ ДЛЯ ВЫВОДА ТАЛБИЦЫ ЛИДЕРОВ НА СТРАНИЦЕ ТАБЛИЦА ЛИДЕРОВ
+		char name[20];// ХРАНИТ ИМЕНА ПОБЕДИТЕЛЕЙ ИЗ ФАЙЛА
+		unsigned num_moves;// ХРАНИТ КОЛИЧЕСТВО ХОДОВ ЗА КОТОРОЕ ПОБЕДИЛ ПОБЕДИТЕЛЬ
+	};
+
 	int correct_entering(int menu, int settings);
 
 	int main_menu(void);
 
 	void fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y]);	
 
-	void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y]);
+	void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y],int limitMovesO, int limitMovesX);
 
 	void entering_coord(int choice, int winExit, int *height, int *widht, char tableGame[TABLE_Y][TABLE_Y]);
 
-	void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *playerScore,  int *hightStepPlayer, int *weightStepPlayer, int dopusk);
+	void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *playerScore,  int *hightStepPlayer, int *weightStepPlayer, int dopusk, int *outPutReplics);
 
 	void check_to_win(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, int height, int winExit, int *winX, int *winO, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *hightStepPlayer, int *weightStepPlayer);
 
@@ -64,6 +83,14 @@ Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 	void control(int exit, int i, int choice, char tableGame[TABLE_Y][TABLE_Y], int coord, int *score, int *spaceFinder, int hightCoordLeft, int hightCoordRight, int weightCoordLeft, int weightCoordRight, int *check, int checkTwo, int *zamok);
 
 	int checkWin(int score, int choice, int *winX, int *winO);
+	
+	void rules(int menu, int settings);
+	
+	void table_name(int menu, int settings);
+	
+	void top_table_player(int *menu);
+	
+	void easter_egg(int menu, int settings);
 
 	void game_settings(int menu, int *settings, int *level, int *choice, int *bot, int *otladka);
 

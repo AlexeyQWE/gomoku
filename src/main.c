@@ -6,6 +6,10 @@ int main()
 	int i = 1, level = 2, choice = 0, bot = 1, otladka = 1;
 	int height = 0, widht = 0; // КООРДИНАТЫ
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
+	int outPutReplics = 0;
+	int limitMovesX, limitMovesO;
+	struct winner tablname[15];
+	struct afterVictory result[11];
 
 	while (i == 1) {
 		int hodBot = 0; // перменные для бота
@@ -13,9 +17,19 @@ int main()
 		int menu = 0;
 		int playerScore = 0;
 		menu = main_menu();
-	
 		if(menu == 1){// ИГРА
-			/*массивы для анализа ботом*/
+			struct Replica repl[67];
+			result[1].num_moves = 0;
+			result[2].num_moves = 0;
+			result[3].num_moves = 0;
+			FILE *replic;
+			replic = fopen("data/replic/replics.txt", "r");
+			i = 1;
+			for(int i = 1; i <= 68; i++)
+				fgets (repl[i].replics, 65, replic);
+
+			fclose(replic);
+				/*массивы для анализа ботом*/
 			int botScoreGorizont[9] = {'\0'};
 			int botScoreVertikal[9] = {'\0'};
 			int botScoreLeftDiagonal[9] = {'\0'};
@@ -51,8 +65,16 @@ int main()
 					}
 				}
 
-
-				print_gameboard(tableGame);
+				if(choice == 1 && bot == 1){
+					limitMovesX = 50 - result[1].num_moves;
+					limitMovesO = 50 - result[3].num_moves;
+				}else if(choice == 0 && bot == 1){
+					limitMovesX = 50 - result[3].num_moves;
+					limitMovesO = 50 - result[2].num_moves;
+				}else if(bot == 0){
+					limitMovesX = 50 - result[1].num_moves;
+					limitMovesO = 50 - result[2].num_moves;
+				}
 
 				
 				if(otladka == 1 && bot == 1){
@@ -62,12 +84,34 @@ int main()
 					printf("\nbotScore %d", botScore);
 				}
 				
+				print_gameboard(tableGame, limitMovesO, limitMovesX);
+
+				if(bot == 1){
+					if((result[1].num_moves == 0 || result[2].num_moves == 0) && result[3].num_moves == 0){
+						printf("\n\tBot: %s", repl[1 + rand()%(5 - 1 + 1)].replics);
+					}else if(outPutReplics == 0){
+						printf("\n\tBot: %s", repl[6 + rand()%(17 - 6 + 1)].replics);
+					}else if(outPutReplics == 1){
+						printf("\n\tBot: %s", repl[18 + rand()%(28 - 18 + 1)].replics);
+					}else if(outPutReplics == 2){
+						printf("\n\tBot: %s", repl[29 + rand()%(39 - 29 + 1)].replics);
+					}else if(outPutReplics == 3){
+						printf("\n\tBot: %s", repl[40 + rand()%(50 - 40 + 1)].replics);
+					}
+				}
+				outPutReplics = 0;
 
 				if(winX == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
 					printf("\n\n\t\t\tХ - ПОБЕДИЛ\a");
+					resetcolor();
 					winExit = 1;
 				}else if(winO == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
 					printf("\n\n\t\t\tO - ПОБЕДИЛ");
+					resetcolor();
 					winExit = 1;
 				}
 				if(winExit != 1){
@@ -90,13 +134,25 @@ int main()
 					scoreHandPlayer++;
 				}
 
+				// ПОДСЧЕТ ХОДОВ ИГРОКА
+				if(choice == 1){
+					tableGame[height][widht] = 'X';
+					result[1].num_moves++;
+					if(result[1].num_moves > 50)
+						winO = 1;
+				}else{
+					tableGame[height][widht] = 'O';
+					result[2].num_moves++;
+					if(result[2].num_moves > 50)
+						winX = 1;
+				}
+
 				if(winExit == 0){
 					print_gameboard(tableGame);
 					printf("\n\t\t");
 
 					sleep(1);
 				}
-
 
 				if((choice == 1 || choice == 0) && winExit != 1){
 					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, hightStepPlayer, weightStepPlayer);
@@ -106,7 +162,6 @@ int main()
 					prioritization(level, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, &playerScore, hightStepPlayer, weightStepPlayer, dopusk);
 				}
 
-				
 				if(otladka == 1 && bot == 1){
 					debugging_player(hightStepPlayer, weightStepPlayer, playerScoreGorizont,  playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft,  playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft);
 				}
@@ -125,7 +180,6 @@ int main()
 						choice = 1;
 					}
 				}
-
 
 				if((level == 2 || level == 0) && bot == 0){
 					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot, dopusk);
@@ -151,8 +205,26 @@ int main()
 					if(level == 1 || hodBot == 0){// ЕСЛИ БОТ НЕ СДЕЛАЛ ХОД, ТО ОН ПЕРЕХОДИТ К ЛЕГКОМУ БОТУ
 						move_bot_easy(level, tableGame, choice, hightAtakBot, weightAtakBot, &hodBot, &winX, &winO, height, widht);
 					}
+					
+					if(hodBot == 1){
+					    result[3].num_moves++;
+					    if(choice == 1 && result[3].num_moves > 50){
+						winX = 1;
+					    }else if(choice == 0 && result[3].num_moves > 50){
+						winO = 1;
+					    }
+					}
 
-					if(level == 2 && choice == 1 && dopusk == 0){
+					if(hodBot == 1){
+						result[3].num_moves++;
+						if(choice == 1 && result[3].num_moves > 50){
+							winX = 1;
+						}else if(choice == 0 && result[3].num_moves > 50){
+							winO = 1;
+						}
+					}
+
+					if((level == 2 || level == 0) && choice == 1 && dopusk == 0){
 						int triger = 0;
 						for(int p = 1; p < 9; p++){
 							if(hightAtakBot[p] == 0){
@@ -191,6 +263,7 @@ int main()
 
 				if((level == 2 || level == 1) && bot == 1){
 					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot, dopusk);
+
 				}
 
 				hodBot = 0;
@@ -202,8 +275,88 @@ int main()
 				}
 
 			}while(winExit != 1);
+			if(outPutReplics == 4 && bot == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
+					printf("\n\tBot: %s", repl[59 + rand()%(67 - 59 + 1)].replics);
+					resetcolor();
+			}
+			if(choice == 1 && bot == 1 && winO == 1){
+				    set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
+					printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
+					resetcolor();
+			}else if(choice == 0 && bot == 1 && winX == 1){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
+					printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
+					resetcolor();
+			}
+			if(bot == 1 && ((choice == 1 && winX == 1) || (choice == 0 && winO == 1))){
+				FILE *winTabl;
+				if(level == 0){
+					winTabl = fopen("data/hall/tabl_easy_bot", "r");
+				}else if(level == 1){
+					winTabl = fopen("data/hall/tabl_medium_bot", "r");
+				}else{
+					winTabl = fopen("data/hall/tabl_hard_bot", "r");
+				}
+				i = 1;
+				while(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF)
+					i++;
+				for(int k = 1; k <= 10; k++){
+					if(choice == 0){
+						result[1].num_moves = result[2].num_moves;
+					}
+					if(result[1].num_moves < tablname[k].num_moves){
+						tablname[k].num_moves = result[1].num_moves;
+						fclose(winTabl);
+						if(k == 1){
+							set_display_atrib(BRIGHT);
+							set_display_atrib(F_YELLOW);
+							printf("\n\t\t\tТы - Чемпион!\n\t\t\tТебе нет равных!");
+							resetcolor();
+						}else if(k == 2){
+							set_display_atrib(BRIGHT);
+							set_display_atrib(F_YELLOW);
+							printf("\n\t\t\tМолодец!\n\t\t\tТы занял 2 место, но надо еще потренироваться!");
+							resetcolor();
+						}else if(k == 3){
+							set_display_atrib(BRIGHT);
+							set_display_atrib(F_YELLOW);
+							printf("\n\t\t\tОго, ты вошел в тройку лучших из лучших!\n\t\t\tТы занимаешь почетное 3 место!");
+							resetcolor();
+						}
+						set_display_atrib(BRIGHT);
+						set_display_atrib(F_YELLOW);
+						printf("\n\t\t\tВведи свое имя, победитель, дабы история запомнила тебя!\n\t\t\t");
+						resetcolor();
+						scanf("%14s", tablname[k].name);
+						if(level == 0){
+							winTabl = fopen("data/hall/tabl_easy_bot", "r+");
+						}else if(level == 1){
+							winTabl = fopen("data/hall/tabl_medium_bot", "r+");
+						}else{
+						winTabl = fopen("data/hall/tabl_hard_bot", "r+");
+						}
+						for(int j = 1; j <= 10; j++){
+							fprintf(winTabl, "%s %u\n", tablname[j].name, tablname[j].num_moves);
+						}
+						k = 11;
+						fclose(winTabl);
+					}
+				}
+			}else if(bot == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
+				printf("\n\t\t\tТы жалок, тебя выиграл бот");
+				resetcolor();
+			}
 			menu = 10;
+			set_display_atrib(BLINK);
+			set_display_atrib(F_YELLOW);
 			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[2] - Выйти из игры\n");
+			resetcolor();
 			menu = correct_entering(menu, settings);// ФУНКЦИЯ ПРОВЕРКИ ВВОДИМЫХ ЗНАЧЕНИЙ
 			if(menu == 0)
 				break;
@@ -212,19 +365,23 @@ int main()
 		if(menu == 2){// НАСТРОЙКИ
 			game_settings(menu, &settings, &level, &choice, &bot, &otladka);
 		}
-
-		if(menu == 3){// ПРАВИЛА ИГРЫ
 		
+		if(menu == 3){// ПРАВИЛА
+			rules(menu, settings);
 		}
 
 		if(menu == 4){// ЗАЛ СЛАВЫ
-
+			table_name(menu, settings);
 		}
 
 		if(menu == 5){// ВЫХОД
 			break;
 		}
+		
+		if(menu == 6){// ПАСХАЛКА
+			easter_egg(menu, settings);
+		}
+	
 	}
-
 	return 0;
 }

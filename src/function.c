@@ -30,7 +30,7 @@ int correct_entering(int menu, int settings)
 				continue;
 			}
 			error++;
-		}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5') || strChoose[1] != '\0');
+		}while((strChoose[0] != '1' && strChoose[0] != '2' && strChoose[0] != '3' && strChoose[0] != '4' && strChoose[0] != '5' && strChoose[0] != '6') || strChoose[1] != '\0');
 		if(strChoose[0] == '1')
 			return 1;
 		else if(strChoose[0] == '2')
@@ -41,6 +41,8 @@ int correct_entering(int menu, int settings)
 			return 4;
 		else if(strChoose[0] == '5')
 			return 5;
+		else if(strChoose[0] == '6')
+			return 6;
 		else
 			return 0;
 	}else if(menu == 1){
@@ -112,7 +114,7 @@ int correct_entering(int menu, int settings)
 				error = 0;
 			}
 
-			set_display_atrib(BLINK);
+			set_display_atrib(BRIGHT);
 	    	set_display_atrib(F_YELLOW);
 			printf("\nВыберите нужный вам пункт ");
 			resetcolor();
@@ -178,10 +180,9 @@ int correct_entering(int menu, int settings)
 int main_menu()
 {
 	int menu = 0, settings = 0;
-
 	system("clear");// УДАЛЯЕТ В ТЕРМИНАЛЕ ВСЕ НАПИСАННОЕ ВЫШЕ
 	set_display_atrib(BRIGHT);
-	set_display_atrib(F_RED);
+	set_display_atrib(F_GREEN);
 	printf("\t\t __   __   ______   __        __         ______    \n");
 	printf("\t\t/_/| /_/| /_____/| /_/|      /_/|       /______\\   \n");
 	printf("\t\t|-|| |-|| |- ___|/ |-||      |-||      /- ___ -\\\\  \n");
@@ -192,6 +193,7 @@ int main_menu()
 	printf("\t\t|-|| |-|| |-|___/| |-|____/| |-|____/| |-\\___/-|/ \n");
 	printf("\t\t|_|/ |_|/ |_____|/ |______|/ |______|/ \\_______/  \n");
 	resetcolor();
+	top_table_player(&menu);
 	set_display_atrib(BRIGHT);
 	set_display_atrib(F_YELLOW);
 	printf("\n\n\t\t\t\t   GOMOKU\n\n\t\t\t\t   1.Играть\n\t\t\t\t   2.Настройки\n\t\t\t\t   3.Правила игры\n\t\t\t\t   4.Таблица лидеров\n\t\t\t\t   5.Выход\n\t\t\t\t   ");
@@ -205,23 +207,24 @@ int main_menu()
 
 void fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 {
-	system("clear");// ОЧИЩАЕМ ОБЛАСТЬ ВЫШЕ, В ДАЛЬНЕЙШЕМ, БУДЕТ ВЫГЯДИТЬ ТАК, ЧТО ДОСКА СТАТИЧНА
-	for(int i = 0; i < TABLE_Y; i++){// ЗАПОЛНЯЕМ МАССИВ (ИГРОВУЮ ДОСКУ), ТО ЕСТЬ ПРИВОДИМ К СМОТРИБЕЛЬНОМУ ВИДУ
-		for(int j = 0; j < TABLE_Y; j++){
+	int i = 0, j = 0;
+	/*system("clear");*/// ОЧИЩАЕМ ОБЛАСТЬ ВЫШЕ, В ДАЛЬНЕЙШЕМ, БУДЕТ ВЫГЯДИТЬ ТАК, ЧТО ДОСКА СТАТИЧНА
+	for( i = 0; i < TABLE_Y; i++){// ЗАПОЛНЯЕМ МАССИВ (ИГРОВУЮ ДОСКУ), ТО ЕСТЬ ПРИВОДИМ К СМОТРИБЕЛЬНОМУ ВИДУ
+		for( j = 0; j < TABLE_Y; j++){
 			gameboard_mass[i][j] = '_';
 		}
 	}
 }
 
-void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
+void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y], int limitMovesO, int limitMovesX)
 {
-	system("clear");  
+	system("clear");   
 	set_display_atrib(BRIGHT);
-    set_display_atrib(F_RED);
-	printf("\n\t\t   ____   __      _    _      __    _   __ __   __\n");
-	printf("\t\t  (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /\n");
-	printf("\t\t  ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /\n");
-	printf("\t\t  (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/\n");
+    set_display_atrib(F_GREEN);
+	printf("                       ____   __      _    _      __    _   __ __   __\n");
+	printf("  Кол-во оставшихся   (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /    Кол-во оставшихся\n");
+	printf("       ходов X        ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /	       ходов O \n");
+	printf("       -[%d]-         (_)    \\__/  (_)  --  (_)  \\__/  (_) \\_\\   /_/	       -[%d]-\n", limitMovesX, limitMovesO);
 	resetcolor();
 	for(int i = 0; i < TABLE_Y; i++){// ЗДЕСЬ ВЫВОДИТСЯ САМА ДОСКА
 		printf("\n\t\t");
@@ -231,46 +234,46 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 					printf("   ");
 				}else if(j < 10){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf("  %d", j);
 					resetcolor();
 				}else if(j == 9){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf("  %d", j);
 					resetcolor();
 				}else{
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf(" %2d", j);
 					resetcolor();
 				}
 			}else if(j == 0){// ТЕ ЖЕ САМЫЕ КООРДИНАТЫ, ТОЛЬКО ПО ВЕРТИКАЛИ
 				if(i < 10){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf(" %2d ", i);
 					resetcolor();
 				}else{
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf(" %d ", i);
 					resetcolor();
 					}
 			}else{
 				if(gameboard_mass[i][j] == 'X'){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_WHITE);
+    				set_display_atrib(F_GREEN);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
 					resetcolor();
 				}else if(gameboard_mass[i][j] == 'O'){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_WHITE);
+    				set_display_atrib(F_CYAN);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
 					resetcolor();
 				}else{
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
 					resetcolor();
 				}
@@ -622,7 +625,7 @@ void check_to_win_bot(char tableGame[TABLE_Y][TABLE_Y], int choice, int widht, i
 	}
 }
 
-void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *playerScore,  int *hightStepPlayer, int *weightStepPlayer, int dopusk){
+void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertikal, int *playerScoreLeftDiagonal, int *playerScoreRightDiagonal, int  *playerScoreGorizontLeft, int *playerScoreVertikalLeft, int *playerScoreLeftDiagonalLeft, int *playerScoreRightDiagonalLeft, int *playerScore,  int *hightStepPlayer, int *weightStepPlayer, int dopusk, int *outPutReplics){
 	int checking = 0;
 	int resultat[9] = {'\0'};
 	int key;
@@ -657,7 +660,7 @@ void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertika
 			playerScoreVertikalLeft[8] = playerScoreVertikalLeft[key];
 			playerScoreLeftDiagonalLeft[8] = playerScoreLeftDiagonalLeft[key];
 			playerScoreRightDiagonalLeft[8] = playerScoreRightDiagonalLeft[key];
-			if(level != 0 && dopusk != 0){
+			if(level != 1 && dopusk != 0){
 				hightStepPlayer[8] = hightStepPlayer[key];
 				weightStepPlayer[8] = weightStepPlayer[key];
 			}
@@ -676,6 +679,7 @@ void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertika
 		*playerScore = playerScoreLeftDiagonalLeft[8];
 	if(*playerScore < playerScoreRightDiagonalLeft[8])
 		*playerScore = playerScoreRightDiagonalLeft[8];
+	*outPutReplics = *playerScore;
 }
 
 int checkWin(int score, int choice, int *winX, int *winO)// ПРОВЕРКА НА ПОБЕДУ
@@ -769,7 +773,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot, i
 		printf("\t\t\t\t     /   //\n");
 		printf("\t\t\t\t    /   //\n");
 		resetcolor();
-		set_display_atrib(BLINK);
+		set_display_atrib(BRIGHT);
 	    set_display_atrib(F_YELLOW);
 		printf("\n\n\t\t\t\t   НАСТРОЙКИ");
 		printf("\n\n\t\t\t\t   1.Бот - ");
@@ -787,8 +791,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot, i
 			printf("Легкий");
 		}else if(*level == 0){
 			printf("Средний");
-		}
-		else {
+		}else{
 			printf("Сильный");
 		}
 		if(*settings == 2){
@@ -804,9 +807,9 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot, i
 			printf("\n\t\t\t\t\t|-------- 1.Играть первым за Х\n\t\t\t\t\t|-------- 2.Играть первым за О");
 		}
 		printf("\n\t\t\t\t   4.Отладочная информация - ");
-		if (*otladka == 1) {
+		if(*otladka == 1){
 			printf("Включена");
-		} else {
+		}else{
 			printf("Отключена");
 		}
 		if(*settings == 4){
@@ -819,7 +822,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot, i
 			*settings = correct_entering(menu, *settings);
 			i = 0;
 		}
-		if(*settings == 1 && i == 1){
+		if(*settings == 1 && i == 1){	
 			*bot = correct_entering(menu, *settings);
 			i = 0;
 			*settings = 0;
@@ -911,4 +914,335 @@ void debugging_player(int *hightStepPlayer, int *weightStepPlayer, int *playerSc
 	printf("\nplayerScoreRightDiagonalLeft");
 	for(int i = 0; i <= 8; i++)
 		printf(" %d ", playerScoreRightDiagonalLeft[i]);
+}
+
+void rules(int menu, int settings)
+{
+	while(menu == 3){
+		system("clear");
+		set_display_atrib(BRIGHT);
+	    set_display_atrib(F_GREEN);
+		printf("\t\t\t\t   ________\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   |    | |\n");
+		printf("\t\t\t\t   \\    / /\n");
+		printf("\t\t\t\t    \\__/_/\n");
+		printf("\t\t\t\t     ____\n");
+		printf("\t\t\t\t    /  \\ \\\n");
+		printf("\t\t\t\t    \\__/_/\n");
+		resetcolor();
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
+		printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 15Х15\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
+		resetcolor();
+		menu = 0;
+	    menu = correct_entering(menu, settings);
+
+	}
+}
+
+void table_name(int menu, int settings)
+{
+	struct winner tablname[15];
+	while(menu == 4){
+		system("clear");
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
+		printf("\t\t\t\t\t\t\t       __\n");
+		printf("\t\t\t\t\t\t\t      / /\\\n");
+		printf("\t\t\t\t\t\t\t ____/_/  \\___\n");
+		printf("\t\t\t\t\t\t\t | |   ___   |\n");
+		printf("\t\t\t\t\t\t\t  \\ \\  \\_/  /\n");
+		printf("\t\t\t\t\t\t\t   \\_\\_   _/\n");
+		printf("\t\t\t\t\t\t\t     \\ \\ /\n");
+		printf("\t\t\t\t\t\t\t      || |\n");
+		printf("\t\t\t\t\t\t\t     ||___|\n");
+		resetcolor();
+		top_table_player(&menu);
+
+		FILE *winTabl1;
+		FILE *winTabl2;
+		FILE *winTabl3;
+
+		winTabl1 = fopen("data/hall/tabl_easy_bot", "r");
+		winTabl2 = fopen("data/hall/tabl_medium_bot", "r");
+		winTabl3 = fopen("data/hall/tabl_hard_bot", "r");
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
+		printf("\n\n\t┌───────────ЛЕГКИЙ──────────────┐\t┌──────────СРЕДНИЙ──────────────┐\t┌───────────ТЯЖЕЛЫЙ─────────────┐");
+		printf("\n\t│№    Имя\tКоличество ходов│\t│№    Имя\tКоличество ходов│\t│№    Имя\tКоличество ходов│");
+
+		for(int i = 0; i < 10; i++){
+			if(fscanf (winTabl1, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+				if(i < 9){
+					printf("\n\t│%d  - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+					if(fscanf (winTabl2, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+						printf("\t│%d  - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+						if(fscanf (winTabl3, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+							printf("\t│%d  - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+						}
+					}
+				}else{
+					printf("\n\t│%d - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+					if(fscanf (winTabl2, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+						printf("\t│%d - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+						if(fscanf (winTabl3, "%s%u\t│", tablname[i].name, &(tablname[i].num_moves)) != EOF){
+							printf("\t│%d - %s\t\t%u\t│", i + 1, tablname[i].name, tablname[i].num_moves);
+						}
+					} 
+				}
+			}
+		}
+		printf("\n\t└───────────────────────────────┘\t└───────────────────────────────┘\t└───────────────────────────────┘");
+		printf("\n      └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+		fclose(winTabl1);
+		fclose(winTabl2);
+		fclose(winTabl3);
+		printf("\n\n\t\t\t\t\t\t\t1.Выход в меню\n\t\t\t\t\t\t\t");
+		resetcolor();
+		menu = 0;
+		menu = correct_entering(menu, settings);
+	}
+}
+
+void top_table_player(int *menu)
+{
+    struct top topPlayer[30];
+    int playerPoints[33] = {'\0'};
+    FILE *winTabl1;
+    FILE *winTabl2;
+    FILE *winTabl3;
+
+    winTabl1 = fopen("data/hall/tabl_easy_bot", "r");
+    winTabl2 = fopen("data/hall/tabl_medium_bot", "r");
+    winTabl3 = fopen("data/hall/tabl_hard_bot", "r");
+
+    for(int i = 0; i < 33; i++){
+		if(i < 10){
+		    if(fscanf (winTabl1, "%s%u", topPlayer[i].name, &(topPlayer[i].num_moves)) != EOF){
+				switch(i){
+				    case 0:
+					playerPoints[i] = 50;
+					break;
+				    case 1:
+					playerPoints[i] = 40;
+					break;
+				    case 2:
+					playerPoints[i] = 30;
+					break;
+				    case 3:
+					playerPoints[i] = 25;
+					break;
+				    case 4:
+					playerPoints[i] = 20;
+					break;
+				    case 5:
+					playerPoints[i] = 15;
+					break;
+				    case 6:
+					playerPoints[i] = 10;
+					break;
+				    case 7:
+					playerPoints[i] = 5;
+					break;
+				    case 8:
+					playerPoints[i] = 5;
+					break;
+				    case 9:
+					playerPoints[i] = 5;
+					break;
+				}
+		    }
+		}else if(i < 20){
+		    if(fscanf (winTabl2, "%s%u", topPlayer[i].name, &(topPlayer[i].num_moves)) != EOF){
+				switch(i){
+				    case 10:
+					playerPoints[i] = 150;
+					break;
+				    case 11:
+					playerPoints[i] = 125;
+					break;
+				    case 12:
+					playerPoints[i] = 100;
+					break;
+				    case 13:
+					playerPoints[i] = 80;
+					break;
+				    case 14:
+					playerPoints[i] = 60;
+					break;
+				    case 15:
+					playerPoints[i] = 40;
+					break;
+				    case 16:
+					playerPoints[i] = 35;
+					break;
+				    case 17:
+					playerPoints[i] = 30;
+					break;
+				    case 18:
+					playerPoints[i] = 25;
+					break;
+				    case 19:
+					playerPoints[i] = 20;
+					break;
+				}
+		    }
+		}else if(i < 30){
+		    if(fscanf (winTabl3, "%s%u", topPlayer[i].name, &(topPlayer[i].num_moves)) != EOF){
+				switch(i){
+				    case 20:
+					playerPoints[i] = 250;
+					break;
+				    case 21:
+					playerPoints[i] = 200;
+					break;
+				    case 22:
+					playerPoints[i] = 150;
+					break;
+				    case 23:
+					playerPoints[i] = 125;
+					break;
+				    case 24:
+					playerPoints[i] = 100;
+					break;
+				    case 25:
+					playerPoints[i] = 80;
+					break;
+				    case 26:
+					playerPoints[i] = 70;
+					break;
+				    case 27:
+					playerPoints[i] = 60;
+					break;
+				    case 28:
+					playerPoints[i] = 50;
+					break;
+				    case 29:
+					playerPoints[i] = 40;
+					break;
+				}
+		    }
+		}else{
+		    i = 33;
+		}
+    }
+
+    fclose(winTabl1);
+    fclose(winTabl2);
+    fclose(winTabl3);
+    int vizited[30] = {'\0'}; //Хранит посещения
+    int indexWinner[30] = {'\0'}; //Хранит индексы
+    char Attention[] = {"NONE"};
+    for(int i = 0; i < 30; i++){
+		for(int j = 1; j < 30; j++){
+		    if(topPlayer[i].name != Attention && topPlayer[j].name != Attention && (strcmp(topPlayer[i].name, topPlayer[j].name) == 0) && vizited[j] == 0 && i != j){
+				playerPoints[i] = playerPoints[i] + playerPoints[j];
+				vizited[j] = 1;
+		    }
+		}
+		vizited[i] = 1; 
+    }
+
+    int tmp;
+    int tmpIndex;
+
+    for(int i = 0; i < 30; i++){
+	indexWinner[i] = i;
+    }
+
+    for(int i = 0; i < 30; i++){
+		for(int j = 0; j < 30; j++){
+		    if(playerPoints[i] < playerPoints[j]){
+				tmp = playerPoints[i];
+				tmpIndex = indexWinner[i];
+				playerPoints[i] = playerPoints[j];
+				playerPoints[j] = tmp;
+				indexWinner[i] = indexWinner[j];
+				indexWinner[j] = tmpIndex;
+		    }
+		}
+    }
+    int tyyp = 1;
+    for(int i = 0; i < 2; i++){
+		for(int j = 1; j < 3; j++){
+		    if(strcmp(topPlayer[indexWinner[29 - i]].name, topPlayer[indexWinner[29 - j]].name) == 0 && i != j){
+				if(j == 2){
+				    strcpy(topPlayer[indexWinner[29 - j]].name, topPlayer[indexWinner[29 - 2 - tyyp]].name);
+				    playerPoints[29 - j] = playerPoints[29 - 2 - tyyp];
+				    j = 1;
+				    tyyp++;
+				}else if(j == 1){
+				    strcpy(topPlayer[indexWinner[29 - j]].name, topPlayer[indexWinner[29 - j - 1]].name);
+				    playerPoints[29 - j] = playerPoints[29 - j - 1];
+				    strcpy(topPlayer[indexWinner[29 - j - 1]].name, topPlayer[indexWinner[29 - 2 - tyyp]].name);
+				    playerPoints[29 - j - 1] = playerPoints[29 - 2 - tyyp];
+				    j = 1;
+				    tyyp++;
+				}
+		    }
+		}
+    }
+    if(*menu == 0){
+	    set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
+		printf("\t\t\t\t┌───────ТОП─────────ИГРОКОВ─────┐");
+		printf("\n\t\t\t\t│ №    Имя    Количество очков  │");
+		resetcolor();
+		for(int i = 0; i < 3; i++){
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_YELLOW);
+		    printf("\n\t\t\t\t│ %d  - %s     \t%u\t│", i + 1, topPlayer[indexWinner[29 - i]].name, playerPoints[29 - i]);
+			resetcolor();
+		}
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
+		printf("\n\t\t\t\t└─────────────────────────────┐ │");
+	    resetcolor();
+    }else{
+	   	set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
+		printf("\n\t\t\t\t\t\t┌───────ТОП─────ИГРОКОВ─────────┐");
+		printf("\n\t\t\t\t\t\t│№    Имя\tКоличество очков│");
+		resetcolor();
+		for(int i = 0; i < 3; i++){
+			set_display_atrib(BRIGHT);
+			set_display_atrib(F_YELLOW);
+		    printf("\n\t\t\t\t\t\t│%d  - %s\t\t%u\t│", i + 1, topPlayer[indexWinner[29 - i]].name, playerPoints[29 - i]);
+			resetcolor();
+		}
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
+		printf("\n\t\t\t\t\t\t└───────────────────────────────┘");
+		resetcolor();
+    }
+}
+
+void easter_egg(int menu, int settings)
+{
+	while(menu == 6){
+		system("clear");
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
+        printf("\t\t\t\t    _______\n");
+		printf("\t\t\t\t   /  ---  \\\n");
+		printf("\t\t\t\t  /         \\\n");
+		resetcolor();
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_GREEN);
+		printf("\t\t\t\t |  !EASTER  |\n");
+		printf("\t\t\t\t |    EGG    |\n");
+		resetcolor();
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
+		printf("\t\t\t\t |  -------  |\n");
+		printf("\t\t\t\t |    ___    |\n");
+		printf("\t\t\t\t  \\         /\n");
+		printf("\t\t\t\t   \\_______/\n");
+		printf("\n\n\t\t\tПривет!\n\t\t\tЭтого пункта в меню нет!\n\t\t\tПотому что он секретный...\n\t\t\tПоздравляю! Ты нашёл пасхальное яйцо!\n\t\t\tА сейчас, дорогой друг, я хочу тебе рассказать\n\t\t\tпару интересных фактов о твоей любимой игре'Гомоку'.\n\n\t\t\tИгра появилась более четырех тысяч лет назад на территории\n\t\t\tодной из самых древних цивилизаций в долине реки Хуанхэ.\n\t\t\tВ VII веке она была привезена на Японские острова,\n\t\t\tгде получила название «гомоку», что означает «пять камней».\n\n\t\t\tТак как у чёрных камней есть преимущество первого хода и при грамотном\n\t\t\tподходе, не зависимо от того, как будут строить оборону белые камни,\n\t\t\tпобеждают именно чёрные, были введены специальные ограничения,\n\t\t\tчтобы уровнять шансы на победу, и сделать тем самым игру более\n\t\t\tсбалансированной и интересной.\n\n\t\t\tТак, для черных фишек в спортивном рэндзю ввели следующие фолы (запрещенные ходы):\n\n\t\t\t • запрещается строить 'вилки' 3х3 и 4х4\n\n\t\t\t • запрещается строить ряд из 6 или более камней\n\n\t\t\t • запрещается строить любые вилки кратностью более двух.\n\n\t\t\tДля белых камней-фишек никаких фолов нет, и для победы им нужно\n\t\t\tпостроить ряд из пяти камней, либо дождаться ошибки чёрных камней\n\t\t\t(совершение ими фола).\n\n\t\t\tВ том случае, когда наступает ход игрока и он считает, что хороших для\n\t\t\tнего ходов не осталось, он может отказаться делать свой ход, то есть\n\t\t\tсделать пас. Если после этого второй игрок тоже спасует, то игра\n\t\t\tзавершается вничью. Также игра заканчивается вничью, если вся доска\n\t\t\tбудет заставлена камнями, но никто из игроков не смог построить\n\t\t\tпобедную линию в 5 камней.\n\n\t\t\t\tCreated BY:\n\t\t\t • Вашов Алексей\n\t\t\t • Карасев Алексей\n\t\t\t • Рамус Евгений\n\n\n\t\t\t1.Хочу играть!\n\t\t\t");
+		resetcolor();	
+		menu = 0;
+	    menu = correct_entering(menu, settings);
+	}
 }

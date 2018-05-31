@@ -1,7 +1,6 @@
 #include "prototypes.h"
 
 void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int playerScore, int choice,  int *botScoreGorizont, int *botScoreVertikal, int *botScoreLeftDiagonal, int *botScoreRightDiagonal, int  *botScoreGorizontLeft, int *botScoreVertikalLeft, int *botScoreLeftDiagonalLeft, int *botScoreRightDiagonalLeft, int *hightAtakBot, int *weightAtakBot, int height, int widht, int *hodBot){
-	int rak;
 	if((((botScore == playerScore && (playerScore < 3 && choice == 0))) || (botScore == playerScore && choice == 0) || (botScore >= playerScore && (playerScore < 2 && choice == 0))) || (botScore > playerScore) || (playerScore < 2 && choice == 1)){//-----------УРОВЕНЬ БОТА - ИГРОК
 		int addmission = 0;
 		int exit, j;
@@ -172,7 +171,6 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 		/* ЛЕВАЯ ДИАГОНАЛЬ, ТО ЕСТЬ ТАКАЯ \ */
 		if(botScoreLeftDiagonal[8] >= botScoreGorizont[8] && botScoreLeftDiagonal[8] >= botScoreVertikal[8] && botScoreLeftDiagonal[8] >= botScoreRightDiagonal[8] && *hodBot != 1){
 			j = 0;
-			// leftDiagonalSchet - leftDiagonalSchetLeft --- ЭТО СЧЕТЧИК КАК БЫ ВЕРХНЕЙ ПОЛОВИНЫ ЛЕВОЙ ДИАГОНАЛИ, leftDiagonalSchetLeft ---- ЭТО СЧЕТЧИК НИЖНЕЙ ЛЕВОЙ ДИАГОНАЛИ
 			widht = weightAtakBot[4];
 			if((((botScoreLeftDiagonal[8] - botScoreLeftDiagonalLeft[8]) > botScoreLeftDiagonalLeft[8] || botScoreLeftDiagonal[8] == botScoreLeftDiagonalLeft[8]) && (widht - botScoreLeftDiagonal[8]) > 0) && hightAtakBot[4] != 0 && weightAtakBot[4] != 0){
 				height = hightAtakBot[8];
@@ -261,7 +259,6 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 		// ПРАВАЯ ДИАГОНАЛЬ, ТО ЕСТЬ ТАКАЯ / 
 		if(botScoreRightDiagonal[8] >= botScoreGorizont[8] && botScoreRightDiagonal[8] >= botScoreVertikal[8] && botScoreRightDiagonal[8] >= botScoreLeftDiagonal[8] && *hodBot != 1){
 			j = 0;
-			// rightDiagonalSchet - rightDiagonalSchetLeft --- ЭТО СЧЕТЧИК КАК БЫ НИЖНЕЙ ПОЛОВИНЫ ПРАВОЙ ДИАГОНАЛИ, rightDiagonalSchetLeft ---- ЭТО СЧЕТЧИК ВЕРХНЕЙ ПРАВОЙ ДИАГОНАЛИ
 			widht = weightAtakBot[6];
 			if((((botScoreRightDiagonal[8] - botScoreRightDiagonalLeft[8]) > botScoreRightDiagonalLeft[8]) && (widht + 1) != 11) && hightAtakBot[6] != 0 && weightAtakBot[6] != 0){
 				height = hightAtakBot[8];
