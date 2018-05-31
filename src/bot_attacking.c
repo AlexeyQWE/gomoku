@@ -1,14 +1,14 @@
 #include "prototypes.h"
 
 void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int playerScore, int choice,  int *botScoreGorizont, int *botScoreVertikal, int *botScoreLeftDiagonal, int *botScoreRightDiagonal, int  *botScoreGorizontLeft, int *botScoreVertikalLeft, int *botScoreLeftDiagonalLeft, int *botScoreRightDiagonalLeft, int *hightAtakBot, int *weightAtakBot, int height, int widht, int *hodBot){
-	int rak;
+	/*int rak;*/
 	if((((botScore == playerScore && (playerScore < 3 && choice == 0))) || (botScore == playerScore && choice == 0) || (botScore >= playerScore && (playerScore < 2 && choice == 0))) || (botScore > playerScore) || (playerScore < 2 && choice == 1)){//-----------УРОВЕНЬ БОТА - ИГРОК
 		int addmission = 0;
 		int exit, j;
 		if(botScoreGorizont[8] >= botScoreVertikal[8] && botScoreGorizont[8] >= botScoreLeftDiagonal[8] && botScoreGorizont[8] >= botScoreRightDiagonal[8] && *hodBot != 1){
 			if(((botScoreGorizont[8] - botScoreGorizontLeft[8]) <= botScoreGorizontLeft[8] || botScoreGorizont[8] == botScoreGorizontLeft[8]) && hightAtakBot[8] != 0 && weightAtakBot[8] != 0){
-				printf("сюда заходь 461");
-				scanf("%d", &rak);
+				/*printf("сюда заходь 461");
+				scanf("%d", &rak);*/
 				height = hightAtakBot[8];
 				widht = weightAtakBot[8];
 				exit = widht - 4 - 1;
@@ -35,12 +35,12 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 								}
 							}
 						}
-						printf("%d - i\n", i);
+						/*printf("%d - i\n", i);
 						printf("%d - exit\n", exit);
 						printf("%d - height\n", height);
 						printf("%d - widht\n", widht);
 						printf("%d - addmission\n", addmission);
-						scanf("%d", &rak);
+						scanf("%d", &rak);*/
 						if(i != exit && addmission == 4){
 							step_attack_bot_gorizont(choice, tableGame, &i, height, &*hodBot, exit, &widht);// САМ ПРОЦЕСС ХОДА БОТА
 							if(*hodBot == 1){
@@ -55,8 +55,8 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 				}
 			}
 			if(*hodBot == 0 && hightAtakBot[1] != 0 && weightAtakBot[1] != 0){
-				printf("сюда заходь 504");
-				scanf("%d", &rak);
+				/*printf("сюда заходь 504");
+				scanf("%d", &rak);*/
 				height = hightAtakBot[8];
 				widht = weightAtakBot[8];
 				exit = widht + 4 + 1;
@@ -83,12 +83,12 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 								}
 							}
 						}
-						printf("%d - i\n", i);
+						/*printf("%d - i\n", i);
 						printf("%d - exit\n", exit);
 						printf("%d - height\n", height);
 						printf("%d - widht\n", widht);
 						printf("%d - addmission\n", addmission);
-						scanf("%d", &rak);
+						scanf("%d", &rak);*/
 						if(i != exit && addmission == 4){
 							step_attack_bot_gorizont(choice, tableGame, &i, height, &*hodBot, exit, &widht);
 							if(*hodBot == 1){
@@ -104,11 +104,11 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 			}
 		}
 		if(botScoreVertikal[8] >= botScoreGorizont[8] && botScoreVertikal[8] >= botScoreLeftDiagonal[8] && botScoreVertikal[8] >= botScoreRightDiagonal[8] && *hodBot != 1){
-			printf("сюда заходь 549------------------");
-				scanf("%d", &rak);
+			/*printf("сюда заходь 549------------------");
+				scanf("%d", &rak);*/
 			if(((botScoreVertikal[8] - botScoreVertikalLeft[8]) <= botScoreVertikalLeft[8] || botScoreVertikal[8] == botScoreVertikalLeft[8]) && hightAtakBot[2] != 0 && weightAtakBot[2] != 0){
-				printf("сюда заходь 549");
-				scanf("%d", &rak);
+				/*printf("сюда заходь 549");
+				scanf("%d", &rak);*/
 
 				height = hightAtakBot[8];
 				widht = weightAtakBot[8];
@@ -136,12 +136,12 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 								}
 							}
 						}
-						printf("%d - i\n", i);
+						/*printf("%d - i\n", i);
 						printf("%d - exit\n", exit);
 						printf("%d - height\n", height);
 						printf("%d - widht\n", widht);
 						printf("%d - addmission\n", addmission);
-						scanf("%d", &rak);
+						scanf("%d", &rak);*/
 						if(i != exit && addmission == 4){
 							step_attack_bot_vertical(choice, tableGame, &i, widht, &*hodBot, exit, &height);
 							if(*hodBot == 1){
@@ -156,8 +156,8 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 				}
 			}
 			if(*hodBot == 0 && hightAtakBot[3] > 0 && weightAtakBot[3] > 0){
-				printf("сюда заходь 592");
-				scanf("%d", &rak);
+				/*printf("сюда заходь 592");
+				scanf("%d", &rak);*/
 
 				height = hightAtakBot[8];
 				widht = weightAtakBot[8];
@@ -185,12 +185,12 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 								}
 							}
 						}
-						printf("%d - i\n", i);
+						/*printf("%d - i\n", i);
 						printf("%d - exit\n", exit);
 						printf("%d - height\n", height);
 						printf("%d - widht\n", widht);
 						printf("%d - addmission\n", addmission);
-						scanf("%d", &rak);
+						scanf("%d", &rak);*/
 						if(i != exit && addmission == 4){
 							step_attack_bot_vertical(choice, tableGame, &i, widht, &*hodBot, exit, &height);
 							if(*hodBot == 1){
@@ -211,8 +211,8 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 			// leftDiagonalSchet - leftDiagonalSchetLeft --- ЭТО СЧЕТЧИК КАК БЫ ВЕРХНЕЙ ПОЛОВИНЫ ЛЕВОЙ ДИАГОНАЛИ, leftDiagonalSchetLeft ---- ЭТО СЧЕТЧИК НИЖНЕЙ ЛЕВОЙ ДИАГОНАЛИ
 			widht = weightAtakBot[4];
 			if((((botScoreLeftDiagonal[8] - botScoreLeftDiagonalLeft[8]) > botScoreLeftDiagonalLeft[8] || botScoreLeftDiagonal[8] == botScoreLeftDiagonalLeft[8]) && (widht - botScoreLeftDiagonal[8]) > 0) && hightAtakBot[4] != 0 && weightAtakBot[4] != 0){
-				printf("сюда заходь 641");
-				scanf("%d", &rak);
+				/*printf("сюда заходь 641");
+				scanf("%d", &rak);*/
 
 				height = hightAtakBot[8];
 				widht = weightAtakBot[8];
@@ -241,8 +241,8 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 								}
 							}
 						}
-						printf("%d - addmission", addmission);
-						scanf("%d", &rak);
+						/*printf("%d - addmission", addmission);
+						scanf("%d", &rak);*/
 						if(i != exit && addmission == 4){
 							step_attack_bot_diagonal_minus(j, choice, tableGame, &i, &widht, &*hodBot, exit, &height);
 							if(*hodBot == 1){
@@ -257,8 +257,8 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 				}
 			}
 			if(*hodBot == 0 && (height + botScoreLeftDiagonal[8] - botScoreLeftDiagonalLeft[8]) <= 15 && hightAtakBot[5] != 0 && weightAtakBot[5] != 0){
-				printf("сюда заходь 686");
-				scanf("%d", &rak);
+				/*printf("сюда заходь 686");
+				scanf("%d", &rak);*/
 
 				height = hightAtakBot[8];
 				widht = weightAtakBot[8];
@@ -288,14 +288,14 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 								}
 							}
 						}
-						printf("%d - addmission\n", addmission);
+						/*printf("%d - addmission\n", addmission);
 						printf("%d - i\n", i);
 						printf("%d - exit\n", exit);
 						printf("%d - height\n", height);
 						printf("%d - widht\n", widht);
 						printf("%d - j\n", j);
 
-						scanf("%d", &rak);
+						scanf("%d", &rak);*/
 						if(i != exit && addmission == 4){
 							step_attack_bot_diagonal_plus(j, choice, tableGame, &i, &widht, &*hodBot, exit, &height);
 							if(*hodBot == 1){
@@ -316,8 +316,8 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 			// rightDiagonalSchet - rightDiagonalSchetLeft --- ЭТО СЧЕТЧИК КАК БЫ НИЖНЕЙ ПОЛОВИНЫ ПРАВОЙ ДИАГОНАЛИ, rightDiagonalSchetLeft ---- ЭТО СЧЕТЧИК ВЕРХНЕЙ ПРАВОЙ ДИАГОНАЛИ
 			widht = weightAtakBot[6];
 			if((((botScoreRightDiagonal[8] - botScoreRightDiagonalLeft[8]) > botScoreRightDiagonalLeft[8]) && (widht + 1) != 11) && hightAtakBot[6] != 0 && weightAtakBot[6] != 0){
-				printf("сюда заходь 737");
-				scanf("%d", &rak);
+				/*printf("сюда заходь 737");
+				scanf("%d", &rak);*/
 				height = hightAtakBot[8];
 				widht = weightAtakBot[8];
 
@@ -347,14 +347,14 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 							}
 						}
 
-						printf("%d - addmission\n", addmission);
+						/*printf("%d - addmission\n", addmission);
 						printf("%d - i\n", i);
 						printf("%d - exit\n", exit);
 						printf("%d - hight\n", height);
 						printf("%d - weight\n", widht);
 						printf("%d - j\n", j);
 
-						scanf("%d", &rak);
+						scanf("%d", &rak);*/
 						if(i != exit && addmission == 4){
 							step_attack_bot_diagonal_plus(j, choice, tableGame, &i, &widht, &*hodBot, exit, &height);
 							if(*hodBot == 1){
@@ -370,8 +370,8 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 				}
 			}
 			if(*hodBot == 0 && hightAtakBot[7] != 0 && weightAtakBot[7] != 0){
-				printf("сюда заходь 781");
-				scanf("%d", &rak);
+				/*printf("сюда заходь 781");
+				scanf("%d", &rak);*/
 
 				height = hightAtakBot[8];
 				widht = weightAtakBot[8];
@@ -402,14 +402,14 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 							}
 						}
 
-						printf("%d - addmission\n", addmission);
+						/*printf("%d - addmission\n", addmission);
 						printf("%d - i\n", i);
 						printf("%d - exit\n", exit);
 						printf("%d - hight\n", height);
 						printf("%d - weight\n", widht);
 						printf("%d - j\n", j);
 
-						scanf("%d", &rak);
+						scanf("%d", &rak);*/
 						if(i != exit && addmission == 4){
 							step_attack_bot_diagonal_minus(j, choice, tableGame, &i, &widht, &*hodBot, exit, &height);
 							if(*hodBot == 1){
