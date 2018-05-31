@@ -4,8 +4,6 @@ void move_bot_defender(char tableGame[TABLE_Y][TABLE_Y], int *playerScoreGorizon
 	int exit;
 	int j;
 	int left, right, down, up;
-<<<<<<< HEAD
-	int rak;
 	// ПРОВЕРКА СЧЕТЧИКОВ, КОТОРЫЕ СЧИТАЛИСЬ ПРИ ПРОВЕРКЕ ХОДА ИГРОКА, ТО ЕСТЬ, ЕСЛИ ГДЕ-ТО СЧЕТЧИК БОЛЬШЕ, ТО ЗНАЧИТ БОТ БУДЕТ ХОДИТЬ ИМЕННО В ТОЙ ПЛОСКОСТИ
 	// НАПРИМЕР gorizontScore = 5  А ОСТАЛЬНЫЕ РАВНЫ ПО 1 (СЧЕТЧИКИ), ЗНАЧИТ ОН ПОЙДЕТ ИМЕННО ПО ПЛОСКОСТИ ГОРИЗОНТАЛИ (ВПРАВО ИЛИ ВЛЕВО БУДЕТ РЕШАТЬСЯ ДАЛЬШЕ)
 	if(playerScoreGorizont[8] >= playerScoreVertikal[8] && playerScoreGorizont[8] >= playerScoreLeftDiagonal[8] && playerScoreGorizont[8] >= playerScoreRightDiagonal[8] && *hodBot != 1){
