@@ -115,7 +115,7 @@ int correct_entering(int menu, int settings)
 				error = 0;
 			}
 
-			set_display_atrib(BLINK);
+			set_display_atrib(BRIGHT);
 	    	set_display_atrib(F_YELLOW);
 			printf("\nВыберите нужный вам пункт ");
 			resetcolor();
@@ -183,7 +183,7 @@ int main_menu()
 	int menu = 0, settings = 0;
 	system("clear");// УДАЛЯЕТ В ТЕРМИНАЛЕ ВСЕ НАПИСАННОЕ ВЫШЕ
 	set_display_atrib(BRIGHT);
-	set_display_atrib(F_RED);
+	set_display_atrib(F_GREEN);
 	printf("\t\t __   __   ______   __        __         ______    \n");
 	printf("\t\t/_/| /_/| /_____/| /_/|      /_/|       /______\\   \n");
 	printf("\t\t|-|| |-|| |- ___|/ |-||      |-||      /- ___ -\\\\  \n");
@@ -223,7 +223,7 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y], int limitMovesO, int
 	printf("limitMovesX - %d\n", limitMovesX);
 	printf("limitMovesO - %d\n", limitMovesO);
 	set_display_atrib(BRIGHT);
-    set_display_atrib(F_RED);
+    set_display_atrib(F_GREEN);
 	printf("                       ____   __      _    _      __    _   __ __   __\n");
 	printf("  Кол-во оставшихся   (  __) /  \\    / \\  / \\    /  \\  ( )_/ / \\ \\_/ /    Кол-во оставшихся\n");
 	printf("       ходов X        ) (   ( () )  / /\\\\//\\ \\  ( () ) )  _ |   \\_  /	       ходов O \n");
@@ -237,46 +237,46 @@ void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y], int limitMovesO, int
 					printf("   ");
 				}else if(j < 10){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf("  %d", j);
 					resetcolor();
 				}else if(j == 9){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf("  %d", j);
 					resetcolor();
 				}else{
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf(" %2d", j);
 					resetcolor();
 				}
 			}else if(j == 0){// ТЕ ЖЕ САМЫЕ КООРДИНАТЫ, ТОЛЬКО ПО ВЕРТИКАЛИ
 				if(i < 10){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf(" %2d ", i);
 					resetcolor();
 				}else{
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf(" %d ", i);
 					resetcolor();
 					}
 			}else{
 				if(gameboard_mass[i][j] == 'X'){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_WHITE);
+    				set_display_atrib(F_GREEN);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
 					resetcolor();
 				}else if(gameboard_mass[i][j] == 'O'){
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_WHITE);
+    				set_display_atrib(F_CYAN);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
 					resetcolor();
 				}else{
 					set_display_atrib(BRIGHT);
-    				set_display_atrib(F_CYAN);
+    				set_display_atrib(F_WHITE);
 					printf("[%c]", gameboard_mass[i][j]);// ВЫВОД САМОЙ ИГРОВОЙ ДОСКИ
 					resetcolor();
 				}
@@ -780,7 +780,7 @@ void game_settings(int menu, int *settings, int *level, int *choice, int *bot, i
 		printf("\t\t\t\t     /   //\n");
 		printf("\t\t\t\t    /   //\n");
 		resetcolor();
-		set_display_atrib(BLINK);
+		set_display_atrib(BRIGHT);
 	    set_display_atrib(F_YELLOW);
 		printf("\n\n\t\t\t\t   НАСТРОЙКИ");
 		printf("\n\n\t\t\t\t   1.Бот - ");
@@ -860,7 +860,7 @@ void rules(int menu, int settings)
 	while(menu == 3){
 		system("clear");
 		set_display_atrib(BRIGHT);
-	    set_display_atrib(F_RED);
+	    set_display_atrib(F_GREEN);
 		printf("\t\t\t\t   ________\n");
 		printf("\t\t\t\t   |    | |\n");
 		printf("\t\t\t\t   |    | |\n");
@@ -871,7 +871,7 @@ void rules(int menu, int settings)
 		printf("\t\t\t\t    /  \\ \\\n");
 		printf("\t\t\t\t    \\__/_/\n");
 		resetcolor();
-		set_display_atrib(BLINK);
+		set_display_atrib(BRIGHT);
 		set_display_atrib(F_YELLOW);
 		printf("\n\n\t\t\t\tПРАВИЛА ИГРЫ\n\n\t\t\t\tВ гомоку играют\n\t\t\t\t2 игрока, в поле 15Х15\n\t\t\t\tу каждого из игроков\n\t\t\t\tцель собрать в ряд 5\n\t\t\t\tкрестов или нолей\n\n\t\t\t\t1.Выход в меню\n\t\t\t\t");
 		    resetcolor();
@@ -885,6 +885,8 @@ void table_name(int menu, int settings)
 	struct winner tablname[15];
 	while(menu == 4){
 		system("clear");
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
 		printf("\t\t\t\t\t\t\t       __\n");
 		printf("\t\t\t\t\t\t\t      / /\\\n");
 		printf("\t\t\t\t\t\t\t ____/_/  \\___\n");
@@ -894,6 +896,7 @@ void table_name(int menu, int settings)
 		printf("\t\t\t\t\t\t\t     \\ \\ /\n");
 		printf("\t\t\t\t\t\t\t      || |\n");
 		printf("\t\t\t\t\t\t\t     ||___|\n");
+		resetcolor();
 		top_table_player(&menu);
 
 		FILE *winTabl1;
@@ -903,6 +906,8 @@ void table_name(int menu, int settings)
 		winTabl1 = fopen("data/hall/tabl_easy_bot", "r");
 		winTabl2 = fopen("data/hall/tabl_medium_bot", "r");
 		winTabl3 = fopen("data/hall/tabl_hard_bot", "r");
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
 		printf("\n\n\t┌───────────ЛЕГКИЙ──────────────┐\t┌──────────СРЕДНИЙ──────────────┐\t┌───────────ТЯЖЕЛЫЙ─────────────┐");
 		printf("\n\t│№    Имя\tКоличество ходов│\t│№    Имя\tКоличество ходов│\t│№    Имя\tКоличество ходов│");
 
@@ -933,6 +938,7 @@ void table_name(int menu, int settings)
 		fclose(winTabl2);
 		fclose(winTabl3);
 		printf("\n\n\t\t\t\t\t\t\t1.Выход в меню\n\t\t\t\t\t\t\t");
+		resetcolor();
 		menu = 0;
 		menu = correct_entering(menu, settings);
 	}
@@ -1117,19 +1123,37 @@ void top_table_player(int *menu)
 	}
     }
     if(*menu == 0){
+    set_display_atrib(BRIGHT);
+	set_display_atrib(F_YELLOW);
 	printf("\t\t\t\t┌───────ТОП─────────ИГРОКОВ─────┐");
 	printf("\n\t\t\t\t│ №    Имя    Количество очков  │");
+	resetcolor();
 	for(int i = 0; i < 3; i++){
+	set_display_atrib(BRIGHT);
+	set_display_atrib(F_YELLOW);
 	    printf("\n\t\t\t\t│ %d  - %s     \t%u\t│", i + 1, topPlayer[indexWinner[29 - i]].name, playerPoints[29 - i]);
+		resetcolor();
 	}
+	set_display_atrib(BRIGHT);
+	set_display_atrib(F_YELLOW);
 	printf("\n\t\t\t\t└─────────────────────────────┐ │");
+    resetcolor();
     }else{
+   	set_display_atrib(BRIGHT);
+	set_display_atrib(F_YELLOW);
 	printf("\n\t\t\t\t\t\t┌───────ТОП─────ИГРОКОВ─────────┐");
 	printf("\n\t\t\t\t\t\t│№    Имя\tКоличество очков│");
+	resetcolor();
 	for(int i = 0; i < 3; i++){
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
 	    printf("\n\t\t\t\t\t\t│%d  - %s\t\t%u\t│", i + 1, topPlayer[indexWinner[29 - i]].name, playerPoints[29 - i]);
+		resetcolor();
 	}
+	set_display_atrib(BRIGHT);
+	set_display_atrib(F_YELLOW);
 	printf("\n\t\t\t\t\t\t└───────────────────────────────┘");
+	resetcolor();
     }
 }
 
@@ -1137,17 +1161,25 @@ void easter_egg(int menu, int settings)
 {
 	while(menu == 6){
 		system("clear");
+	set_display_atrib(BRIGHT);
+	set_display_atrib(F_YELLOW);
                 printf("\t\t\t\t    _______\n");
 		printf("\t\t\t\t   /  ---  \\\n");
 		printf("\t\t\t\t  /         \\\n");
+		resetcolor();
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_GREEN);
 		printf("\t\t\t\t |  !EASTER  |\n");
 		printf("\t\t\t\t |    EGG    |\n");
+		resetcolor();
+		set_display_atrib(BRIGHT);
+		set_display_atrib(F_YELLOW);
 		printf("\t\t\t\t |  -------  |\n");
 		printf("\t\t\t\t |    ___    |\n");
 		printf("\t\t\t\t  \\         /\n");
 		printf("\t\t\t\t   \\_______/\n");
 		printf("\n\n\t\t\tПривет!\n\t\t\tЭтого пункта в меню нет!\n\t\t\tПотому что он секретный...\n\t\t\tПоздравляю! Ты нашёл пасхальное яйцо!\n\t\t\tА сейчас, дорогой друг, я хочу тебе рассказать\n\t\t\tпару интересных фактов о твоей любимой игре'Гомоку'.\n\n\t\t\tИгра появилась более четырех тысяч лет назад на территории\n\t\t\tодной из самых древних цивилизаций в долине реки Хуанхэ.\n\t\t\tВ VII веке она была привезена на Японские острова,\n\t\t\tгде получила название «гомоку», что означает «пять камней».\n\n\t\t\tТак как у чёрных камней есть преимущество первого хода и при грамотном\n\t\t\tподходе, не зависимо от того, как будут строить оборону белые камни,\n\t\t\tпобеждают именно чёрные, были введены специальные ограничения,\n\t\t\tчтобы уровнять шансы на победу, и сделать тем самым игру более\n\t\t\tсбалансированной и интересной.\n\n\t\t\tТак, для черных фишек в спортивном рэндзю ввели следующие фолы (запрещенные ходы):\n\n\t\t\t • запрещается строить 'вилки' 3х3 и 4х4\n\n\t\t\t • запрещается строить ряд из 6 или более камней\n\n\t\t\t • запрещается строить любые вилки кратностью более двух.\n\n\t\t\tДля белых камней-фишек никаких фолов нет, и для победы им нужно\n\t\t\tпостроить ряд из пяти камней, либо дождаться ошибки чёрных камней\n\t\t\t(совершение ими фола).\n\n\t\t\tВ том случае, когда наступает ход игрока и он считает, что хороших для\n\t\t\tнего ходов не осталось, он может отказаться делать свой ход, то есть\n\t\t\tсделать пас. Если после этого второй игрок тоже спасует, то игра\n\t\t\tзавершается вничью. Также игра заканчивается вничью, если вся доска\n\t\t\tбудет заставлена камнями, но никто из игроков не смог построить\n\t\t\tпобедную линию в 5 камней.\n\n\t\t\t\tCreated BY:\n\t\t\t • Вашов Алексей\n\t\t\t • Карасев Алексей\n\t\t\t • Рамус Евгений\n\n\n\t\t\t1.Хочу играть!\n\t\t\t");
-			
+		resetcolor();	
 		menu = 0;
 	        menu = correct_entering(menu, settings);
 	}
