@@ -442,7 +442,13 @@ int main()
 			}
 			if(bot == 1 && ((choice == 1 && winX == 1) || (choice == 0 && winO == 1))){
 				FILE *winTabl;
-				winTabl = fopen("data/hall/LeadTable.txt", "r");
+				if(level == 0){
+					winTabl = fopen("data/hall/tabl_easy_bot", "r");
+				}else if(level == 1){
+					winTabl = fopen("data/hall/tabl_medium_bot", "r");
+				}else{
+					winTabl = fopen("data/hall/tabl_hard_bot", "r");
+				}
 				i = 1;
 				while(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF)
 					i++;
@@ -474,7 +480,13 @@ int main()
 						printf("\n\t\t\tВведи свое имя, победитель, дабы история запомнила тебя!\n\t\t\t");
 						resetcolor();
 						scanf("%14s", tablname[k].name);
-						winTabl = fopen("data/hall/LeadTable.txt", "r+");
+						if(level == 0){
+							winTabl = fopen("data/hall/tabl_easy_bot", "r+");
+						}else if(level == 1){
+							winTabl = fopen("data/hall/tabl_medium_bot", "r+");
+						}else{
+						winTabl = fopen("data/hall/tabl_hard_bot", "r+");
+						}
 						for(int j = 1; j <= 10; j++){
 							fprintf(winTabl, "%s %u\n", tablname[j].name, tablname[j].num_moves);
 						}
@@ -507,7 +519,7 @@ int main()
 		}
 
 		if(menu == 4){// ЗАЛ СЛАВЫ
-			table_name(menu, settings, tablname);
+			table_name(menu, settings);
 		}
 
 		if(menu == 5){// ВЫХОД
