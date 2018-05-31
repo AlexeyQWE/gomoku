@@ -272,6 +272,18 @@ CTEST(testing_suite, table_name)
 	ASSERT_EQUAL(expended, menu);
 }
 
+CTEST(testing_suite, easter_egg) 
+{
+	//GIVEN
+	int menu = 6, settings = 0;
+
+	//WHEN
+	easter_egg(menu, settings);
+
+	//THEN 
+	const int expended = 6;
+	ASSERT_EQUAL(expended, menu);
+}
 
 
 //bot_easy.c
