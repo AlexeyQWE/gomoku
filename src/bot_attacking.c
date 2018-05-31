@@ -14,7 +14,7 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 				for(int i = widht - 1; i >= widht - 4; i--){
 					if(i > 0 && i <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
 						if(addmission == 0){
-							for(int j = 0; j < 4; j++){
+							for(int j = 0; j < 4 - botScore; j++){
 								if(choice == 1 && widht - j > 0){
 									if(tableGame[height][widht - j] == 'X'){
 										i = exit;
@@ -28,12 +28,12 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 										addmission++;
 									}
 								}else{
-									j = 4;
+									j = 4 - botScore;
 									i = exit;
 								}
 							}
 						}
-						if(i != exit && addmission == 4){
+						if(i != exit && addmission == 4 - botScore){
 							step_attack_bot_gorizont(choice, tableGame, &i, height, &*hodBot, exit, &widht);// САМ ПРОЦЕСС ХОДА БОТА
 							if(*hodBot == 1){
 								i = widht - 4 - 1;
@@ -54,7 +54,7 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 				for(int i = widht + 1; i <= widht + 4; i++){
 					if(i > 0 && i <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
 						if(addmission == 0){
-							for(int j = 0; j < 4; j++){
+							for(int j = 0; j < 4 - botScore; j++){
 								if(choice == 1 && widht + j <= 15){
 									if(tableGame[height][widht + j] == 'X'){
 										i = exit;
@@ -68,12 +68,12 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 										addmission++;
 									}
 								}else{
-									j = 4;
+									j = 4 - botScore;
 									i = exit;
 								}
 							}
 						}
-						if(i != exit && addmission == 4){
+						if(i != exit && addmission == 4 - botScore){
 							step_attack_bot_gorizont(choice, tableGame, &i, height, &*hodBot, exit, &widht);
 							if(*hodBot == 1){
 								i = widht + 4 + 1;
@@ -361,7 +361,7 @@ char step_attack_bot_gorizont(int vibor, char tableGame[TABLE_Y][TABLE_Y], int *
 			*hodBot = 1;// СЧЕТЧИК ОБОЗНАЧАЕТ, ЧТО БОТ СХОДИЛ И ПРАВО ХОДА ПЕРЕДАЕТСЯ ЧЕЛОВЕКУ
 		}
 	}else{// ЭТО В СЛУЧАЕ ТОГО, ЕСЛИ БОТ ИГРАЕТ ЗА КРЕСТИКИ
-		if(tableGame[hight][*i] == '_' || tableGame[hight][*i] != 'X'){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		if(tableGame[hight][*i] == '_'){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[hight][*i] = 'X';
 			*weight = *i;
 			*i = exit;
@@ -373,14 +373,14 @@ char step_attack_bot_gorizont(int vibor, char tableGame[TABLE_Y][TABLE_Y], int *
 
 char step_attack_bot_vertical(int vibor, char tableGame[TABLE_Y][TABLE_Y], int *i, int weight, int *hodBot, int exit, int *hight){
 	if(vibor == 1){
-		if(tableGame[*i][weight] == '_' || tableGame[*i][weight] != 'O'){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		if(tableGame[*i][weight] == '_'){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[*i][weight] = 'O';
 			*hight = *i;
 			*i = exit;
 			*hodBot = 1;
 		}
 	}else{
-		if(tableGame[*i][weight] == '_' && tableGame[*i][weight] != 'X'){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		if(tableGame[*i][weight] == '_'){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[*i][weight] = 'X';
 			*hight = *i;
 			*i = exit;	
@@ -392,7 +392,7 @@ char step_attack_bot_vertical(int vibor, char tableGame[TABLE_Y][TABLE_Y], int *
 
 char step_attack_bot_diagonal_plus(int j, int vibor, char tableGame[TABLE_Y][TABLE_Y], int *i, int *weight, int *hodBot, int exit, int *hight){
 	if(vibor == 1){
-		if(tableGame[*i][*weight + j] == '_' && tableGame[*i][*weight + j] != 'O' && *weight + j <= 15){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		if(tableGame[*i][*weight + j] == '_' && *weight + j <= 15){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[*i][*weight + j] = 'O';
 			*hight = *i;
 			*weight = *weight + j;
@@ -400,7 +400,7 @@ char step_attack_bot_diagonal_plus(int j, int vibor, char tableGame[TABLE_Y][TAB
 			*hodBot = 1;
 		}
 	}else{
-		if(tableGame[*i][*weight + j] == '_' && tableGame[*i][*weight + j] != 'X' && *weight + j <= 15){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		if(tableGame[*i][*weight + j] == '_' && *weight + j <= 15){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[*i][*weight + j] = 'X';
 			*hight = *i;
 			*weight = *weight + j;
@@ -413,7 +413,7 @@ char step_attack_bot_diagonal_plus(int j, int vibor, char tableGame[TABLE_Y][TAB
 
 char step_attack_bot_diagonal_minus(int j, int vibor, char tableGame[TABLE_Y][TABLE_Y], int *i, int *weight, int *hodBot, int exit, int *hight){
 	if(vibor == 1){
-		if(tableGame[*i][*weight - j] == '_' && tableGame[*i][*weight - j] != 'O' && *weight - j > 0){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		if(tableGame[*i][*weight - j] == '_' && *weight - j > 0){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[*i][*weight - j] = 'O';
 			*hight = *i;
 			*weight = *weight - j;
@@ -421,7 +421,7 @@ char step_attack_bot_diagonal_minus(int j, int vibor, char tableGame[TABLE_Y][TA
 			*hodBot = 1;
 		}
 	}else{
-		if(tableGame[*i][*weight - j] == '_' && tableGame[*i][*weight - j] != 'X' && *weight - j > 0){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
+		if(tableGame[*i][*weight - j] == '_' && *weight - j > 0){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
 			tableGame[*i][*weight - j] = 'X';
 			*hight = *i;
 			*weight = *weight - j;
