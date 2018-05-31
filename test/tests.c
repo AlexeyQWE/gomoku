@@ -37,8 +37,8 @@ CTEST(testing_suite, fill_gameboard)
 
 	//THEN
 	const char expected = '_';
-	for(int i = 0; i < TABLE_Y; i++) {
-		for(int j = 0; j < TABLE_Y; j++) {
+	for(int i = 1; i < TABLE_Y; i++) {
+		for(int j = 1; j < TABLE_Y; j++) {
 			ASSERT_EQUAL(expected, tableGame[i][j]);
 		}
 	}
