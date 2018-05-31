@@ -90,6 +90,13 @@ int main()
 					scoreHandPlayer++;
 				}
 
+				if(winExit == 0){
+					print_gameboard(tableGame);
+					printf("\n\t\t");
+
+					sleep(1);
+				}
+
 
 				if((choice == 1 || choice == 0) && winExit != 1){
 					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, hightStepPlayer, weightStepPlayer);

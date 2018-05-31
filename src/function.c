@@ -215,7 +215,7 @@ void fill_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 
 void print_gameboard(char gameboard_mass[TABLE_Y][TABLE_Y])
 {
-	//system("clear");  
+	system("clear");  
 	set_display_atrib(BRIGHT);
     set_display_atrib(F_RED);
 	printf("\n\t\t   ____   __      _    _      __    _   __ __   __\n");
@@ -642,10 +642,6 @@ void prioritization(int level, int *playerScoreGorizont, int *playerScoreVertika
 		}
 	}
 	checking = 0;
-
-	for(int i = 0; i < 8; i++){
-		printf("resultat[%d] - %d\n", i, resultat[i]);
-	}
 	resultat[8] = 0;
 	for(int i = 0; i < 8; i++){
 		if(resultat[8] <= resultat[i]){
