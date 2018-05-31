@@ -1,3 +1,11 @@
-/bin/GOMOKU
+/bin/gom
+/bin/testing
+/build/test/main.o
+/build/test/tests.o
 /build/function.o
 /build/main.o
+/build/bot_easy.o
+/build/bot_defender.o
+/build/bot_attacking.o
+
+
