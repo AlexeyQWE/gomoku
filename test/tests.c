@@ -6,7 +6,7 @@
 
 //function.c
 
-CTEST(testing_suite, main_menu) 
+/*CTEST(testing_suite, main_menu) 
 {
 	//WHEN
 	const int result = main_menu();
@@ -25,31 +25,26 @@ CTEST(testing_suite, correct_entering)
 
 	//THEN 
 	ASSERT_INTERVAL(0, 15, result);
-}
+}*/
 
-CTEST(testing_suite, fill_and_print_gameboard) 
+CTEST(testing_suite, fill_gameboard) 
 {
 	//GIVEN
 	char tableGame[TABLE_Y][TABLE_Y];
-	int limitMovesX = 50, limitMovesO = 50;
 
 	//WHEN
 	fill_gameboard(tableGame);
-	print_gameboard(tableGame, limitMovesX, limitMovesO);
 
 	//THEN
 	const char expected = '_';
-	const int expected1 = 50;
 	for(int i = 0; i < TABLE_Y; i++) {
 		for(int j = 0; j < TABLE_Y; j++) {
 			ASSERT_EQUAL(expected, tableGame[i][j]);
 		}
 	}
-	ASSERT_EQUAL(expected1, limitMovesX);
-	ASSERT_EQUAL(expected1, limitMovesO);
 }
 
-CTEST(testing_suite, entering_coord) 
+/*CTEST(testing_suite, entering_coord) 
 {
 	//GIVEN
 	char tableGame[TABLE_Y][TABLE_Y];
@@ -63,7 +58,7 @@ CTEST(testing_suite, entering_coord)
 	ASSERT_INTERVAL(0, 1, winExit);
 	ASSERT_INTERVAL(1, 15, height);
 	ASSERT_INTERVAL(1, 15, widht);
-}
+}*/
 
 CTEST(testing_suite, prioritization) 
 {
@@ -151,16 +146,6 @@ CTEST(testing_suite, check_to_win)
 
 	//THEN
 	const int expected = 0;
-	/*int EplayerScoreGorizont[9] = {'\0'};
-	int EplayerScoreVertikal[9] = {'\0'};
-	int EplayerScoreLeftDiagonal[9] = {'\0'};
-	int EplayerScoreRightDiagonal[9] = {'\0'};
-	int EplayerScoreGorizontLeft[9] = {'\0'};
-	int EplayerScoreVertikalLeft[9] = {'\0'};
-	int EplayerScoreLeftDiagonalLeft[9] = {'\0'};
-	int EplayerScoreRightDiagonalLeft[9] = {'\0'};
-	int EhightStepPlayer[9] = {'\0'};
-	int EweightStepPlayer[9] = {'\0'};*/
 
 	ASSERT_INTERVAL(0, 1, choice);
 	ASSERT_INTERVAL(1, 15, widht);
@@ -168,16 +153,6 @@ CTEST(testing_suite, check_to_win)
 	ASSERT_EQUAL(expected, winExit);
 	ASSERT_EQUAL(expected, winX);
 	ASSERT_EQUAL(expected, winO);
-	/*ASSERT_DATA(EplayerScoreGorizont, 9, playerScoreGorizont, 9);
-	ASSERT_DATA(EplayerScoreVertikal, 9, playerScoreVertikal, 9);
-	ASSERT_DATA(EplayerScoreLeftDiagonal, 9, playerScoreLeftDiagonal, 9);
-	ASSERT_DATA(EplayerScoreRightDiagonal, 9, playerScoreRightDiagonal, 9);
-	ASSERT_DATA(EplayerScoreGorizontLeft, 9, playerScoreGorizontLeft, 9);
-	ASSERT_DATA(EplayerScoreVertikalLeft, 9, playerScoreVertikalLeft, 9);
-	ASSERT_DATA(EplayerScoreLeftDiagonalLeft, 9, EplayerScoreLeftDiagonalLeft, 9);
-	ASSERT_DATA(EplayerScoreRightDiagonalLeft, 9, playerScoreRightDiagonalLeft, 9);
-	ASSERT_DATA(EhightStepPlayer, 9, hightStepPlayer, 9);
-	ASSERT_DATA(EweightStepPlayer, 9,weightStepPlayer, 9);*/
 }
 
 CTEST(testing_suite, check_to_win_bot) 
@@ -227,7 +202,7 @@ CTEST(testing_suite, checkWwin)
 	ASSERT_INTERVAL(0, 5, score);
 }
 
-CTEST(testing_suite, game_settings) 
+/*CTEST(testing_suite, game_settings) 
 {
 	//GIVEN
 	int  level = 2, choice = 1, bot = 1, settings = 0, otladka = 1;
@@ -283,7 +258,7 @@ CTEST(testing_suite, easter_egg)
 	//THEN 
 	const int expended = 6;
 	ASSERT_EQUAL(expended, menu);
-}
+}*/
 
 
 //bot_easy.c
@@ -381,9 +356,10 @@ CTEST(testing_suite,move_bot_gotizont)
 	//THEN
 	const int expected = 1;
 	const int expected1 = 0;
+	const int expected2 = 5;
 	ASSERT_EQUAL(expected1, result);
 	ASSERT_EQUAL(expected, hodBot);
-	ASSERT_EQUAL(5, widht);
+	ASSERT_EQUAL(expected2, widht);
 	ASSERT_EQUAL(exit, i);
 }
 
@@ -405,9 +381,10 @@ CTEST(testing_suite,move_bot_vertical)
 	//THEN
 	const int expected = 1;
 	const int expected1 = 0;
+	const int expected2 = 5;
 	ASSERT_EQUAL(expected1, result);
 	ASSERT_EQUAL(expected, hodBot);
-	ASSERT_EQUAL(5, height);
+	ASSERT_EQUAL(expected2, height);
 	ASSERT_EQUAL(exit, i);
 }
 
@@ -429,10 +406,11 @@ CTEST(testing_suite, move_bot_diagonal_minus)
 	//THEN
 	const int expected = 1;
 	const int expected1 = 0;
+	const int expected2 = 5;
 	ASSERT_EQUAL(expected1, result);
 	ASSERT_EQUAL(expected, hodBot);
-	ASSERT_EQUAL(5, height);
-	ASSERT_EQUAL(5, widht);
+	ASSERT_EQUAL(expected2, height);
+	ASSERT_EQUAL(expected2 , widht);
 	ASSERT_EQUAL(exit, i);
 }
 
@@ -454,10 +432,11 @@ CTEST(testing_suite, move_bot_diagonal_plus)
 	//THEN
 	const int expected = 1;
 	const int expected1 = 0;
+	const int expected2 = 7;
 	ASSERT_EQUAL(expected1, result);
 	ASSERT_EQUAL(expected, hodBot);
-	ASSERT_EQUAL(7, height);
-	ASSERT_EQUAL(7, widht);
+	ASSERT_EQUAL(expected2, height);
+	ASSERT_EQUAL(expected2, widht);
 	ASSERT_EQUAL(exit, i);
 }
 
@@ -516,9 +495,10 @@ CTEST(testing_suite,step_attack_bot_gorizont)
 	//THEN
 	const int expected = 1;
 	const int expected1 = 0;
+	const int expected2 = 5;
 	ASSERT_EQUAL(expected1, result);
 	ASSERT_EQUAL(expected, hodBot);
-	ASSERT_EQUAL(5, widht);
+	ASSERT_EQUAL(expected2, widht);
 	ASSERT_EQUAL(exit, i);
 }
 
@@ -541,9 +521,10 @@ CTEST(testing_suite,step_attack_bot_vertical)
 	//THEN
 	const int expected = 1;
 	const int expected1 = 0;
+	const int expected2 = 5;
 	ASSERT_EQUAL(expected1, result);
 	ASSERT_EQUAL(expected, hodBot);
-	ASSERT_EQUAL(5, height);
+	ASSERT_EQUAL(expected2, height);
 	ASSERT_EQUAL(exit, i);
 }
 
@@ -566,10 +547,11 @@ CTEST(testing_suite, step_attack_bot_diagonal_plus)
 	//THEN
 	const int expected = 1;
 	const int expected1 = 0;
+	const int expected2 = 7;
 	ASSERT_EQUAL(expected1, result);
 	ASSERT_EQUAL(expected, hodBot);
-	ASSERT_EQUAL(7, height);
-	ASSERT_EQUAL(7, widht);
+	ASSERT_EQUAL(expected2, height);
+	ASSERT_EQUAL(expected2, widht);
 	ASSERT_EQUAL(exit, i);
 }
 
@@ -592,9 +574,10 @@ CTEST(testing_suite, step_attack_bot_diagonal_minus)
 	//THEN
 	const int expected = 1;
 	const int expected1 = 0;
+	const int expected2 = 5;
 	ASSERT_EQUAL(expected1, result);
 	ASSERT_EQUAL(expected, hodBot);
-	ASSERT_EQUAL(5, height);
-	ASSERT_EQUAL(5, widht);
+	ASSERT_EQUAL(expected2, height);
+	ASSERT_EQUAL(expected2, widht);
 	ASSERT_EQUAL(exit, i);
 }
