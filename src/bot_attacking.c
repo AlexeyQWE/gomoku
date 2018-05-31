@@ -13,7 +13,7 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 				for(int i = widht - 1; i >= widht - 4; i--){
 					if(i > 0 && i <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
 						if(addmission == 0){
-							for(int j = 0; j < 4 - botScore; j++){
+							for(int j = 0; j < 4; j++){
 								if(choice == 1 && widht - j > 0){
 									if(tableGame[height][widht - j] == 'X'){
 										i = exit;
@@ -27,12 +27,12 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 										addmission++;
 									}
 								}else{
-									j = 4 - botScore;
+									j = 4;
 									i = exit;
 								}
 							}
 						}
-						if(i != exit && addmission == 4 - botScore){
+						if(i != exit && addmission == 4){
 							step_attack_bot_gorizont(choice, tableGame, &i, height, &*hodBot, exit, &widht);// САМ ПРОЦЕСС ХОДА БОТА
 							if(*hodBot == 1){
 								i = widht - 4 - 1;
@@ -53,26 +53,26 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 				for(int i = widht + 1; i <= widht + 4; i++){
 					if(i > 0 && i <= 15){// ДАННАЯ ПРОВЕРКА НУЖНА, ЧТОБЫ i НЕ ВЫШЛА ЗА МАССИВ
 						if(addmission == 0){
-							for(int j = 0; j < 4 - botScore; j++){
+							for(int j = 0; j < 4; j++){
 								if(choice == 1 && widht + j <= 15){
 									if(tableGame[height][widht + j] == 'X'){
 										i = exit;
 									}else if(tableGame[height][widht + j] == 'O' || tableGame[height][widht + j] == '_'){
 										addmission++;
 									}
-								}else if(widht + j > 0){
+								}else if(widht + j <= 15){
 									if(tableGame[height][widht + j] == 'O'){
 										i = exit;
 									}else if(tableGame[height][widht + j] == 'X' || tableGame[height][widht + j] == '_'){
 										addmission++;
 									}
 								}else{
-									j = 4 - botScore;
+									j = 4;
 									i = exit;
 								}
 							}
 						}
-						if(i != exit && addmission == 4 - botScore){
+						if(i != exit && addmission == 4){
 							step_attack_bot_gorizont(choice, tableGame, &i, height, &*hodBot, exit, &widht);
 							if(*hodBot == 1){
 								i = widht + 4 + 1;
@@ -142,7 +142,7 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 									}else if(tableGame[height + j][widht] == 'O' || tableGame[height + j][widht] == '_'){
 										addmission++;
 									}
-								}else if(height + j > 0){
+								}else if(height + j <= 15){
 									if(tableGame[height + j][widht] == 'O'){
 										i = exit;
 									}else if(tableGame[height + j][widht] == 'X' || tableGame[height + j][widht] == '_'){
@@ -224,13 +224,13 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 						j++;
 						if(addmission == 0){
 							for(int k = 0; k < 4; k++){
-								if(choice == 1 && height + k > 0 && widht + k > 0){//7 8
+								if(choice == 1 && height + k <= 15 && widht + k <= 15){//7 8
 									if(tableGame[height + k][widht + k] == 'X'){
 										i = exit;
 									}else if(tableGame[height + k][widht + k] == 'O' || tableGame[height + k][widht + k] == '_'){
 										addmission++;
 									}
-								}else if(height + k > 0 && widht + k > 0){// 
+								}else if(height + k <= 15&& widht + k <= 15){// 
 									if(tableGame[height + k][widht + k] == 'O'){
 										i = exit;
 									}else if(tableGame[height + k][widht + k] == 'X' || tableGame[height + k][widht + k] == '_'){
@@ -311,13 +311,13 @@ void move_bot_attacking(char tableGame[TABLE_Y][TABLE_Y], int botScore, int play
 					if(i > 0 && i <= 15){
 						if(addmission == 0){
 							for(int k = 0; k < 4; k++){
-								if(choice == 1 && height + k > 0 && widht + k > 0){
+								if(choice == 1 && height + k <= 15 && widht + k <= 15){
 									if(tableGame[height + k][widht + k] == 'X'){
 										i = exit;
 									}else if(tableGame[height + k][widht + k] == 'O' || tableGame[height + k][widht + k] == '_'){
 										addmission++;
 									}
-								}else if(height + k > 0 && widht + k > 0){
+								}else if(height + k <= 15 && widht + k <= 15){
 									if(tableGame[height + k][widht + k] == 'O'){
 										i = exit;
 									}else if(tableGame[height + k][widht + k] == 'X' || tableGame[height + k][widht + k] == '_'){
@@ -375,6 +375,8 @@ char step_attack_bot_vertical(int vibor, char tableGame[TABLE_Y][TABLE_Y], int *
 			*hight = *i;
 			*i = exit;
 			*hodBot = 1;
+		}else{
+			*i = exit;
 		}
 	}else{
 		if(tableGame[*i][weight] == '_'){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
@@ -382,6 +384,8 @@ char step_attack_bot_vertical(int vibor, char tableGame[TABLE_Y][TABLE_Y], int *
 			*hight = *i;
 			*i = exit;	
 			*hodBot = 1;
+		}else{
+			*i = exit;
 		}		
 	}
 	return 0;
@@ -395,6 +399,8 @@ char step_attack_bot_diagonal_plus(int j, int vibor, char tableGame[TABLE_Y][TAB
 			*weight = *weight + j;
 			*i = exit;
 			*hodBot = 1;
+		}else{
+			*i = exit;
 		}
 	}else{
 		if(tableGame[*i][*weight + j] == '_' && *weight + j <= 15){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
@@ -403,7 +409,9 @@ char step_attack_bot_diagonal_plus(int j, int vibor, char tableGame[TABLE_Y][TAB
 			*weight = *weight + j;
 			*i = exit;	
 			*hodBot = 1;
-		}		
+		}else{
+			*i = exit;
+		}	
 	}
 	return 0;
 }
@@ -416,6 +424,8 @@ char step_attack_bot_diagonal_minus(int j, int vibor, char tableGame[TABLE_Y][TA
 			*weight = *weight - j;
 			*i = exit;
 			*hodBot = 1;
+		}else{
+			*i = exit;
 		}
 	}else{
 		if(tableGame[*i][*weight - j] == '_' && *weight - j > 0){// ЭТА КЛЕТКА ПРОВЕРЯЕТСЯ НА НАЛИЧИЕ Х (ПРОВЕРКА ИДЕТ НА ПОБЕДУ Х), ЕСЛИ ЕСТЬ, ТО СЧЕТЧИК УВЕЛИЧИВАЕТСЯ
@@ -424,6 +434,8 @@ char step_attack_bot_diagonal_minus(int j, int vibor, char tableGame[TABLE_Y][TA
 			*weight = *weight - j;
 			*i = exit;	
 			*hodBot = 1;
+		}else{
+			*i = exit;
 		}		
 	}
 	return 0;

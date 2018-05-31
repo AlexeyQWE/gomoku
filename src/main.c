@@ -3,7 +3,7 @@
 
 int main()
 {
-	int i = 1, level = 2, choice = 0, bot = 1, otladka = 1;
+	int i = 1, level = 2, choice = 0, bot = 1, otladka = 0;
 	int height = 0, widht = 0; // КООРДИНАТЫ
 	char tableGame[TABLE_Y][TABLE_Y];	//Хранение доски и ходов игроков
 	int outPutReplics = 0;
@@ -25,7 +25,7 @@ int main()
 			FILE *replic;
 			replic = fopen("data/replic/replics.txt", "r");
 			i = 1;
-			for(int i = 1; i <= 68; i++)
+			for(int i = 1; i < 67; i++)
 				fgets (repl[i].replics, 65, replic);
 
 			fclose(replic);
@@ -76,15 +76,8 @@ int main()
 					limitMovesO = 50 - result[2].num_moves;
 				}
 
-				
-				if(otladka == 1 && bot == 1){
-					debugging_player(hightStepPlayer, weightStepPlayer, playerScoreGorizont,  playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft,  playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft);
-					debugging_bot(hightAtakBot, weightAtakBot, botScoreGorizont,  botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft,  botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft);
-					printf("\nplayerScore %d", playerScore);
-					printf("\nbotScore %d", botScore);
-				}
-				
 				print_gameboard(tableGame, limitMovesO, limitMovesX);
+
 
 				if(bot == 1){
 					if((result[1].num_moves == 0 || result[2].num_moves == 0) && result[3].num_moves == 0){
@@ -114,6 +107,14 @@ int main()
 					resetcolor();
 					winExit = 1;
 				}
+
+				if(otladka == 1 && bot == 1){
+					debugging_player(hightStepPlayer, weightStepPlayer, playerScoreGorizont,  playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft,  playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft);
+					debugging_bot(hightAtakBot, weightAtakBot, botScoreGorizont,  botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft,  botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft);
+					printf("\nplayerScore %d", playerScore);
+					printf("\nbotScore %d", botScore);
+				}
+
 				if(winExit != 1){
 					entering_coord(choice, winExit, &height, &widht, tableGame);
 				}
@@ -122,6 +123,13 @@ int main()
 					hightStepPlayer[8] = height;
 					weightStepPlayer[8] = widht;
 					settings = 300;
+				}
+
+				if(bot == 0){
+					for(int i = 0; i < 9; i++){
+						hightStepPlayer[i] = height;
+						weightStepPlayer[i] = widht;
+					}
 				}
 	
 				if(bot == 1){
@@ -147,9 +155,23 @@ int main()
 						winX = 1;
 				}
 
-				if(winExit == 0){
+				if(winX == 1 && winExit == 0){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
+					printf("\n\n\t\t\tХ - ПОБЕДИЛ\a");
+					resetcolor();
+					winExit = 1;
+				}else if(winO == 1 && winExit == 0){
+					set_display_atrib(BRIGHT);
+					set_display_atrib(F_YELLOW);
+					printf("\n\n\t\t\tO - ПОБЕДИЛ");
+					resetcolor();
+					winExit = 1;
+				}
+
+				if(winExit == 0 && bot == 1){
 					print_gameboard(tableGame, limitMovesO, limitMovesX);
-					printf("\n\t\t");
+					printf("\n\t\t\n");
 
 					sleep(1);
 				}
@@ -158,7 +180,7 @@ int main()
 					check_to_win(tableGame, choice, widht, height, winExit, &winX, &winO, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, hightStepPlayer, weightStepPlayer);
 				}
 
-				if((level == 2 || level == 0) && bot == 0){
+				if((level == 2 || level == 0) && bot == 1){
 					prioritization(level, playerScoreGorizont, playerScoreVertikal, playerScoreLeftDiagonal, playerScoreRightDiagonal, playerScoreGorizontLeft, playerScoreVertikalLeft, playerScoreLeftDiagonalLeft, playerScoreRightDiagonalLeft, &playerScore, hightStepPlayer, weightStepPlayer, dopusk, &outPutReplics);
 				}
 
@@ -167,7 +189,7 @@ int main()
 				}
 				
 
-				if((choice == 1 || choice == 0) && winExit != 1 && level == 2){
+				if((choice == 1 || choice == 0) && winExit != 1 && level == 2 && bot == 1){
 					if(choice == 1){
 						choice = 0;
 					}else if(choice == 0){
@@ -181,7 +203,7 @@ int main()
 					}
 				}
 
-				if((level == 2 || level == 0) && bot == 0){
+				if((level == 2 || level == 0) && bot == 1){
 					prioritization(level, botScoreGorizont, botScoreVertikal, botScoreLeftDiagonal, botScoreRightDiagonal, botScoreGorizontLeft, botScoreVertikalLeft, botScoreLeftDiagonalLeft, botScoreRightDiagonalLeft, &botScore, hightAtakBot, weightAtakBot, dopusk, &outPutReplics);
 				}
 
@@ -215,15 +237,6 @@ int main()
 					    }
 					}
 
-					if(hodBot == 1){
-						result[3].num_moves++;
-						if(choice == 1 && result[3].num_moves > 50){
-							winX = 1;
-						}else if(choice == 0 && result[3].num_moves > 50){
-							winO = 1;
-						}
-					}
-
 					if((level == 2 || level == 0) && choice == 1 && dopusk == 0){
 						int triger = 0;
 						for(int p = 1; p < 9; p++){
@@ -242,10 +255,12 @@ int main()
 					dopusk++;
 				}
 
-				botScoreGorizont[8] = 0;
-				botScoreVertikal[8] = 0;
-				botScoreLeftDiagonal[8] = 0;
-				botScoreRightDiagonal[8] = 0;
+				if(bot == 1){
+					botScoreGorizont[8] = 0;
+					botScoreVertikal[8] = 0;
+					botScoreLeftDiagonal[8] = 0;
+					botScoreRightDiagonal[8] = 0;
+				}
 
 				if(winExit != 1 && bot == 1 && winO != 1 && winX != 1){
 					if(choice == 1){
@@ -275,42 +290,47 @@ int main()
 				}
 
 			}while(winExit != 1);
-			if(outPutReplics == 4 && bot == 1){
-					set_display_atrib(BRIGHT);
-					set_display_atrib(F_YELLOW);
-					printf("\n\tBot: %s", repl[59 + rand()%(67 - 59 + 1)].replics);
-					resetcolor();
+			if(outPutReplics >= 4 && bot == 1 && choice == 1 && winX == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
+				printf("\n\tBot: %s", repl[59 + rand()%(67 - 59 + 1)].replics);
+				resetcolor();
+			}else if(outPutReplics >= 4 && bot == 1 && choice == 0 && winO == 1){
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
+				printf("\n\tBot: %s", repl[59 + rand()%(67 - 59 + 1)].replics);
+				resetcolor();
 			}
 			if(choice == 1 && bot == 1 && winO == 1){
-				    set_display_atrib(BRIGHT);
-					set_display_atrib(F_YELLOW);
-					printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
-					resetcolor();
+			    set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
+				printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
+				resetcolor();
 			}else if(choice == 0 && bot == 1 && winX == 1){
-					set_display_atrib(BRIGHT);
-					set_display_atrib(F_YELLOW);
-					printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
-					resetcolor();
+				set_display_atrib(BRIGHT);
+				set_display_atrib(F_YELLOW);
+				printf("\n\tBot: %s", repl[51 + rand()%(58 - 51 + 1)].replics);
+				resetcolor();
 			}
 			if(bot == 1 && ((choice == 1 && winX == 1) || (choice == 0 && winO == 1))){
 				FILE *winTabl;
-				if(level == 0){
+				if(level == 1){
 					winTabl = fopen("data/hall/tabl_easy_bot", "r");
-				}else if(level == 1){
+				}else if(level == 0){
 					winTabl = fopen("data/hall/tabl_medium_bot", "r");
 				}else{
 					winTabl = fopen("data/hall/tabl_hard_bot", "r");
 				}
-				i = 1;
+				i = 0;
 				while(fscanf (winTabl, "%s%u", tablname[i].name, &(tablname[i].num_moves)) != EOF)
 					i++;
-				for(int k = 1; k <= 10; k++){
+				fclose(winTabl);
+				for(int k = 0; k < 10; k++){
 					if(choice == 0){
 						result[1].num_moves = result[2].num_moves;
 					}
 					if(result[1].num_moves < tablname[k].num_moves){
 						tablname[k].num_moves = result[1].num_moves;
-						fclose(winTabl);
 						if(k == 1){
 							set_display_atrib(BRIGHT);
 							set_display_atrib(F_YELLOW);
@@ -331,15 +351,16 @@ int main()
 						set_display_atrib(F_YELLOW);
 						printf("\n\t\t\tВведи свое имя, победитель, дабы история запомнила тебя!\n\t\t\t");
 						resetcolor();
-						scanf("%14s", tablname[k].name);
+						scanf("%s", tablname[k].name);
+						FILE *winTabl;
 						if(level == 0){
 							winTabl = fopen("data/hall/tabl_easy_bot", "r+");
 						}else if(level == 1){
 							winTabl = fopen("data/hall/tabl_medium_bot", "r+");
 						}else{
-						winTabl = fopen("data/hall/tabl_hard_bot", "r+");
+							winTabl = fopen("data/hall/tabl_hard_bot", "r+");
 						}
-						for(int j = 1; j <= 10; j++){
+						for(int j = 0; j < 10; j++){
 							fprintf(winTabl, "%s %u\n", tablname[j].name, tablname[j].num_moves);
 						}
 						k = 11;
@@ -353,12 +374,11 @@ int main()
 				resetcolor();
 			}
 			menu = 10;
-			set_display_atrib(BLINK);
 			set_display_atrib(F_YELLOW);
 			printf("\n\t\t\t[1] - Вернуться в меню\n\t\t\t[2] - Выйти из игры\n");
 			resetcolor();
 			menu = correct_entering(menu, settings);// ФУНКЦИЯ ПРОВЕРКИ ВВОДИМЫХ ЗНАЧЕНИЙ
-			if(menu == 0)
+			if(menu == 2)
 				break;
 		}
 
