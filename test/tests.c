@@ -92,7 +92,7 @@ CTEST(testing_suite, prioritization)
 CTEST(testing_suite, control) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
@@ -126,6 +126,12 @@ CTEST(testing_suite, check_to_win)
 {
 	//GIVEN
 	char tableGame[TABLE_Y][TABLE_Y];
+	for(int i = 0; i < TABLE_Y; i++){
+		for(int j = 0; j < TABLE_Y; j++){
+			tableGame[i][j] = '_';
+		}
+	}
+	tableGame[6][6] = 'X';
 	int choice = 0, widht = 1, height = 1, winExit = 0, winX = 0, winO = 0;
 	int playerScoreGorizont[9] = {'\0'};
 	int playerScoreVertikal[9] = {'\0'};
@@ -159,6 +165,12 @@ CTEST(testing_suite, check_to_win_bot)
 {
 	//GIVEN
 	char tableGame[TABLE_Y][TABLE_Y];
+	for(int i = 0; i < TABLE_Y; i++){
+		for(int j = 0; j < TABLE_Y; j++){
+			tableGame[i][j] = '_';
+		}
+	}
+	tableGame[6][6] = 'X';
 	int choice = 0, widht = 1, height = 1, winExit = 0, winX = 0, winO = 0;
 	int botScoreGorizont[9] = {'\0'};
 	int botScoreVertikal[9] = {'\0'};
@@ -266,7 +278,7 @@ CTEST(testing_suite, easter_egg)
 CTEST(testing_suite, move_bot_easy) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
@@ -305,7 +317,7 @@ CTEST(testing_suite, move_bot_defender)
 {
 	//GIVEN
 	int choice = 1, hodBot = 0, height = 6, widht = 6;
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
 			tableGame[i][j] = '_';
@@ -341,7 +353,7 @@ CTEST(testing_suite, move_bot_defender)
 CTEST(testing_suite,move_bot_gotizont) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
 			tableGame[i][j] = '_';
@@ -366,7 +378,7 @@ CTEST(testing_suite,move_bot_gotizont)
 CTEST(testing_suite,move_bot_vertical) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
 			tableGame[i][j] = '_';
@@ -391,7 +403,7 @@ CTEST(testing_suite,move_bot_vertical)
 CTEST(testing_suite, move_bot_diagonal_minus) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
 			tableGame[i][j] = '_';
@@ -417,7 +429,7 @@ CTEST(testing_suite, move_bot_diagonal_minus)
 CTEST(testing_suite, move_bot_diagonal_plus) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
 			tableGame[i][j] = '_';
@@ -448,7 +460,7 @@ CTEST(testing_suite, move_bot_attacking)
 	//GIVEN
 	int choice = 1, hodBot = 0, height = 6, widht = 6, playerScore = 0, botScore = 0;
 
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
 			tableGame[i][j] = '_';
@@ -479,7 +491,7 @@ CTEST(testing_suite, move_bot_attacking)
 CTEST(testing_suite,step_attack_bot_gorizont) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
 			tableGame[i][j] = '_';
@@ -505,7 +517,7 @@ CTEST(testing_suite,step_attack_bot_gorizont)
 CTEST(testing_suite,step_attack_bot_vertical) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
 			tableGame[i][j] = '_';
@@ -531,7 +543,7 @@ CTEST(testing_suite,step_attack_bot_vertical)
 CTEST(testing_suite, step_attack_bot_diagonal_plus) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
 			tableGame[i][j] = '_';
@@ -558,7 +570,7 @@ CTEST(testing_suite, step_attack_bot_diagonal_plus)
 CTEST(testing_suite, step_attack_bot_diagonal_minus) 
 {
 	//GIVEN
-	char tableGame[16][16];
+	char tableGame[TABLE_Y][TABLE_Y];
 	for(int i = 0; i < TABLE_Y; i++){
 		for(int j = 0; j < TABLE_Y; j++){
 			tableGame[i][j] = '_';

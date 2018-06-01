@@ -1,3 +1,5 @@
+//Copyright. Конслольный вывод цветов и библиотека "term.h" реализованы на основе данного проекта: https://github.com/dlinyj/terminal_controller
+
 #ifndef __TERM_EXAMPLE__
 #define __TERM_EXAMPLE__
 
@@ -6,7 +8,7 @@
 //Format text
 #define RESET 		0
 #define BRIGHT 		1
-#define DIM		2
+#define DIM			2
 #define UNDERSCORE	3
 #define BLINK		4
 #define REVERSE		5
